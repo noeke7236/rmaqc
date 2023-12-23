@@ -6,8 +6,8 @@ def rma_qc():
     st.sidebar.markdown("# RMA QC 🎈")
 
 def rma_2023():
-    st.markdown("# 2023 :watermelon:")
-    st.sidebar.markdown("# 2023 :watermelon:")
+    st.markdown("# 2023 :tulip:")
+    st.sidebar.markdown("# 2023 :tulip:")
 
 #def page3():
 #    st.markdown("# Page 3 🎉")
