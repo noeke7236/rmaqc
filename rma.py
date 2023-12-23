@@ -1,6 +1,11 @@
 # Contents of ~/rmaqc/rma.py
 import streamlit as st
 
+st.set_page_config(
+    page_title="RMA&QC",
+    page_icon=":watermelon:",
+)
+
 def rma_qc():
     st.markdown("# RMA QC 🎈")
     st.sidebar.markdown("# RMA QC 🎈")
