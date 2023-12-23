@@ -15,9 +15,6 @@ def rma_2023():
     st.markdown("# 2023 :tulip:")
     st.sidebar.markdown("# 2023 :tulip:")
 
-image_url = "https://www.python.org/static/community_logos/python-logo-master-v3-TM.png"
-image = plt.imread(image_url)
-st.sidebar.image(image, caption='Your Image Caption', use_column_width=True)
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
