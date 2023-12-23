@@ -1,5 +1,6 @@
 # Contents of ~/rmaqc/rma.py
 import streamlit as st
+import matplotlib as plt
 
 st.set_page_config(
     page_title="RMA&QC",
