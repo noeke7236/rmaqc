@@ -15,7 +15,7 @@ def rma_2023():
 
 page_names_to_funcs = {
     "RMA QC": rma_qc,
-    "rma_2023": 2023,
+    "2023": rma_2023,
     #"Page 3": page3,
 }
 
