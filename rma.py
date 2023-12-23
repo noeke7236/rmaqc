@@ -1,7 +1,6 @@
 # Contents of ~/rmaqc/rma.py
 import streamlit as st
 import matplotlib as plt
-from wordcloud_script import generate_wordcloud
 
 st.set_page_config(
     page_title="RMA&QC",
@@ -11,8 +10,7 @@ st.set_page_config(
 def rma_qc():
     st.markdown("# RMA QC 🎈")
     st.sidebar.markdown("# RMA QC 🎈")
-    generate_wordcloud("wc2023.csv")
-
+ 
 def rma_2023():
     st.markdown("# 2023 :tulip:")
     st.sidebar.markdown("# 2023 :tulip:")
