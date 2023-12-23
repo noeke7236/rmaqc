@@ -5,7 +5,7 @@ def rma_qc():
     st.markdown("# RMA QC 🎈")
     st.sidebar.markdown("# RMA QC 🎈")
 
-def 2023():
+def rma_2023():
     st.markdown("# 2023 ❄️")
     st.sidebar.markdown("# 2023 ❄️")
 
@@ -15,7 +15,7 @@ def 2023():
 
 page_names_to_funcs = {
     "RMA QC": rma_qc,
-    "2023": 2023,
+    "rma_2023": 2023,
     #"Page 3": page3,
 }
 
