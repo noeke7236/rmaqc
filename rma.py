@@ -10,7 +10,7 @@ st.set_page_config(
 def rma_qc():
     st.markdown("# RMA QC 🎈")
     st.sidebar.markdown("# RMA QC 🎈")
-    st.image('('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')')
+    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
  
 def rma_2023():
     st.markdown("# 2023 :tulip:")
