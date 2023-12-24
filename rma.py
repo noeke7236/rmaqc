@@ -8,6 +8,9 @@ st.set_page_config(
     page_icon=":watermelon:",
 )
 
+wc = WordCloud().fit_words({"R": 2, "M": 2, "A": 2})
+st.sidebar.image(wc.to_array(),use_column_width=True)
+
 def rma_qc():
     st.markdown("# RMA QC 🎈")
     st.sidebar.markdown("# RMA QC 🎈")
