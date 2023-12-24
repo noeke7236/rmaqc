@@ -1,6 +1,7 @@
 # Contents of ~/rmaqc/rma.py
 import streamlit as st
 import matplotlib as plt
+from wordcloud import WordCloud
 
 st.set_page_config(
     page_title="RMA&QC",
