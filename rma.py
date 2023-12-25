@@ -44,7 +44,7 @@ def rma_2023():
     # Calculate statistics
     row_count, total_qty = calculate_statistics(rma_modified)
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
-    st.subheader('Total barang yang masuk')
+    st.subheader('Total barang masuk')
     st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     # Create a barplot
@@ -72,7 +72,8 @@ def rma_2023():
     bulan_labels = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
     ax_bar.set_xticks(range(len(bulan_labels)))
     ax_bar.set_xticklabels(bulan_labels, rotation=20)
-
+    st.text("")
+    st.subheader('Grafik barang masuk')
     # Display the barplot using st.pyplot()
     st.pyplot(fig_bar)
         
