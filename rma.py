@@ -5,8 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#rma = pd.read_excel('https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx')
-rma = pd.read_excel('/main/2023/2023.xlsx')
+rma = pd.read_excel('https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx')
+#rma = pd.read_excel('/main/2023/2023.xlsx')
 rma_modified = rma.copy()
 
 #def load_data(url):
