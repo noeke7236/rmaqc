@@ -48,8 +48,8 @@ def rma_2023():
     #tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', rma_modified_qty]]
     tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]
     #st.subheader('Total barang yang masuk')
-    table_statistics(tabel_barang)
-    #st.table(tabel_barang)
+    #table_statistics(tabel_barang)
+    st.table(tabel_barang, use_container_width=True, index_col=False)
 
 #def page3():
 #    st.markdown("# Page 3 🎉")
