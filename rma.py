@@ -5,12 +5,23 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-rma = pd.read_excel('https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx')
+def load_data(url):
+    return pd.read_excel(url)
+
+def calculate_statistics(data):
+    row_count = len(data)
+    total_qty = data['Qty'].sum()
+    return row_count, total_qty
+
+def table_statistics(data):
+    st.table(data, use_container_width=True, index_col=False)
+
+# Load data
+url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
+rma = load_data(url)
+#rma = pd.read_excel('https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx')
 #rma = pd.read_excel('/main/2023/2023.xlsx')
 rma_modified = rma.copy()
-
-#def load_data(url):
-#    return pd.read_excel(url)
   
 st.set_page_config(
     page_title="RMA&QC",
@@ -26,15 +37,19 @@ def rma_qc():
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
  
 def rma_2023():
-    st.markdown("# 2023 :tulip:")
+    st.markdown("# Statistik 2023")
     st.sidebar.markdown("# 2023 :tulip:")
-    row_count = len(rma_modified)
-    print("Total barang:",row_count)
-    rma_modified_qty = rma_modified['Qty'].sum()
-    print("Total kuantitas:", rma_modified_qty)
-    tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', rma_modified_qty]]
+    #row_count = len(rma_modified)
+    #print("Total barang:",row_count)
+    #rma_modified_qty = rma_modified['Qty'].sum()
+    #print("Total kuantitas:", rma_modified_qty)
+    # Calculate statistics
+    row_count, total_qty = calculate_statistics(rma_modified)
+    #tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', rma_modified_qty]]
+    tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]
     st.subheader('Total barang yang masuk')
-    st.table(tabel_barang)
+    table_statistics(tabel_barang)
+    #st.table(tabel_barang)
 
 #def page3():
 #    st.markdown("# Page 3 🎉")
