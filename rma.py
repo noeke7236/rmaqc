@@ -28,7 +28,6 @@ def rma_qc():
 def rma_2023():
     st.markdown("# 2023 :tulip:")
     st.sidebar.markdown("# 2023 :tulip:")
-
     row_count = len(rma_modified)
     print("Total barang:",row_count)
     rma_modified_qty = rma_modified['Qty'].sum()
