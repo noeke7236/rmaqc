@@ -45,7 +45,7 @@ def rma_2023():
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
     
     st.subheader('Total barang yang masuk')
-    st.dataframe(tabel_barang)
+    st.dataframe(tabel_barang.style.hide(axis="index"))
     #st.table(tabel_barang)
     
 #def page3():
