@@ -39,12 +39,12 @@ def rma_qc():
 def rma_2023():
     st.markdown("# Statistik 2023")
     st.sidebar.markdown("# 2023 :tulip:")
-    #row_count = len(rma_modified)
+    row_count = len(rma_modified)
     #print("Total barang:",row_count)
-    #rma_modified_qty = rma_modified['Qty'].sum()
+    total_qty = rma_modified['Qty'].sum()
     #print("Total kuantitas:", rma_modified_qty)
     # Calculate statistics
-    row_count, total_qty = calculate_statistics(rma_modified)
+    #row_count, total_qty = calculate_statistics(rma_modified)
     #tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', rma_modified_qty]]
     tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]
     #st.subheader('Total barang yang masuk')
