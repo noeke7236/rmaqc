@@ -40,15 +40,14 @@ def rma_2023():
     st.markdown("# Statistik 2023")
     st.sidebar.markdown("# 2023 :tulip:")
     row_count = len(rma_modified)
-    #print("Total barang:",row_count)
     total_qty = rma_modified['Qty'].sum()
-    #print("Total kuantitas:", rma_modified_qty)
-    tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]]
+    #tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]]
+    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
+    data_for_display = tabel_barang.style.hide_index()
     st.subheader('Total barang yang masuk')
-    st.table(tabel_barang, use_container_width=True, index_col=False)
+    st.table(data_for_display)
     #st.table(tabel_barang)
-    #st.table(tabel_barang, use_container_width=True, index_col=False)
-
+    
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
