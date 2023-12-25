@@ -47,7 +47,7 @@ def rma_2023():
     row_count, total_qty = calculate_statistics(rma_modified)
     #tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', rma_modified_qty]]
     tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]
-    st.subheader('Total barang yang masuk')
+    #st.subheader('Total barang yang masuk')
     table_statistics(tabel_barang)
     #st.table(tabel_barang)
 
