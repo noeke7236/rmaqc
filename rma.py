@@ -45,7 +45,8 @@ def rma_2023():
     #print("Total kuantitas:", rma_modified_qty)
     tabel_barang = [['Total Barang', row_count], ['Total Kuantitas', total_qty]]
     st.subheader('Total barang yang masuk')
-    st.table(tabel_barang)
+    st.table(tabel_barang, , use_container_width=True, index_col=False)
+    #st.table(tabel_barang)
     #st.table(tabel_barang, use_container_width=True, index_col=False)
 
 #def page3():
