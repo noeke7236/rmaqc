@@ -101,7 +101,7 @@ def rma_2023():
     # Mengganti nama kolom 'RMA Level' menjadi 'Level'
     tabel_persentase.index.name = 'Level'
     #st.dataframe(tabel_persentase)
-    st.markdown(tabel_persentase.style.set_table_styles(styles).to_html())
+    st.table(tabel_persentase.style.set_table_styles(styles).to_html())
     #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
         
 #def page3():
