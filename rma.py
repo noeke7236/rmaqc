@@ -100,10 +100,17 @@ def rma_2023():
     tabel_persentase.columns.name = 'Level'
 
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.2f}%")
-    tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.2f}%")
+    tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.1f}%")
+    tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.1f}%")
 
-    st.table(tabel_persentase)
+    #st.table(tabel_persentase)
+
+    st.markdown("""
+    <style>
+    table {background-color: #f0f0f0;}
+    </style>
+    """, unsafe_allow_html=True)
+    st.dataframe(tabel_persentase)
     #st.dataframe(tabel_persentase)
     #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
