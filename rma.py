@@ -107,7 +107,9 @@ def rma_2023():
 
     st.markdown("""
     <style>
-    table {background-color: #f0f0f0;}
+    table {background-color: #f0f0f0;
+            border: 1px solid;
+    }}
     </style>
     """, unsafe_allow_html=True)
     st.dataframe(tabel_persentase)
