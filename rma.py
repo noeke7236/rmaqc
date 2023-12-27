@@ -39,12 +39,15 @@ def rma_qc():
 def rma_2023():
     st.markdown("# Statistik 2023")
     st.sidebar.markdown("# 2023 :tulip:")
+    
+    # TOTAL BARANG MASUK
     # Calculate statistics
     row_count, total_qty = calculate_statistics(rma_modified)
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
     st.subheader('Total barang masuk')
     st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
+    # GRAFIK BARANG MASUK
     # Create a barplot
     rma_modified['Bulan_Masuk'] = pd.to_datetime(rma_modified['Tgl Masuk [PB06]'], dayfirst=True).dt.strftime('%B')
     rma_modified['bulan'] = pd.to_datetime(rma_modified['Tgl Masuk [PB06]'], dayfirst=True).dt.month
@@ -75,6 +78,7 @@ def rma_2023():
     # Display the barplot using st.pyplot()
     st.pyplot(fig_bar)
 
+    # PERSENTASE DALAM PROSES QC
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
     rma_modified['Final Status Name'] = rma_modified['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
     
@@ -94,23 +98,15 @@ def rma_2023():
     })
     
     tabel_persentase.rename_axis(None, inplace=True)
-    # Mengganti nama kolom 'RMA Level' menjadi 'Level'
-    #tabel_persentase.index.name = 'Level'
-
+    
     # Mengganti nama header 'RMA Level' menjadi 'Level'
     tabel_persentase.columns.name = 'Level'
 
-    # Menghilangkan nama header 'RMA Level'
-    #tabel_persentase.columns = tabel_persentase.columns.set_names(['', 'Level'])
-    
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
     tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.1f}%")
     tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.1f}%")
-
-    #st.table(tabel_persentase)
-
-    #st.dataframe(tabel_persentase)
-    #st.dataframe(tabel_persentase)
+    st.text("")
+    st.subheader('Persentase dalam proses QC')
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
         
