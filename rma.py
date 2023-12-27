@@ -110,7 +110,9 @@ def rma_2023():
     table {background-color: #f0f0f0;
             border: 1px solid;
             border-collapse: collapse;
-    }}
+    }
+
+    tr:hover {background-color: coral;}
     </style>
     """, unsafe_allow_html=True)
     st.dataframe(tabel_persentase)
