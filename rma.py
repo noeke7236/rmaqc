@@ -105,13 +105,6 @@ def rma_2023():
 
     #st.table(tabel_persentase)
 
-    st.markdown("""
-    <style>
-    table th {font-size: 30px; color: red} 
-    table tr:nth-child(odd) 
-    td {background-color: #eee}
-    </style>
-    """, unsafe_allow_html=True)
     st.dataframe(tabel_persentase)
     #st.dataframe(tabel_persentase)
     #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
