@@ -93,15 +93,18 @@ def rma_2023():
         'Percentage Good': result_percentage['Good']
     })
 
-    styles = [dict(selector="caption",
-            props=[("text-align", "right"),
-                   ("font-size", "150%"),
-                   ("color", 'lime')])]
+    # Set precision untuk angka desimal di HTML
+    html_content = (
+        tabel_persentase.style
+        .set_precision({'Percentage Bad': 2, 'Percentage Good': 2})
+        .render()
+    )
     
     # Mengganti nama kolom 'RMA Level' menjadi 'Level'
     tabel_persentase.index.name = 'Level'
     #st.dataframe(tabel_persentase)
-    st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
+    #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
+    st.markdown(html_content, unsafe_allow_html=True)
         
 #def page3():
 #    st.markdown("# Page 3 🎉")
