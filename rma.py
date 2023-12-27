@@ -105,9 +105,9 @@ def rma_2023():
 
     #st.table(tabel_persentase)
 
-    st.dataframe(tabel_persentase)
     #st.dataframe(tabel_persentase)
-    #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
+    #st.dataframe(tabel_persentase)
+    st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
         
 #def page3():
