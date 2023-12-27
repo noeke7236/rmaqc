@@ -75,6 +75,9 @@ def rma_2023():
     # Display the barplot using st.pyplot()
     st.pyplot(fig_bar)
 
+    # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
+    rma_modified['Final Status Name'] = rma_modified['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
+    
     # Result dari groupby dan value_counts
     result_counts = rma_modified.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
     result_counts = result_counts.applymap(lambda x: int(x) if x.is_integer() else x)
