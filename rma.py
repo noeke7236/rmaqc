@@ -109,6 +109,7 @@ def rma_2023():
     <style>
     table {background-color: #f0f0f0;
             border: 1px solid;
+            border-collapse: collapse;
     }}
     </style>
     """, unsafe_allow_html=True)
