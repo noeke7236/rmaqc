@@ -39,8 +39,6 @@ def rma_qc():
 def rma_2023():
     st.markdown("# Statistik 2023")
     st.sidebar.markdown("# 2023 :tulip:")
-    #row_count = len(rma_modified)
-    #total_qty = rma_modified['Qty'].sum()
     # Calculate statistics
     row_count, total_qty = calculate_statistics(rma_modified)
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
@@ -76,6 +74,25 @@ def rma_2023():
     st.subheader('Grafik barang masuk')
     # Display the barplot using st.pyplot()
     st.pyplot(fig_bar)
+
+    # Result dari groupby dan value_counts
+    result_counts = rma_modified.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
+    result_counts = result_counts.applymap(lambda x: int(x) if x.is_integer() else x)
+
+    # Result persentase
+    result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
+
+    # Membuat DataFrame
+    tabel_persentase = pd.DataFrame({
+        'Bad': result_counts['Bad'].astype(int),
+        'Good': result_counts['Good'].astype(int),
+        'Percentage Bad': result_percentage['Bad'],
+        'Percentage Good': result_percentage['Good']
+    })
+
+    # Mengganti nama kolom 'RMA Level' menjadi 'Level'
+    tabel_persentase.index.name = 'Level'
+    st.markdown(tabel_persentase.style.hide(axis="index").to_html(), unsafe_allow_html=True)
         
 #def page3():
 #    st.markdown("# Page 3 🎉")
