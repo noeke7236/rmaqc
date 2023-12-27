@@ -92,9 +92,10 @@ def rma_2023():
         'Percentage Bad': result_percentage['Bad'],
         'Percentage Good': result_percentage['Good']
     })
-  
+    
+    tabel_persentase.rename_axis(None, inplace=True)
     # Mengganti nama kolom 'RMA Level' menjadi 'Level'
-    tabel_persentase.index.name = 'Level'
+    #tabel_persentase.index.name = 'Level'
 
     # Mengganti nama header 'RMA Level' menjadi 'Level'
     #tabel_persentase.columns.name = 'Level'
