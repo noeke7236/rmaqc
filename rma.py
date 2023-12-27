@@ -94,10 +94,10 @@ def rma_2023():
     })
   
     # Mengganti nama kolom 'RMA Level' menjadi 'Level'
-    tabel_persentase.index.name = none
+    tabel_persentase.index.name = 'Level'
 
     # Mengganti nama header 'RMA Level' menjadi 'Level'
-    tabel_persentase.columns.name = 'Level'
+    #tabel_persentase.columns.name = 'Level'
 
     # Menghilangkan nama header 'RMA Level'
     #tabel_persentase.columns = tabel_persentase.columns.set_names(['', 'Level'])
