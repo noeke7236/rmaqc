@@ -97,8 +97,11 @@ def rma_2023():
     #tabel_persentase.index.name = 'Level'
 
     # Mengganti nama header 'RMA Level' menjadi 'Level'
-    tabel_persentase.columns.name = 'Level'
+    #tabel_persentase.columns.name = 'Level'
 
+    # Menghilangkan nama header 'RMA Level'
+    tabel_persentase.columns = tabel_persentase.columns.set_names(['', 'Level'])
+    
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
     tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.1f}%")
     tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.1f}%")
