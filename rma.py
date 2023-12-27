@@ -108,11 +108,8 @@ def rma_2023():
     st.markdown("""
     <style>
     table {background-color: #f0f0f0;
-            border: 1px solid;
-            border-collapse: collapse;
     }
-
-    tr:hover {background-color: coral;}
+    .font {font-size:50px;} 
     </style>
     """, unsafe_allow_html=True)
     st.dataframe(tabel_persentase)
