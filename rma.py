@@ -109,7 +109,20 @@ def rma_2023():
     st.subheader('Persentase dalam proses QC')
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
-        
+    # Membuat Pie Chart untuk baris 'L1'
+    fig_pie, ax_pie = plt.subplots()
+    labels_pie = ['Bad', 'Good']
+    colors_pie = ['#ff9999', '#66b3ff']
+    explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
+
+    ax_pie.pie(tabel_persentase.loc['L1', ['Bad', 'Good']], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
+    ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
+
+    # Menampilkan Pie Chart di Streamlit
+    st.text("")
+    st.subheader('Pie chart hasil proses QC')
+    st.pyplot(fig_pie)
+    
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
