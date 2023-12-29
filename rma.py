@@ -93,8 +93,8 @@ def rma_2023():
     tabel_persentase = pd.DataFrame({
         'Bad': result_counts['Bad'].astype(int),
         'Good': result_counts['Good'].astype(int),
-        'Percentage Bad': result_percentage['Bad'],
-        'Percentage Good': result_percentage['Good']
+        'Bad (%)': result_percentage['Bad'],
+        'Good (%)': result_percentage['Good']
     })
     
     tabel_persentase.rename_axis(None, inplace=True)
@@ -103,8 +103,8 @@ def rma_2023():
     tabel_persentase.columns.name = 'Level'
 
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.1f}%")
-    tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.1f}%")
+    tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.1f}")
+    tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.1f}")
     st.text("")
     st.subheader('Persentase dalam proses QC')
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
@@ -127,7 +127,7 @@ def rma_2023():
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
 
     # Membuat horizontal bar chart
-    fig_bar_hor, ax = plt.subplots()
+    fig_count, ax_count = plt.subplots()
     bars = count_barang.plot(kind='barh', color='skyblue')
     plt.xlabel('Jumlah')
     plt.ylabel('Alat/Barang')
@@ -140,7 +140,7 @@ def rma_2023():
     # Menampilkan plot di Streamlit
     st.text("")
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
-    st.pyplot(fig_bar_hor)
+    st.pyplot(fig_count)
 
 
 #def page3():
