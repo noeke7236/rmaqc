@@ -78,6 +78,43 @@ def rma_2023():
     # Display the barplot using st.pyplot()
     st.pyplot(fig_bar)
 
+    # GRAFIK BARANG KELUAR
+    rma_modified['jumlah_out'] = 1
+    result_out = rma_modified.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
+
+    no_bulan_out = [{'bulan_out': i, 'jumlah_out': 0} for i in range(1, 13)]
+    data_bulan_out = pd.DataFrame(no_bulan_out)
+
+    # Menggabungkan dataframe result dan data_bulan berdasarkan kolom 'bulan'
+    result_dataframe_out = pd.merge(data_bulan_out, result_out, on='bulan_out', how='left')
+    
+    # Mengisi nilai NaN dengan 0
+    result_dataframe_out['jumlah_out_y'] = result_dataframe_out['jumlah_out_y'].fillna(0).astype(int)
+    
+    # Plot barplot
+    fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
+    bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=["#FF6347" if y <= 200 else "#009EFA" for y in result_dataframe_out['jumlah_out_y']])
+    ax_bar1.set_xlabel('Bulan')
+    ax_bar1.set_ylabel('Jumlah barang')
+
+    # Menambahkan batasan pada sumbu y
+    ax_bar1.set_ylim(0, 400)
+
+    # Menambahkan bar label
+    for p in ax_bar1.patches:
+        height = p.get_height()
+        ax_bar1.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
+                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+
+    # Mengubah nilai sumbu x
+    bulan_labels = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
+    ax_bar1.set_xticks(range(len(bulan_labels)))
+    ax_bar1.set_xticklabels(bulan_labels, rotation=20)
+    st.text("")
+    st.subheader('Grafik barang keluar')
+    # Display the barplot using st.pyplot()
+    st.pyplot(fig_bar1)
+    
     # PERSENTASE DALAM PROSES QC
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
     rma_modified['Final Status Name'] = rma_modified['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
