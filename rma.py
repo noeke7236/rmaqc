@@ -31,8 +31,8 @@ st.set_page_config(
 #st.sidebar.image("logo.png",use_column_width=True)
 
 def rma_qc():
-    st.markdown("# RMA QC 🎈")
-    st.sidebar.markdown("# RMA QC 🎈")
+    st.markdown("# RMA QC :flag-id:")
+    st.sidebar.markdown("# RMA QC ")
     st.header('Alur Kerja', divider='rainbow')
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
  
@@ -129,7 +129,7 @@ def rma_2023():
     st.subheader('Pie chart hasil proses QC')
     st.pyplot(fig_pie)
     
-    #GRAFIK BAR HORIZONTAL
+    #GRAFIK BAR HORIZONTAL COUNT
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
 
     # Membuat horizontal bar chart
@@ -148,6 +148,24 @@ def rma_2023():
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
     st.pyplot(fig_count)
 
+    #GRAFIK BAR HORIZONTAL SUM
+    sum_barang = rma_modified.groupby('Nama Barang')['Qty'].sum().nlargest(10).sort_values(ascending=True)
+
+    # Membuat horizontal bar chart dengan warna tomato
+    fig_sum, ax_sum = plt.subplots()
+    bars = sum_barang.plot(kind='barh', color='tomato')
+    plt.xlabel('Jumlah')
+    plt.ylabel('Alat/Barang')
+    plt.grid(axis='x')
+
+    # Menambahkan nilai di dalam setiap bar
+    for bar, value in zip(bars.patches, sum_barang):
+        plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
+
+    # Menampilkan plot di Streamlit
+    st.text("")
+    st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
+    st.pyplot(fig_sum)
 
 #def page3():
 #    st.markdown("# Page 3 🎉")
