@@ -139,7 +139,7 @@ def rma_2023():
 
     # Menampilkan plot di Streamlit
     st.text("")
-    st.subheader('Top 10 Alat/Barang')
+    st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
     st.pyplot(fig_bar_hor)
 
 
