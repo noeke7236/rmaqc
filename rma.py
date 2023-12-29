@@ -127,9 +127,10 @@ def rma_2023():
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
 
     # Membuat horizontal bar chart
-    fig, ax = plt.subplots()
+    fig_bar_hor, ax = plt.subplots()
     bars = count_barang.plot(kind='barh', color='skyblue')
     plt.xlabel('Jumlah')
+    plt.ylabel('Alat/Barang')
     plt.grid(axis='x')
 
     # Menambahkan nilai di dalam setiap bar
@@ -137,7 +138,9 @@ def rma_2023():
         plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
 
     # Menampilkan plot di Streamlit
-    st.pyplot(fig)
+    st.text("")
+    st.subheader('Top 10 Alat/Barang')
+    st.pyplot(fig_bar_hor)
 
 
 #def page3():
