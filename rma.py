@@ -107,13 +107,13 @@ def rma_2023():
                     ha='center', va='center', xytext=(0, 10), textcoords='offset points')
 
     # Mengubah nilai sumbu x
-    bulan_labels = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
-    ax_bar1.set_xticks(range(len(bulan_labels)))
-    ax_bar1.set_xticklabels(bulan_labels, rotation=20)
-    st.text("")
-    st.subheader('Grafik barang keluar')
+    bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
+    ax_bar1.set_xticks(range(len(bulan_labels1)))
+    ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
+    #st.text("")
+    #st.subheader('Grafik barang keluar')
     # Display the barplot using st.pyplot()
-    st.pyplot(fig_bar1)
+    #st.pyplot(fig_bar1)
     
     # PERSENTASE DALAM PROSES QC
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
