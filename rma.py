@@ -79,6 +79,9 @@ def rma_2023():
     st.pyplot(fig_bar)
 
     # GRAFIK BARANG KELUAR
+    rma_modified['Bulan_Keluar'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
+    rma_modified['bulan_out'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.month
+
     rma_modified['jumlah_out'] = 1
     result_out = rma_modified.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
 
@@ -110,10 +113,10 @@ def rma_2023():
     bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
     ax_bar1.set_xticks(range(len(bulan_labels1)))
     ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
-    #st.text("")
-    #st.subheader('Grafik barang keluar')
+    st.text("")
+    st.subheader('Grafik barang keluar')
     # Display the barplot using st.pyplot()
-    #st.pyplot(fig_bar1)
+    st.pyplot(fig_bar1)
     
     # PERSENTASE DALAM PROSES QC
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
