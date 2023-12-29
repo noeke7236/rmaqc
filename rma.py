@@ -31,7 +31,7 @@ st.set_page_config(
 #st.sidebar.image("logo.png",use_column_width=True)
 
 def rma_qc():
-    st.markdown("# RMA QC :flag-id:")
+    st.markdown("# RMA QC ")
     st.sidebar.markdown("# RMA QC ")
     st.header('Alur Kerja', divider='rainbow')
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
@@ -44,7 +44,7 @@ def rma_2023():
     # Calculate statistics
     row_count, total_qty = calculate_statistics(rma_modified)
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
-    st.subheader('Total barang masuk')
+    st.subheader('Total Alat/Barang')
     st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     # GRAFIK BARANG MASUK
