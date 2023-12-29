@@ -37,8 +37,8 @@ def rma_qc():
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
  
 def rma_2023():
-    st.markdown("# Statistik 2023")
-    st.sidebar.markdown("# 2023 :tulip:")
+    st.markdown("# Statistik Tahun 2023")
+    st.sidebar.markdown("# 2023 :chart:")
     
     # TOTAL BARANG MASUK
     # Calculate statistics
@@ -106,7 +106,7 @@ def rma_2023():
     # Mengganti nama header 'RMA Level' menjadi 'Level'
     tabel_persentase.columns.name = 'Level'
 
-        st.text("")
+    st.text("")
     st.subheader('Persentase dalam proses QC')
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
