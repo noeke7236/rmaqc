@@ -45,6 +45,8 @@ def rma_2023():
     col2.metric("Total Quantity", "1935")
     col3.metric("Pass", "99.2%")
     col4.metric("Fail", "0.8%")
+
+    st.markdown("""---""")
     
     # TOTAL BARANG MASUK
     # Calculate statistics
