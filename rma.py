@@ -38,67 +38,13 @@ def rma_qc():
  
 def rma_2023():
     st.markdown("# Statistik Tahun 2023")
-    st.sidebar.markdown("# 2023 :chart:")
+    st.sidebar.markdown("# 2023 :bar_chart:")
     
-    # Menambahkan HTML dan CSS untuk mengatur tampilan
-    st.markdown(
-        """
-        <style>
-            .logo1 {
-                background-color: #4285F4;
-                border: 2px solid #1967D2;
-                border-radius: 5px;
-                padding: 10px;
-                text-align: center;
-                color: white;
-            }
-            .logo2 {
-                background-color: #0F9D58;
-                border: 2px solid #0F9D58;
-                border-radius: 5px;
-                padding: 10px;
-                text-align: center;
-                color: white;
-            }
-            .logo3 {
-                background-color: #F4B400;
-                border: 2px solid #F4B400;
-                border-radius: 5px;
-                padding: 10px;
-                text-align: center;
-                color: white;
-            }
-            .logo4 {
-                background-color: #DB4437;
-                border: 2px solid #DB4437;
-                border-radius: 5px;
-                padding: 10px;
-                text-align: center;
-                color: white;
-            }
-        </style>
-        """,unsafe_allow_html=True
-    )
-
-    # Menggunakan st.markdown untuk menambahkan elemen dengan style yang telah ditentukan
-    with st.columns(4):
-        with st.markdown("<div class='logo1'>Total Items<br>1022</div>", unsafe_allow_html=True):
-            pass  # Tidak perlu menambahkan konten di sini
-    
-        with st.markdown("<div class='logo2'>Total Quantity<br>1935</div>", unsafe_allow_html=True):
-            pass  # Tidak perlu menambahkan konten di sini
-    
-        with st.markdown("<div class='logo3'>Pass<br>99.2%</div>", unsafe_allow_html=True):
-            pass  # Tidak perlu menambahkan konten di sini
-    
-        with st.markdown("<div class='logo4'>Fail<br>0.8%</div>", unsafe_allow_html=True):
-            pass  # Tidak perlu menambahkan konten di sini
-
     #col1, col2, col3, col4 = st.columns(4)
-    #col1.metric("Total Items", "1022")
-    #col2.metric("Total Quantity", "1935")
-    #col3.metric("Pass", "99.2%")
-    #col4.metric("Fail", "0.8%")
+    #col1.metric("Total Items :1022:", "1022")
+    #col2.metric("Total Quantity :1935:", "1935")
+    #col3.metric("Pass :heavy_check_mark:", "99.2%")
+    #col4.metric("Fail :x:", "0.8%")
 
     st.markdown("""---""")
     
