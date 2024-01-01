@@ -41,8 +41,8 @@ def rma_2023():
     st.sidebar.markdown("# 2023 :bar_chart:")
     
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items :1022:", "1022")
-    col2.metric("Total Quantity :1935:", "1935")
+    col1.metric("Total Items", "1022")
+    col2.metric("Total Quantity", "1935")
     col3.metric("Pass :heavy_check_mark:", "99.2%")
     col4.metric("Fail :x:", "0.8%")
 
