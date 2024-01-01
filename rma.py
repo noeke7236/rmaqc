@@ -142,9 +142,6 @@ def rma_2023():
     tabel_persentase.rename_axis(None, inplace=True)
 
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    #tabel_persentase['Percentage Bad'] = tabel_persentase['Percentage Bad'].apply(lambda x: f"{x:.1f}")
-    #tabel_persentase['Percentage Good'] = tabel_persentase['Percentage Good'].apply(lambda x: f"{x:.1f}")
-    # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
     tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
     tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
 
@@ -207,6 +204,31 @@ def rma_2023():
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
     st.pyplot(fig_sum)
 
+    # GRAFIK BAR PROJECT
+    data_project = rma_modified['Project'].value_counts()
+
+    # Mengambil data dari Series data_project
+    project_names = data_project.index
+    project_counts = data_project.values
+
+    # Membuat objek figure dan axes
+    fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
+
+    # Membuat bar plot dengan seaborn dan menggunakan axes
+    sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
+
+    # Menambahkan bar label ke setiap batang
+    for i, value in enumerate(project_counts):
+        ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
+
+    ax_bar2.set_ylabel('Project')
+    ax_bar2.set_xlabel('Jumlah')
+
+    # Menampilkan plot di Streamlit
+    st.text("")
+    st.subheader('Jumlah Alat/Barang berdasarkan project')
+    st.pyplot(fig_bar2)
+    
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
