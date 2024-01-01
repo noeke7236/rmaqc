@@ -39,6 +39,12 @@ def rma_qc():
 def rma_2023():
     st.markdown("# Statistik Tahun 2023")
     st.sidebar.markdown("# 2023 :chart:")
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total Items", "1022")
+    col2.metric("Total Quantity", "1935")
+    col3.metric("Pass", "99.2%")
+    col4.metric("Fail", "0.8%")
     
     # TOTAL BARANG MASUK
     # Calculate statistics
