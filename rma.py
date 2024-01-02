@@ -201,7 +201,7 @@ def rma_2023():
     st.markdown(filtered_data_nok.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     #TABEL LEVEL L3
-    Mencari data dengan kondisi RMA Level == L3 dan memilih kolom yang diinginkan
+    #Mencari data dengan kondisi RMA Level == L3 dan memilih kolom yang diinginkan
     filtered_data_L3 = rma_modified.loc[rma_modified['RMA Level'] == 'L3', 
                                  ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
                                   'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
