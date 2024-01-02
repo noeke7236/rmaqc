@@ -186,6 +186,9 @@ def rma_2023():
     # Menambahkan kolom index nomor urut
     filtered_data_nok['No.'] = range(1, len(filtered_data_nok) + 1)
 
+    # Menyisipkan kolom 'No' sebelum kolom 'Nama Barang'
+    filtered_data_nok.insert(0, 'No', filtered_data_nok.pop('No.'))
+
     # Menampilkan hasil di Streamlit
     st.text("")
     st.subheader('Daftar beberapa alat/barang yang Bad/Fail')
