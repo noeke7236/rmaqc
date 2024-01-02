@@ -187,7 +187,8 @@ def rma_2023():
     # Menampilkan hasil di Streamlit
     st.text("")
     st.subheader('Daftar beberapa alat/barang yang Bad/Fail')
-    st.table(filtered_data_nok)
+    st.markdown(filtered_data_nok.style.to_html(), unsafe_allow_html=True)
+    #st.table(filtered_data_nok)
     
     #GRAFIK BAR HORIZONTAL COUNT
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
