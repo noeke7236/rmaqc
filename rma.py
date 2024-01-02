@@ -183,6 +183,8 @@ def rma_2023():
                                   'Final Status', 'Project']]
 
     filtered_data_nok = filtered_data_nok.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
+    # Menambahkan kolom index nomor urut
+    filtered_data_nok['No.'] = range(1, len(filtered_data_nok) + 1)
 
     # Menampilkan hasil di Streamlit
     st.text("")
