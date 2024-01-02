@@ -35,6 +35,7 @@ def rma_qc():
     st.sidebar.markdown("# RMA QC ")
     st.header('Alur Kerja', divider='rainbow')
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
+    st.text("")
  
 def rma_2023():
     st.markdown("# Statistik Tahun 2023")
@@ -173,6 +174,20 @@ def rma_2023():
     st.text("")
     st.subheader('Pie chart hasil proses QC')
     st.pyplot(fig_pie)
+
+    #TABEL FAIL
+    # Mencari data dengan kondisi Project == 'NOK' dan memilih kolom yang diinginkan
+    filtered_data_nok = rma_modified.loc[rma_modified['Final Status'] == 'NOK', 
+                                 ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
+                                  'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
+                                  'Final Status', 'Project']]
+
+    filtered_data_nok = filtered_data_nok.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
+
+    # Menampilkan hasil di Streamlit
+    st.text("")
+    st.subheader('Daftar beberapa alat/barang yang Bad/Fail')
+    st.table(filtered_data_nok)
     
     #GRAFIK BAR HORIZONTAL COUNT
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
