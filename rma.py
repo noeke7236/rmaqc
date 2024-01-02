@@ -221,7 +221,7 @@ def rma_2023():
     st.text("")
     st.subheader('List Alat/Barang yang mengalami proses L3')
     #st.markdown(filtered_data_L3.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-    st.markdown(filtered_data_L3.to_html(), unsafe_allow_html=True)
+    st.markdown(data_L3.to_html(), unsafe_allow_html=True)
     
     #GRAFIK BAR HORIZONTAL COUNT
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
