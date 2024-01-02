@@ -197,8 +197,28 @@ def rma_2023():
 
     # Menampilkan hasil di Streamlit
     st.text("")
-    st.subheader('Daftar beberapa alat/barang yang Bad/Fail')
+    st.subheader('List beberapa Alat/Barang dengan status Bad/Fail setelah proses QC')
     st.markdown(filtered_data_nok.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+
+    #TABEL LEVEL L3
+    Mencari data dengan kondisi RMA Level == L3 dan memilih kolom yang diinginkan
+    filtered_data_L3 = rma_modified.loc[rma_modified['RMA Level'] == 'L3', 
+                                 ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
+                                  'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
+                                  'Final Status', 'Project']].reset_index()
+
+    filtered_data_L3 = filtered_data_L3.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
+
+    # Menambahkan kolom index nomor urut
+    filtered_data_L3['No.'] = range(1, len(filtered_data_L3) + 1)
+
+    # Menyisipkan kolom 'No' sebelum kolom 'Nama Barang'
+    filtered_data_L3.insert(0, 'No', filtered_data_L3.pop('No.'))
+
+    # Menampilkan hasil di Streamlit
+    st.text("")
+    st.subheader('List Alat/Barang yang mengalami proses L3')
+    st.markdown(filtered_data_L3.style.hide(axis="index").to_html(), unsafe_allow_html=True)
     
     #GRAFIK BAR HORIZONTAL COUNT
     count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
