@@ -210,10 +210,10 @@ def rma_2023():
     filtered_data_L3 = filtered_data_L3.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
 
     # Menambahkan kolom index nomor urut
-    filtered_data_L3['No.'] = range(1, len(filtered_data_L3) + 1)
+    #filtered_data_L3['No.'] = range(1, len(filtered_data_L3) + 1)
 
     # Menyisipkan kolom 'No' sebelum kolom 'Nama Barang'
-    filtered_data_L3.insert(0, 'No', filtered_data_L3.pop('No.'))
+    #filtered_data_L3.insert(0, 'No', filtered_data_L3.pop('No.'))
 
     # Menampilkan hasil di Streamlit
     st.text("")
