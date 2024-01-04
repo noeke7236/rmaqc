@@ -41,7 +41,7 @@ def rma_qc():
     url_link = "http://kb.mindotama.co.id/dokuwiki/doku.php?id=start"
     st.write("RMA QC Knowledge Base [link](%s)" % url_link)
     #st.markdown("check out this [link](%s)" % url)
-    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/kbmindotama.png')
+    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
  
 def rma_2023():
     st.markdown("# Infografis Tahun 2023")
