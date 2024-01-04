@@ -40,11 +40,15 @@ def rma_qc():
     st.header('Knowledge Base', divider='rainbow')
     url_link = "http://kb.mindotama.co.id/dokuwiki/doku.php?id=start"
     st.write("RMA QC Knowledge Base [link](%s)" % url_link)
+    iframe_code = """
+        <iframe src="http://kb.mindotama.co.id/dokuwiki/doku.php?id=start" width="700" height="500"></iframe>
+    """
+    st.markdown(iframe_code, unsafe_allow_html=True)
     #st.markdown("check out this [link](%s)" % url)
-    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/kbmindotama.png')
+    #st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/kbmindotama.png')
  
 def rma_2023():
-    st.markdown("# Statistik Tahun 2023")
+    st.markdown("# Infografis Tahun 2023")
     st.sidebar.markdown("# 2023 :bar_chart:")
     
     col1, col2, col3, col4 = st.columns(4)
