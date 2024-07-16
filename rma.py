@@ -4,7 +4,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from mount.src.rmaqc.2024 import rma_2024
+import sys
+sys.path.append("./mount/src/rmaqc/")
+import 2024
 
 sns.set_theme(style="darkgrid")
 
