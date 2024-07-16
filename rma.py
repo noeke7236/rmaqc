@@ -102,35 +102,35 @@ def rma_2023():
     
     # GRAFIK BARANG MASUK
     # Create a barplot
-    #grafik_barang_masuk(rma_modified)
-    rma_modified['Bulan_Masuk'] = pd.to_datetime(rma_modified['Tgl Masuk [PB06]'], dayfirst=True).dt.strftime('%B')
-    rma_modified['bulan'] = pd.to_datetime(rma_modified['Tgl Masuk [PB06]'], dayfirst=True).dt.month
-    rma_modified['jumlah'] = 1
-    result = rma_modified.groupby(['bulan']).agg(jumlah=('jumlah', 'count')).reset_index()
+    grafik_barang_masuk(rma_modified)
+    #rma_modified['Bulan_Masuk'] = pd.to_datetime(rma_modified['Tgl Masuk [PB06]'], dayfirst=True).dt.strftime('%B')
+    #rma_modified['bulan'] = pd.to_datetime(rma_modified['Tgl Masuk [PB06]'], dayfirst=True).dt.month
+    #rma_modified['jumlah'] = 1
+    #result = rma_modified.groupby(['bulan']).agg(jumlah=('jumlah', 'count')).reset_index()
 
-    no_bulan = [{'bulan': i, 'jumlah': 0} for i in range(1, 13)]
-    data_bulan = pd.DataFrame(no_bulan)
-    result_dataframe = pd.merge(data_bulan, result, on='bulan', how='left')
-    result_dataframe['jumlah_y'] = result_dataframe['jumlah_y'].fillna(0).astype(int)
+    #no_bulan = [{'bulan': i, 'jumlah': 0} for i in range(1, 13)]
+    #data_bulan = pd.DataFrame(no_bulan)
+    #result_dataframe = pd.merge(data_bulan, result, on='bulan', how='left')
+    #result_dataframe['jumlah_y'] = result_dataframe['jumlah_y'].fillna(0).astype(int)
 
-    fig_bar, ax_bar = plt.subplots(figsize=(12, 6))
-    bar_plot = sns.barplot(data=result_dataframe, x="bulan", y="jumlah_y", palette=["#009EFA" if y <= 200 else "#FF6347" for y in result_dataframe['jumlah_y']])
-    ax_bar.set_xlabel('Bulan')
-    ax_bar.set_ylabel('Jumlah barang')
-    ax_bar.set_ylim(0, 400)
+    #fig_bar, ax_bar = plt.subplots(figsize=(12, 6))
+    #bar_plot = sns.barplot(data=result_dataframe, x="bulan", y="jumlah_y", palette=["#009EFA" if y <= 200 else "#FF6347" for y in result_dataframe['jumlah_y']])
+    #ax_bar.set_xlabel('Bulan')
+    #ax_bar.set_ylabel('Jumlah barang')
+    #ax_bar.set_ylim(0, 400)
 
-    for p in ax_bar.patches:
-        height = p.get_height()
-        ax_bar.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
-                   ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+    #for p in ax_bar.patches:
+    #    height = p.get_height()
+    #    ax_bar.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
+    #               ha='center', va='center', xytext=(0, 10), textcoords='offset points')
 
-    bulan_labels = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
-    ax_bar.set_xticks(range(len(bulan_labels)))
-    ax_bar.set_xticklabels(bulan_labels, rotation=20)
-    st.text("")
-    st.subheader('Grafik barang masuk')
-    #Display the barplot using st.pyplot()
-    st.pyplot(fig_bar)
+    #bulan_labels = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
+    #ax_bar.set_xticks(range(len(bulan_labels)))
+    #ax_bar.set_xticklabels(bulan_labels, rotation=20)
+    #st.text("")
+    #st.subheader('Grafik barang masuk')
+    ##Display the barplot using st.pyplot()
+    #st.pyplot(fig_bar)
 
     # GRAFIK BARANG KELUAR
     rma_modified['Bulan_Keluar'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
