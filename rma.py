@@ -129,7 +129,7 @@ def rma_2023():
     ax_bar.set_xticklabels(bulan_labels, rotation=20)
     st.text("")
     st.subheader('Grafik barang masuk')
-     Display the barplot using st.pyplot()
+    #Display the barplot using st.pyplot()
     st.pyplot(fig_bar)
 
     # GRAFIK BARANG KELUAR
