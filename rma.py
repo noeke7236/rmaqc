@@ -54,6 +54,41 @@ def grafik_barang_masuk(data):
     st.text("")
     st.subheader('Grafik barang masuk')
     st.pyplot(fig_bar)
+
+def grafik_barang_keluar(data):
+    data['Bulan_Keluar'] = pd.to_datetime(data['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
+    data['bulan_out'] = pd.to_datetime(data['Tgl Selesai [PB07]'], dayfirst=True).dt.month
+    data['jumlah_out'] = 1
+    result_out = data.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
+
+    no_bulan_out = [{'bulan_out': i, 'jumlah_out': 0} for i in range(1, 13)]
+    data_bulan_out = pd.DataFrame(no_bulan_out)
+    result_dataframe_out = pd.merge(data_bulan_out, result_out, on='bulan_out', how='left')
+    result_dataframe_out['jumlah_out_y'] = result_dataframe_out['jumlah_out_y'].fillna(0).astype(int)
+
+    # Tentukan max_value
+    max_value = result_dataframe_out['jumlah_out_y'].max()
+
+    # Tetapkan warna berdasarkan max_value
+    palette = ["#FF6347" if y == max_value else "#009EFA" for y in result_dataframe_out['jumlah_out_y']]
+
+    fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
+    bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=palette)
+    ax_bar1.set_xlabel('Bulan')
+    ax_bar1.set_ylabel('Jumlah barang')
+    ax_bar1.set_ylim(0, max_value + 50)  # Setting ylim based on max_value
+
+    for p in ax_bar1.patches:
+        height = p.get_height()
+        ax_bar1.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
+                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+
+    bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
+    ax_bar1.set_xticks(range(len(bulan_labels1)))
+    ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
+    st.text("")
+    st.subheader('Grafik barang keluar')
+    st.pyplot(fig_bar1)
     
 # Load data
 url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
@@ -307,6 +342,9 @@ def rma_2024():
     # GRAFIK BARANG MASUK
     # Create a barplot
     grafik_barang_masuk(rma_modified2)
+
+    # GRAFIK BARANG KELUAR
+    grafik_barang_keluar(rma_modified2)
     
 #def page3():
 #    st.markdown("# Page 3 🎉")
