@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from 2024 import *
+from 2024 import rma_2024
 
 sns.set_theme(style="darkgrid")
 
