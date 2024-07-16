@@ -70,7 +70,7 @@ def grafik_barang_keluar(data):
     max_value = result_dataframe_out['jumlah_out_y'].max()
 
     # Tetapkan warna berdasarkan max_value
-    palette = ["#FF6347" if y == max_value else "#009EFA" for y in result_dataframe_out['jumlah_out_y']]
+    palette = ["#009EFA"if y == max_value else "#FF6347" for y in result_dataframe_out['jumlah_out_y']]
 
     fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
     bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=palette)
