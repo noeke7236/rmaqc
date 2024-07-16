@@ -21,7 +21,9 @@ url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
 rma = load_data(url)
 rma_modified = rma.copy()
 
-#rma = pd.read_excel('/main/2023/2023.xlsx')
+url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
+rma2 = load_data(url2)
+rma_modified2 = rma2.copy()
   
 st.set_page_config(
     page_title="RMA&QC",
@@ -286,6 +288,15 @@ def rma_2023():
 def rma_2024():
     st.markdown("# Infografis Tahun 2024")
     st.sidebar.markdown("# 2024 :bar_chart:")
+
+    st.markdown("""---""")
+    
+    # TOTAL BARANG MASUK
+    # Calculate statistics
+    row_count2, total_qty2 = calculate_statistics(rma_modified2)
+    tabel_barang2 = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count2, total_qty2]})
+    st.subheader('Total Alat/Barang')
+    st.markdown(tabel_barang2.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
