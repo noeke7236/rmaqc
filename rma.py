@@ -282,7 +282,10 @@ def rma_2023():
     st.text("")
     st.subheader('Jumlah Alat/Barang berdasarkan project')
     st.pyplot(fig_bar2)
-    
+
+def rma_2024():
+    st.markdown("# Infografis Tahun 2024")
+    st.sidebar.markdown("# 2024 :bar_chart:")
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
@@ -290,6 +293,7 @@ def rma_2023():
 page_names_to_funcs = {
     "RMA QC": rma_qc,
     "2023": rma_2023,
+    "2024": rma_2024
     #"Page 3": page3,
 }
 
