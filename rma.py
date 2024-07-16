@@ -15,7 +15,12 @@ def calculate_statistics(data):
     total_qty = data['Qty'].sum()
     return row_count, total_qty
 
-
+def total_barang_masuk(data):
+    row_count, total_qty = calculate_statistics(data)
+    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
+    st.subheader('Total Alat/Barang')
+    st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+    
 # Load data
 url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
 rma = load_data(url)
@@ -59,10 +64,11 @@ def rma_2023():
     
     # TOTAL BARANG MASUK
     # Calculate statistics
-    row_count, total_qty = calculate_statistics(rma_modified)
-    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
-    st.subheader('Total Alat/Barang')
-    st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+    total_barang_masuk(rma_modified)
+    #row_count, total_qty = calculate_statistics(rma_modified)
+    #tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
+    #st.subheader('Total Alat/Barang')
+    #st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     # GRAFIK BARANG MASUK
     # Create a barplot
@@ -293,10 +299,11 @@ def rma_2024():
     
     # TOTAL BARANG MASUK
     # Calculate statistics
-    row_count2, total_qty2 = calculate_statistics(rma_modified2)
-    tabel_barang2 = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count2, total_qty2]})
-    st.subheader('Total Alat/Barang')
-    st.markdown(tabel_barang2.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+    total_barang_masuk(rma_modified2)
+    #row_count2, total_qty2 = calculate_statistics(rma_modified2)
+    #tabel_barang2 = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count2, total_qty2]})
+    #st.subheader('Total Alat/Barang')
+    #st.markdown(tabel_barang2.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
 #def page3():
 #    st.markdown("# Page 3 🎉")
