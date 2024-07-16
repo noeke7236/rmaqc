@@ -56,8 +56,8 @@ def grafik_barang_masuk(data):
     st.pyplot(fig_bar)
 
 def grafik_barang_keluar(data):
-    data['Bulan_Keluar'] = pd.to_datetime(data['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
-    data['bulan_out'] = pd.to_datetime(data['Tgl Selesai [PB07]'], dayfirst=True).dt.month
+    data['Bulan_Keluar'] = pd.to_datetime(data['Tgl Keluar [PB07]'], dayfirst=True).dt.strftime('%B')
+    data['bulan_out'] = pd.to_datetime(data['Tgl Keluar [PB07]'], dayfirst=True).dt.month
     data['jumlah_out'] = 1
     result_out = data.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
 
@@ -344,7 +344,7 @@ def rma_2024():
     grafik_barang_masuk(rma_modified2)
 
     # GRAFIK BARANG KELUAR
-    #grafik_barang_keluar(rma_modified2)
+    grafik_barang_keluar(rma_modified2)
     
 #def page3():
 #    st.markdown("# Page 3 🎉")
