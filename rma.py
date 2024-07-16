@@ -344,7 +344,7 @@ def rma_2024():
     grafik_barang_masuk(rma_modified2)
 
     # GRAFIK BARANG KELUAR
-    grafik_barang_keluar(rma_modified2)
+    #grafik_barang_keluar(rma_modified2)
     
 #def page3():
 #    st.markdown("# Page 3 🎉")
