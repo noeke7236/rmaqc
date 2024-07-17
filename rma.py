@@ -89,7 +89,26 @@ def grafik_barang_keluar(data):
     st.text("")
     st.subheader('Grafik barang keluar')
     st.pyplot(fig_bar1)
-    
+
+def grafik_bar_horizontal_count(data):
+    count_barang = data['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
+
+    # Membuat horizontal bar chart
+    fig_count, ax_count = plt.subplots()
+    bars = count_barang.plot(kind='barh', color='skyblue', ax=ax_count)
+    ax_count.set_xlabel('Jumlah')
+    ax_count.set_ylabel('Alat/Barang')
+    ax_count.grid(axis='x')
+
+    # Menambahkan nilai di dalam setiap bar
+    for bar, value in zip(bars.patches, count_barang):
+        plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
+
+    # Menampilkan plot di Streamlit
+    st.text("")
+    st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
+    st.pyplot(fig_count)
+
 # Load data
 url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
 rma = load_data(url)
@@ -345,6 +364,9 @@ def rma_2024():
 
     # GRAFIK BARANG KELUAR
     grafik_barang_keluar(rma_modified2)
+
+    #GRAFIK BAR HORIZONTAL COUNT
+    grafik_bar_horizontal_count(rma_modified2)
     
 #def page3():
 #    st.markdown("# Page 3 🎉")
