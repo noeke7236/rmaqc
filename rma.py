@@ -286,23 +286,24 @@ def rma_2023():
     st.markdown(filtered_data_L3.style.hide(axis="index").to_html(), unsafe_allow_html=True)
         
     #GRAFIK BAR HORIZONTAL COUNT
-    count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
+    grafik_bar_horizontal_count(rma_modified)
+    #count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
 
-    # Membuat horizontal bar chart
-    fig_count, ax_count = plt.subplots()
-    bars = count_barang.plot(kind='barh', color='skyblue')
-    plt.xlabel('Jumlah')
-    plt.ylabel('Alat/Barang')
-    plt.grid(axis='x')
+    ## Membuat horizontal bar chart
+    #fig_count, ax_count = plt.subplots()
+    #bars = count_barang.plot(kind='barh', color='skyblue')
+    #plt.xlabel('Jumlah')
+    #plt.ylabel('Alat/Barang')
+    #plt.grid(axis='x')
 
-    # Menambahkan nilai di dalam setiap bar
-    for bar, value in zip(bars.patches, count_barang):
-        plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
+    ## Menambahkan nilai di dalam setiap bar
+    #for bar, value in zip(bars.patches, count_barang):
+    #    plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
 
-    # Menampilkan plot di Streamlit
-    st.text("")
-    st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
-    st.pyplot(fig_count)
+    ## Menampilkan plot di Streamlit
+    #st.text("")
+    #st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
+    #st.pyplot(fig_count)
 
     #GRAFIK BAR HORIZONTAL SUM
     sum_barang = rma_modified.groupby('Nama Barang')['Qty'].sum().nlargest(10).sort_values(ascending=True)
