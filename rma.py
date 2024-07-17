@@ -335,48 +335,32 @@ def rma_2023():
     
     #GRAFIK BAR HORIZONTAL SUM
     grafik_bar_horizontal_sum(rma_modified)
-    #sum_barang = rma_modified.groupby('Nama Barang')['Qty'].sum().nlargest(10).sort_values(ascending=True)
+    
+    # GRAFIK BAR PROJECT
+    grafik_bar_project(rma_modified, 'Project 2023')
+    #data_project = rma_modified['Project'].value_counts()
 
-    ## Membuat horizontal bar chart dengan warna tomato
-    #fig_sum, ax_sum = plt.subplots()
-    #bars = sum_barang.plot(kind='barh', color='tomato')
-    #plt.xlabel('Jumlah')
-    #plt.ylabel('Alat/Barang')
-    #plt.grid(axis='x')
+    ## Mengambil data dari Series data_project
+    #project_names = data_project.index
+    #project_counts = data_project.values
 
-    # Menambahkan nilai di dalam setiap bar
-    #for bar, value in zip(bars.patches, sum_barang):
-    #    plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
+    ## Membuat objek figure dan axes
+    #fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
+
+    ## Membuat bar plot dengan seaborn dan menggunakan axes
+    #sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
+
+    ## Menambahkan bar label ke setiap batang
+    #for i, value in enumerate(project_counts):
+    #    ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
+
+    #ax_bar2.set_ylabel('Project')
+    #ax_bar2.set_xlabel('Jumlah')
 
     ## Menampilkan plot di Streamlit
     #st.text("")
-    #st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
-    #st.pyplot(fig_sum)
-
-    # GRAFIK BAR PROJECT
-    data_project = rma_modified['Project'].value_counts()
-
-    # Mengambil data dari Series data_project
-    project_names = data_project.index
-    project_counts = data_project.values
-
-    # Membuat objek figure dan axes
-    fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
-
-    # Membuat bar plot dengan seaborn dan menggunakan axes
-    sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
-
-    # Menambahkan bar label ke setiap batang
-    for i, value in enumerate(project_counts):
-        ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
-
-    ax_bar2.set_ylabel('Project')
-    ax_bar2.set_xlabel('Jumlah')
-
-    # Menampilkan plot di Streamlit
-    st.text("")
-    st.subheader('Jumlah Alat/Barang berdasarkan project')
-    st.pyplot(fig_bar2)
+    #st.subheader('Jumlah Alat/Barang berdasarkan project')
+    #st.pyplot(fig_bar2)
 
 def rma_2024():
     st.markdown("# Infografis Tahun 2024")
