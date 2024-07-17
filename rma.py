@@ -109,6 +109,25 @@ def grafik_bar_horizontal_count(data):
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
     st.pyplot(fig_count)
 
+def grafik_bar_horizontal_sum(data):
+    sum_barang = data.groupby('Nama Barang')['Qty'].sum().nlargest(10).sort_values(ascending=True)
+
+    # Membuat horizontal bar chart dengan warna tomato
+    fig_sum, ax_sum = plt.subplots()
+    bars = sum_barang.plot(kind='barh', color='tomato', ax=ax_sum)
+    ax_sum.set_xlabel('Jumlah')
+    ax_sum.set_ylabel('Alat/Barang')
+    ax_sum.grid(axis='x')
+
+    # Menambahkan nilai di dalam setiap bar
+    for bar, value in zip(bars.patches, sum_barang):
+        ax_sum.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2, str(value), ha='center', va='center', color='black')
+
+    # Menampilkan plot di Streamlit
+    st.text("")
+    st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
+    st.pyplot(fig_sum)
+
 # Load data
 url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
 rma = load_data(url)
@@ -287,24 +306,7 @@ def rma_2023():
         
     #GRAFIK BAR HORIZONTAL COUNT
     grafik_bar_horizontal_count(rma_modified)
-    #count_barang = rma_modified['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
-
-    ## Membuat horizontal bar chart
-    #fig_count, ax_count = plt.subplots()
-    #bars = count_barang.plot(kind='barh', color='skyblue')
-    #plt.xlabel('Jumlah')
-    #plt.ylabel('Alat/Barang')
-    #plt.grid(axis='x')
-
-    ## Menambahkan nilai di dalam setiap bar
-    #for bar, value in zip(bars.patches, count_barang):
-    #    plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
-
-    ## Menampilkan plot di Streamlit
-    #st.text("")
-    #st.subheader('Top 10 Alat/Barang berdasarkan jumlah item')
-    #st.pyplot(fig_count)
-
+    
     #GRAFIK BAR HORIZONTAL SUM
     sum_barang = rma_modified.groupby('Nama Barang')['Qty'].sum().nlargest(10).sort_values(ascending=True)
 
@@ -368,7 +370,10 @@ def rma_2024():
 
     #GRAFIK BAR HORIZONTAL COUNT
     grafik_bar_horizontal_count(rma_modified2)
-    
+
+    #GRAFIK BAR HORIZONTAL SUM
+    grafik_bar_horizontal_sum(rma_modified2)
+
 #def page3():
 #    st.markdown("# Page 3 🎉")
 #    st.sidebar.markdown("# Page 3 🎉")
