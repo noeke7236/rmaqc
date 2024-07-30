@@ -187,10 +187,15 @@ def rma_qc():
 def rma_2023():
     st.markdown("# Infografis Tahun 2023")
     st.sidebar.markdown("# 2023 :bar_chart:")
+
+    total_items = len(rma_modified)
+    total_quantity = rma_modified['Qty'].sum()
     
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", "1022")
-    col2.metric("Total Quantity", "1935")
+    #col1.metric("Total Items", "1022")
+    #col2.metric("Total Quantity", "1935")
+    col1.metric("Total Items", total_items)
+    col2.metric("Total Quantity", total_quantity)
     col3.metric("Pass :heavy_check_mark:", "99.2%")
     col4.metric("Fail :x:", "0.8%")
 
@@ -339,29 +344,6 @@ def rma_2023():
     
     # GRAFIK BAR PROJECT
     grafik_bar_project(rma_modified, 'Project 2023')
-    #data_project = rma_modified['Project'].value_counts()
-
-    ## Mengambil data dari Series data_project
-    #project_names = data_project.index
-    #project_counts = data_project.values
-
-    ## Membuat objek figure dan axes
-    #fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
-
-    ## Membuat bar plot dengan seaborn dan menggunakan axes
-    #sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
-
-    ## Menambahkan bar label ke setiap batang
-    #for i, value in enumerate(project_counts):
-    #    ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
-
-    #ax_bar2.set_ylabel('Project')
-    #ax_bar2.set_xlabel('Jumlah')
-
-    ## Menampilkan plot di Streamlit
-    #st.text("")
-    #st.subheader('Jumlah Alat/Barang berdasarkan project')
-    #st.pyplot(fig_bar2)
 
 def rma_2024():
     st.markdown("# Infografis Tahun 2024")
