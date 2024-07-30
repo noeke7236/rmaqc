@@ -155,7 +155,8 @@ def grafik_bar_project(data, title):
     st.pyplot(fig_bar2)
 
 # Load data
-url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
+#url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
+url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
 rma = load_data(url)
 rma_modified = rma.copy()
 
