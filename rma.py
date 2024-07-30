@@ -188,12 +188,9 @@ def rma_2023():
     st.markdown("# Infografis Tahun 2023")
     st.sidebar.markdown("# 2023 :bar_chart:")
 
-    total_items = len(rma_modified)
-    total_quantity = rma_modified['Qty'].sum()
-    
+    total_items, total_quantity = calculate_statistics(rma_modified)
+        
     col1, col2, col3, col4 = st.columns(4)
-    #col1.metric("Total Items", "1022")
-    #col2.metric("Total Quantity", "1935")
     col1.metric("Total Items", total_items)
     col2.metric("Total Quantity", total_quantity)
     col3.metric("Pass :heavy_check_mark:", "99.2%")
