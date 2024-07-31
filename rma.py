@@ -155,7 +155,6 @@ def grafik_bar_project(data, title):
     st.pyplot(fig_bar2)
 
 # Load data
-#url = 'https://raw.githubusercontent.com/noeke7236/rmaqc/main/2023/2023.xlsx'
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
 rma = load_data(url)
 rma_modified = rma.copy()
@@ -345,6 +344,14 @@ def rma_2023():
 def rma_2024():
     st.markdown("# Infografis Tahun 2024")
     st.sidebar.markdown("# 2024 :bar_chart:")
+
+     total_items2, total_quantity2 = calculate_statistics(rma_modified2)
+        
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total Items", total_items2)
+    col2.metric("Total Quantity", total_quantity2)
+    col3.metric("Pass :heavy_check_mark:", "----%")
+    col4.metric("Fail :x:", "----%")
 
     st.markdown("""---""")
     
