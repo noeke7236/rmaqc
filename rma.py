@@ -15,6 +15,22 @@ def calculate_statistics(data):
     total_qty = data['Qty'].sum()
     return row_count, total_qty
 
+def calculate_percentage(data):
+    data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
+    result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
+    
+    if 'Bad' not in result_counts:
+        result_counts['Bad'] = 0
+    if 'Good' not in result_counts:
+        result_counts['Good'] = 0
+
+    result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
+    total_good = result_counts['Good'].sum()
+    total_bad = result_counts['Bad'].sum()
+    pass_percentage = (total_good / (total_good + total_bad)) * 100
+    fail_percentage = (total_bad / (total_good + total_bad)) * 100
+    return result_counts, result_percentage, pass_percentage, fail_percentage
+
 def total_barang_masuk(data):
     row_count, total_qty = calculate_statistics(data)
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
@@ -352,21 +368,20 @@ def rma_2024():
     st.sidebar.markdown("# 2024 :bar_chart:")
 
     total_items2, total_quantity2 = calculate_statistics(rma_modified2)
-        
+    rma2024_counts, rma2024_percentage, rma2024_pass_percentage, rma2024_fail_percentage = calculate_percentage(rma_modified2)
+    
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items2)
     col2.metric("Total Quantity", total_quantity2)
-    col3.metric("Pass :heavy_check_mark:", "----%")
-    col4.metric("Fail :x:", "----%")
+    col3.metric("Pass :heavy_check_mark:", f"{rma2024_pass_percentage:.1f}%")
+    col4.metric("Fail :x:", f"{rma2024_fail_percentage:.1f}%")
 
     st.markdown("""---""")
     
     # TOTAL BARANG MASUK
-    # Calculate statistics
     total_barang_masuk(rma_modified2)
 
     # GRAFIK BARANG MASUK
-    # Create a barplot
     grafik_barang_masuk(rma_modified2)
 
     # GRAFIK BARANG KELUAR
@@ -380,10 +395,6 @@ def rma_2024():
 
     # GRAFIK BAR PROJECT
     grafik_bar_project(rma_modified2, 'Project 2024')
-    
-#def page3():
-#    st.markdown("# Page 3 🎉")
-#    st.sidebar.markdown("# Page 3 🎉")
 
 page_names_to_funcs = {
     "RMA QC": rma_qc,
