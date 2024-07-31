@@ -345,7 +345,7 @@ def rma_2024():
     st.markdown("# Infografis Tahun 2024")
     st.sidebar.markdown("# 2024 :bar_chart:")
 
-     total_items2, total_quantity2 = calculate_statistics(rma_modified2)
+    total_items2, total_quantity2 = calculate_statistics(rma_modified2)
         
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items2)
