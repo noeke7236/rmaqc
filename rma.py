@@ -182,7 +182,13 @@ def rma_qc():
     st.write("RMA QC Knowledge Base [link](%s)" % url_link)
     #st.markdown("check out this [link](%s)" % url)
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
- 
+
+def rma_2022():
+    st.markdown("# Infografis Tahun 2022")
+    st.sidebar.markdown("# 2022 :bar_chart:")
+
+    st.markdown("""---""")
+    
 def rma_2023():
     st.markdown("# Infografis Tahun 2023")
     st.sidebar.markdown("# 2023 :bar_chart:")
@@ -381,6 +387,7 @@ def rma_2024():
 
 page_names_to_funcs = {
     "RMA QC": rma_qc,
+    "2022": rma_2022,
     "2023": rma_2023,
     "2024": rma_2024
     #"Page 3": page3,
