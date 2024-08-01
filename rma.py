@@ -262,33 +262,6 @@ def rma_2023():
     
     # PERSENTASE DALAM PROSES QC
     #edit 01/08/2024
-    # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
-    #rma_modified['Final Status Name'] = rma_modified['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
-    
-    # Result dari groupby dan value_counts
-    #result_counts = rma_modified.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
-    #result_counts = result_counts.applymap(lambda x: int(x) if x.is_integer() else x)
-
-    # Result persentase
-    #result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
-
-    # Membuat DataFrame
-    #tabel_persentase = pd.DataFrame({
-    #    'Bad': result_counts['Bad'].astype(int),
-    #    'Good': result_counts['Good'].astype(int),
-    #    'Percentage Bad': result_percentage['Bad'],
-    #    'Percentage Good': result_percentage['Good']
-    #})
-
-    # Mengganti nama header 'Percentage Bad' dan 'Percentage Good'
-    #tabel_persentase = tabel_persentase.rename(columns={'Percentage Bad': 'Bad(%)', 'Percentage Good': 'Good(%)'})
-    #tabel_persentase.rename_axis(None, inplace=True)
-
-    # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    #tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
-    #tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
-
-    #edit 01/08/2024
     # Membuat DataFrame
     tabel_persentase = pd.DataFrame({
         'Bad': rma2023_counts['Bad'].astype(int),
@@ -310,18 +283,19 @@ def rma_2023():
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
     # Membuat Pie Chart untuk baris 'L1'
-    #fig_pie, ax_pie = plt.subplots()
-    #labels_pie = ['Bad', 'Good']
-    #colors_pie = ['#ff9999', '#66b3ff']
-    #explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
+    fig_pie, ax_pie = plt.subplots()
+    labels_pie = ['Bad', 'Good']
+    colors_pie = ['#ff9999', '#66b3ff']
+    explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
 
     #ax_pie.pie(tabel_persentase.loc['L1', ['Bad', 'Good']], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
-    #ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
+    ax_pie.pie(tabel_persentase.loc['Bad', 'Good'], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
+    ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
 
     # Menampilkan Pie Chart di Streamlit
-    #st.text("")
-    #st.subheader('Pie chart hasil proses QC')
-    #st.pyplot(fig_pie)
+    st.text("")
+    st.subheader('Pie chart hasil proses QC')
+    st.pyplot(fig_pie)
 
     #TABEL FAIL
     # Mencari data dengan kondisi Project == 'NOK' dan memilih kolom yang diinginkan
