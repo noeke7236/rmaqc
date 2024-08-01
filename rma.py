@@ -238,12 +238,13 @@ def rma_2023():
 
     rma_modified = normalize_columns(rma.copy(), columns_to_drop, mylist) #edit 01/08/2024
     total_items, total_quantity = calculate_statistics(rma_modified)
-        
+    rma2023_counts, rma2023_percentage, rma2023_pass_percentage, rma2023_fail_percentage = calculate_percentage(rma_modified)
+    
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items)
     col2.metric("Total Quantity", total_quantity)
-    col3.metric("Pass :heavy_check_mark:", "99.2%")
-    col4.metric("Fail :x:", "0.8%")
+    col3.metric("Pass :heavy_check_mark:", f"{rma2023_pass_percentage:.1f}%")
+    col4.metric("Fail :x:", f"{rma2023_fail_percentage:.1f}%")
 
     st.markdown("""---""")
     
@@ -258,74 +259,51 @@ def rma_2023():
     # GRAFIK BARANG KELUAR
     #edit 01/08/2024
     grafik_barang_keluar(rma_modified)
-    #rma_modified['Bulan_Keluar'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
-    #rma_modified['bulan_out'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.month
-
-    #rma_modified['jumlah_out'] = 1
-    #result_out = rma_modified.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
-
-    #no_bulan_out = [{'bulan_out': i, 'jumlah_out': 0} for i in range(1, 13)]
-    #data_bulan_out = pd.DataFrame(no_bulan_out)
-
-    # Menggabungkan dataframe result dan data_bulan berdasarkan kolom 'bulan'
-    #result_dataframe_out = pd.merge(data_bulan_out, result_out, on='bulan_out', how='left')
-    
-    # Mengisi nilai NaN dengan 0
-    #result_dataframe_out['jumlah_out_y'] = result_dataframe_out['jumlah_out_y'].fillna(0).astype(int)
-    
-    # Plot barplot
-    #fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
-    #bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=["#FF6347" if y <= 200 else "#009EFA" for y in result_dataframe_out['jumlah_out_y']])
-    #ax_bar1.set_xlabel('Bulan')
-    #ax_bar1.set_ylabel('Jumlah barang')
-
-    # Menambahkan batasan pada sumbu y
-    #ax_bar1.set_ylim(0, 400)
-
-    # Menambahkan bar label
-    #for p in ax_bar1.patches:
-    #    height = p.get_height()
-    #    ax_bar1.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
-    #                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
-
-    # Mengubah nilai sumbu x
-    #bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
-    #ax_bar1.set_xticks(range(len(bulan_labels1)))
-    #ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
-    #st.text("")
-    #st.subheader('Grafik barang keluar')
-    # Display the barplot using st.pyplot()
-    #st.pyplot(fig_bar1)
     
     # PERSENTASE DALAM PROSES QC
+    #edit 01/08/2024
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
-    rma_modified['Final Status Name'] = rma_modified['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
+    #rma_modified['Final Status Name'] = rma_modified['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
     
     # Result dari groupby dan value_counts
-    result_counts = rma_modified.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
-    result_counts = result_counts.applymap(lambda x: int(x) if x.is_integer() else x)
+    #result_counts = rma_modified.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
+    #result_counts = result_counts.applymap(lambda x: int(x) if x.is_integer() else x)
 
     # Result persentase
-    result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
+    #result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
 
     # Membuat DataFrame
-    tabel_persentase = pd.DataFrame({
-        'Bad': result_counts['Bad'].astype(int),
-        'Good': result_counts['Good'].astype(int),
-        'Percentage Bad': result_percentage['Bad'],
-        'Percentage Good': result_percentage['Good']
-    })
+    #tabel_persentase = pd.DataFrame({
+    #    'Bad': result_counts['Bad'].astype(int),
+    #    'Good': result_counts['Good'].astype(int),
+    #    'Percentage Bad': result_percentage['Bad'],
+    #    'Percentage Good': result_percentage['Good']
+    #})
 
     # Mengganti nama header 'Percentage Bad' dan 'Percentage Good'
-    tabel_persentase = tabel_persentase.rename(columns={'Percentage Bad': 'Bad(%)', 'Percentage Good': 'Good(%)'})
-    tabel_persentase.rename_axis(None, inplace=True)
+    #tabel_persentase = tabel_persentase.rename(columns={'Percentage Bad': 'Bad(%)', 'Percentage Good': 'Good(%)'})
+    #tabel_persentase.rename_axis(None, inplace=True)
 
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
     tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
     tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
 
+    #edit 01/08/2024
+    # Membuat DataFrame
+    tabel_persentase = pd.DataFrame({
+        'Bad': rma2023_counts['Bad'].astype(int),
+        'Good': rma2023_counts['Good'].astype(int),
+        'Bad(%)': rma2023_percentage['Bad'],
+        'Good(%)': rma2023_percentage['Good']
+    })
+
+    # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
+    tabel_persentase.rename_axis('Level', inplace=True)
+    tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
+    tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
+    
     # Mengganti nama header 'RMA Level' menjadi 'Level'
-    tabel_persentase.columns.name = 'Level'
+    #tabel_persentase.columns.name = 'Level'
 
     st.text("")
     st.subheader('Persentase dalam proses QC')
