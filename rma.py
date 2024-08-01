@@ -283,19 +283,19 @@ def rma_2023():
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
     # Membuat Pie Chart untuk baris 'L1'
-    fig_pie, ax_pie = plt.subplots()
-    labels_pie = ['Bad', 'Good']
-    colors_pie = ['#ff9999', '#66b3ff']
-    explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
+    #fig_pie, ax_pie = plt.subplots()
+    #labels_pie = ['Bad', 'Good']
+    #colors_pie = ['#ff9999', '#66b3ff']
+    #explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
 
     #ax_pie.pie(tabel_persentase.loc['L1', ['Bad', 'Good']], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
-    ax_pie.pie(tabel_persentase.loc['Bad', 'Good'], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
-    ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
+    #ax_pie.pie(tabel_persentase.loc['Bad', 'Good'], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
+    #ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
 
     # Menampilkan Pie Chart di Streamlit
-    st.text("")
-    st.subheader('Pie chart hasil proses QC')
-    st.pyplot(fig_pie)
+    #st.text("")
+    #st.subheader('Pie chart hasil proses QC')
+    #st.pyplot(fig_pie)
 
     #TABEL FAIL
     # Mencari data dengan kondisi Project == 'NOK' dan memilih kolom yang diinginkan
