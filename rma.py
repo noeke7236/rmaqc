@@ -10,6 +10,25 @@ sns.set_theme(style="darkgrid")
 def load_data(url):
     return pd.read_excel(url)
 
+#edit 01/08/2024
+def normalize_columns(data, columns_to_drop, target_columns):
+    # Hapus kolom yang tidak diperlukan
+    data.drop(columns_to_drop, axis=1, inplace=True)
+
+    # Ambil nama kolom yang ada di DataFrame
+    nama_kolom = data.columns.tolist()
+
+    # Buat column_mapping secara otomatis berdasarkan perbedaan antara nama_kolom dan target_columns
+    column_mapping = {nama_kolom[i]: target_columns[i] for i in range(min(len(nama_kolom), len(target_columns))) if nama_kolom[i] != target_columns[i]}
+
+    # List untuk menyimpan nama kolom yang baru
+    new_column_names = [column_mapping[col] if col in column_mapping else col for col in nama_kolom]
+
+    # Ganti nama kolom di DataFrame
+    data.columns = new_column_names
+
+    return data
+
 def calculate_statistics(data):
     row_count = len(data)
     total_qty = data['Qty'].sum()
@@ -173,12 +192,20 @@ def grafik_bar_project(data, title):
 # Load data
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
 rma = load_data(url)
-rma_modified = rma.copy()
+#edit 01/08/2024
+#rma_modified = rma.copy()
 
 url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
 rma2 = load_data(url2)
 rma_modified2 = rma2.copy()
-  
+
+#edit 01/08/2024
+# List standar nama kolom
+mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]', 'Tgl Keluar [PB07]', 'Final Status', 'Project']
+
+# Kolom yang harus dihapus untuk data tahun 2023
+columns_to_drop = ['Kategori','Expert','Tgl Tes','Tiket PB07']
+
 st.set_page_config(
     page_title="RMA&QC",
     page_icon=":watermelon:",
@@ -209,6 +236,7 @@ def rma_2023():
     st.markdown("# Infografis Tahun 2023")
     st.sidebar.markdown("# 2023 :bar_chart:")
 
+    rma_modified = normalize_columns(rma.copy(), columns_to_drop, mylist) #edit 01/08/2024
     total_items, total_quantity = calculate_statistics(rma_modified)
         
     col1, col2, col3, col4 = st.columns(4)
