@@ -298,12 +298,12 @@ def rma_2023():
     })
 
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    tabel_persentase.rename_axis('Level', inplace=True)
+    tabel_persentase.rename_axis(None, inplace=True)
     tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
     tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
     
     # Mengganti nama header 'RMA Level' menjadi 'Level'
-    #tabel_persentase.columns.name = 'Level'
+    tabel_persentase.columns.name = 'Level'
 
     st.text("")
     st.subheader('Persentase dalam proses QC')
