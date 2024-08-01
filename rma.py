@@ -256,44 +256,46 @@ def rma_2023():
     grafik_barang_masuk(rma_modified)
     
     # GRAFIK BARANG KELUAR
-    rma_modified['Bulan_Keluar'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
-    rma_modified['bulan_out'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.month
+    #edit 01/08/2024
+    grafik_barang_keluar(rma_modified)
+    #rma_modified['Bulan_Keluar'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.strftime('%B')
+    #rma_modified['bulan_out'] = pd.to_datetime(rma_modified['Tgl Selesai [PB07]'], dayfirst=True).dt.month
 
-    rma_modified['jumlah_out'] = 1
-    result_out = rma_modified.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
+    #rma_modified['jumlah_out'] = 1
+    #result_out = rma_modified.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
 
-    no_bulan_out = [{'bulan_out': i, 'jumlah_out': 0} for i in range(1, 13)]
-    data_bulan_out = pd.DataFrame(no_bulan_out)
+    #no_bulan_out = [{'bulan_out': i, 'jumlah_out': 0} for i in range(1, 13)]
+    #data_bulan_out = pd.DataFrame(no_bulan_out)
 
     # Menggabungkan dataframe result dan data_bulan berdasarkan kolom 'bulan'
-    result_dataframe_out = pd.merge(data_bulan_out, result_out, on='bulan_out', how='left')
+    #result_dataframe_out = pd.merge(data_bulan_out, result_out, on='bulan_out', how='left')
     
     # Mengisi nilai NaN dengan 0
-    result_dataframe_out['jumlah_out_y'] = result_dataframe_out['jumlah_out_y'].fillna(0).astype(int)
+    #result_dataframe_out['jumlah_out_y'] = result_dataframe_out['jumlah_out_y'].fillna(0).astype(int)
     
     # Plot barplot
-    fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
-    bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=["#FF6347" if y <= 200 else "#009EFA" for y in result_dataframe_out['jumlah_out_y']])
-    ax_bar1.set_xlabel('Bulan')
-    ax_bar1.set_ylabel('Jumlah barang')
+    #fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
+    #bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=["#FF6347" if y <= 200 else "#009EFA" for y in result_dataframe_out['jumlah_out_y']])
+    #ax_bar1.set_xlabel('Bulan')
+    #ax_bar1.set_ylabel('Jumlah barang')
 
     # Menambahkan batasan pada sumbu y
-    ax_bar1.set_ylim(0, 400)
+    #ax_bar1.set_ylim(0, 400)
 
     # Menambahkan bar label
-    for p in ax_bar1.patches:
-        height = p.get_height()
-        ax_bar1.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
-                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+    #for p in ax_bar1.patches:
+    #    height = p.get_height()
+    #    ax_bar1.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
+    #                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
 
     # Mengubah nilai sumbu x
-    bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
-    ax_bar1.set_xticks(range(len(bulan_labels1)))
-    ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
-    st.text("")
-    st.subheader('Grafik barang keluar')
+    #bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
+    #ax_bar1.set_xticks(range(len(bulan_labels1)))
+    #ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
+    #st.text("")
+    #st.subheader('Grafik barang keluar')
     # Display the barplot using st.pyplot()
-    st.pyplot(fig_bar1)
+    #st.pyplot(fig_bar1)
     
     # PERSENTASE DALAM PROSES QC
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
@@ -330,57 +332,57 @@ def rma_2023():
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
     # Membuat Pie Chart untuk baris 'L1'
-    fig_pie, ax_pie = plt.subplots()
-    labels_pie = ['Bad', 'Good']
-    colors_pie = ['#ff9999', '#66b3ff']
-    explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
+    #fig_pie, ax_pie = plt.subplots()
+    #labels_pie = ['Bad', 'Good']
+    #colors_pie = ['#ff9999', '#66b3ff']
+    #explode_pie = (0.1, 0)  # memberikan efek explode pada slice pertama
 
-    ax_pie.pie(tabel_persentase.loc['L1', ['Bad', 'Good']], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
-    ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
+    #ax_pie.pie(tabel_persentase.loc['L1', ['Bad', 'Good']], explode=explode_pie, labels=labels_pie, colors=colors_pie, autopct='%1.1f%%', startangle=90)
+    #ax_pie.axis('equal')  # Pastikan lingkaran terlihat sebagai lingkaran
 
     # Menampilkan Pie Chart di Streamlit
-    st.text("")
-    st.subheader('Pie chart hasil proses QC')
-    st.pyplot(fig_pie)
+    #st.text("")
+    #st.subheader('Pie chart hasil proses QC')
+    #st.pyplot(fig_pie)
 
     #TABEL FAIL
     # Mencari data dengan kondisi Project == 'NOK' dan memilih kolom yang diinginkan
-    filtered_data_nok = rma_modified.loc[rma_modified['Final Status'] == 'NOK', 
-                                 ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
-                                  'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
-                                  'Final Status', 'Project']]
+    #filtered_data_nok = rma_modified.loc[rma_modified['Final Status'] == 'NOK', 
+    #                             ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
+    #                              'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
+    #                              'Final Status', 'Project']]
 
-    filtered_data_nok = filtered_data_nok.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
+    #filtered_data_nok = filtered_data_nok.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
     # Menambahkan kolom index nomor urut
-    filtered_data_nok['No.'] = range(1, len(filtered_data_nok) + 1)
+    #filtered_data_nok['No.'] = range(1, len(filtered_data_nok) + 1)
 
     # Menyisipkan kolom 'No' sebelum kolom 'Nama Barang'
-    filtered_data_nok.insert(0, 'No', filtered_data_nok.pop('No.'))
+    #filtered_data_nok.insert(0, 'No', filtered_data_nok.pop('No.'))
 
     # Menampilkan hasil di Streamlit
-    st.text("")
-    st.subheader('List beberapa Alat/Barang dengan status Bad/Fail setelah proses QC')
-    st.markdown(filtered_data_nok.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+    #st.text("")
+    #st.subheader('List beberapa Alat/Barang dengan status Bad/Fail setelah proses QC')
+    #st.markdown(filtered_data_nok.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     #TABEL LEVEL L3
     #Mencari data dengan kondisi RMA Level == L3 dan memilih kolom yang diinginkan
-    filtered_data_L3 = rma_modified.loc[rma_modified['RMA Level'] == 'L3', 
-                                 ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
-                                  'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
-                                  'Final Status', 'Project']]
+    #filtered_data_L3 = rma_modified.loc[rma_modified['RMA Level'] == 'L3', 
+    #                             ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 
+    #                              'Tgl Masuk [PB06]', 'Tgl Selesai [PB07]', 
+    #                              'Final Status', 'Project']]
 
-    filtered_data_L3 = filtered_data_L3.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
+    #filtered_data_L3 = filtered_data_L3.rename(columns={'RMA Level': 'Level', 'Final Status': 'Status'})
         
     # Menambahkan kolom index nomor urut
-    filtered_data_L3['No.'] = range(1, len(filtered_data_L3) + 1)
+    #filtered_data_L3['No.'] = range(1, len(filtered_data_L3) + 1)
 
     # Menyisipkan kolom 'No' sebelum kolom 'Nama Barang'
-    filtered_data_L3.insert(0, 'No', filtered_data_L3.pop('No.'))
+    #filtered_data_L3.insert(0, 'No', filtered_data_L3.pop('No.'))
        
     # Menampilkan hasil di Streamlit
-    st.text("")
-    st.subheader('List Alat/Barang yang mengalami proses L3')
-    st.markdown(filtered_data_L3.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+    #st.text("")
+    #st.subheader('List Alat/Barang yang mengalami proses L3')
+    #st.markdown(filtered_data_L3.style.hide(axis="index").to_html(), unsafe_allow_html=True)
         
     #GRAFIK BAR HORIZONTAL COUNT
     grafik_bar_horizontal_count(rma_modified)
