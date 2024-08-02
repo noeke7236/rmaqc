@@ -15,11 +15,7 @@ def drop_columns(data, columns_to_drop):
     data.drop(columns_to_drop, axis=1, inplace=True)
     return data
 
-#edit 02/08/2024
 def normalize_columns(data, target_columns):
-    # Hapus kolom yang tidak diperlukan
-    #data.drop(columns_to_drop, axis=1, inplace=True)
-
     # Ambil nama kolom yang ada di DataFrame
     nama_kolom = data.columns.tolist()
 
@@ -197,8 +193,6 @@ def grafik_bar_project(data, title):
 # Load data
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
 rma = load_data(url)
-#edit 01/08/2024
-#rma_modified = rma.copy()
 
 url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
 rma2 = load_data(url2)
@@ -247,11 +241,11 @@ def rma_2022():
     rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
     #df_table = calculate_percentage(rma_modified3)
     
-    #col1, col2, col3, col4 = st.columns(4)
-    #col1.metric("Total Items", total_items3)
-    #col2.metric("Total Quantity", total_quantity3)
-    #col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
-    #col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total Items", total_items3)
+    col2.metric("Total Quantity", total_quantity3)
+    col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
+    col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
     #edit 02/08/2024
     
     st.markdown("""---""")
@@ -289,7 +283,6 @@ def rma_2023():
     
     # PERSENTASE DALAM PROSES QC
     #edit 01/08/2024
-    # Membuat DataFrame
     tabel_persentase = pd.DataFrame({
         'Bad': rma2023_counts['Bad'].astype(int),
         'Good': rma2023_counts['Good'].astype(int),
