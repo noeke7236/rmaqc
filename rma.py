@@ -10,10 +10,15 @@ sns.set_theme(style="darkgrid")
 def load_data(url):
     return pd.read_excel(url)
 
-#edit 01/08/2024
+#edit 02/08/2024
+def drop_columns(data, columns_to_drop):
+    data.drop(columns_to_drop, axis=1, inplace=True)
+    return data
+
+#edit 02/08/2024
 def normalize_columns(data, columns_to_drop, target_columns):
     # Hapus kolom yang tidak diperlukan
-    data.drop(columns_to_drop, axis=1, inplace=True)
+    #data.drop(columns_to_drop, axis=1, inplace=True)
 
     # Ambil nama kolom yang ada di DataFrame
     nama_kolom = data.columns.tolist()
@@ -26,7 +31,6 @@ def normalize_columns(data, columns_to_drop, target_columns):
 
     # Ganti nama kolom di DataFrame
     data.columns = new_column_names
-
     return data
 
 def calculate_statistics(data):
@@ -236,15 +240,18 @@ def rma_2022():
     st.sidebar.markdown("# 2022 :bar_chart:")
 
     #edit 02/08/2024
-    rma_modified3 = normalize_columns(rma3.copy(), columns_to_drop, mylist) #edit 01/08/2024
-    total_items2, total_quantity2 = calculate_statistics(rma_modified3)
+    rma_modified3 = rma3.copy()
+    rma_modified3 = normalize_columns(rma_modified3, mylist) #edit 02/08/2024
+    
+    total_items3, total_quantity3 = calculate_statistics(rma_modified3)
     rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
-
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", total_items2)
-    col2.metric("Total Quantity", total_quantity2)
-    col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
+    #df_table = calculate_percentage(rma_modified3)
+    
+    #col1, col2, col3, col4 = st.columns(4)
+    #col1.metric("Total Items", total_items3)
+    #col2.metric("Total Quantity", total_quantity3)
+    #col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
+    #col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
     #edit 02/08/2024
     
     st.markdown("""---""")
@@ -253,7 +260,10 @@ def rma_2023():
     st.markdown("# Infografis Tahun 2023")
     st.sidebar.markdown("# 2023 :bar_chart:")
 
-    rma_modified = normalize_columns(rma.copy(), columns_to_drop, mylist) #edit 01/08/2024
+    rma_modified = rma.copy()
+    rma_modified = drop_columns(rma_modified, columns_to_drop) #edit 02/08/2024
+    rma_modified = normalize_columns(rma_modified, mylist)
+    
     total_items, total_quantity = calculate_statistics(rma_modified)
     rma2023_counts, rma2023_percentage, rma2023_pass_percentage, rma2023_fail_percentage = calculate_percentage(rma_modified)
     
