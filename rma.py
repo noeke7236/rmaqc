@@ -16,7 +16,7 @@ def drop_columns(data, columns_to_drop):
     return data
 
 #edit 02/08/2024
-def normalize_columns(data, columns_to_drop, target_columns):
+def normalize_columns(data, target_columns):
     # Hapus kolom yang tidak diperlukan
     #data.drop(columns_to_drop, axis=1, inplace=True)
 
