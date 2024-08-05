@@ -36,9 +36,9 @@ def calculate_statistics(data):
 
 def calculate_percentage(data):
     data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
-    result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
-    #result_counts = data['Final Status Name'].value_counts().unstack().fillna(0)
-    
+    #result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
+    result_counts = data['Final Status Name'].value_counts()
+        
     if 'Bad' not in result_counts:
         result_counts['Bad'] = 0
     if 'Good' not in result_counts:
