@@ -15,8 +15,8 @@ st.set_page_config(
 )
 
 now = datetime.now()
-dt_string = now.strftime("%d %B %Y %H:%M:%S")
-st.markdown(f"<p style='text-align: right'>Time: {dt_string}</p>", unsafe_allow_html=True)
+dt_string = now.strftime("%d %B %Y")
+st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
 
 def load_data(url):
     return pd.read_excel(url)
