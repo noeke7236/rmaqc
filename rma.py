@@ -7,6 +7,10 @@ import seaborn as sns
 
 sns.set_theme(style="darkgrid")
 
+now = datetime.now()
+dt_string = now.strftime("%d %B %Y %H:%M:%S")
+st.markdown(f"<p style='text-align: right'>Time: {dt_string}</p>", unsafe_allow_html=True)
+
 def load_data(url):
     return pd.read_excel(url)
 
