@@ -9,6 +9,11 @@ import time
 
 sns.set_theme(style="darkgrid")
 
+st.set_page_config(
+    page_title="RMA&QC",
+    page_icon=":watermelon:",
+)
+
 now = datetime.now()
 dt_string = now.strftime("%d %B %Y %H:%M:%S")
 st.markdown(f"<p style='text-align: right'>Time: {dt_string}</p>", unsafe_allow_html=True)
@@ -214,11 +219,6 @@ mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]'
 
 # Kolom yang harus dihapus untuk data tahun 2023
 columns_to_drop = ['Kategori','Expert','Tgl Tes','Tiket PB07']
-
-st.set_page_config(
-    page_title="RMA&QC",
-    page_icon=":watermelon:",
-)
 
 #st.sidebar.image("logo.png",use_column_width=True)
 
