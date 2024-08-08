@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 import time
+import locale
 
 sns.set_theme(style="darkgrid")
 
@@ -13,6 +14,8 @@ st.set_page_config(
     page_title="RMA&QC",
     page_icon=":watermelon:",
 )
+
+locale.setlocale(locale.LC_ALL, 'id_ID')
 
 now = datetime.now()
 dt_string = now.strftime("%d %B %Y")
