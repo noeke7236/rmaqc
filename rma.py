@@ -4,9 +4,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from datetime import datetime
+#from datetime import datetime
 import time
-import locale
+from babel.dates import format_date
+import datetime
 
 sns.set_theme(style="darkgrid")
 
@@ -15,10 +16,12 @@ st.set_page_config(
     page_icon=":watermelon:",
 )
 
-locale.setlocale(locale.LC_ALL, 'id_ID')
+#locale.setlocale(locale.LC_ALL, 'id_ID')
 
-now = datetime.now()
-dt_string = now.strftime("%d %B %Y")
+#now = datetime.now()
+#dt_string = now.strftime("%d %B %Y")
+now = datetime.datetime.now()
+dt_string = format_date(now, locale='id_ID')
 st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
 
 def load_data(url):
