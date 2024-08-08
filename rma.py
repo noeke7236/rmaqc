@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 #from datetime import datetime
 import time
-#from babel.dates import format_date
 import datetime
 
 sns.set_theme(style="darkgrid")
@@ -16,19 +15,8 @@ st.set_page_config(
     page_icon=":watermelon:",
 )
 
-#locale.setlocale(locale.LC_ALL, 'id_ID')
-
-#now = datetime.now()
-#dt_string = now.strftime("%d %B %Y")
-
-list_bulan = ["Januari", "Pebruari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember"]
-
-now = datetime.datetime.now()
-month_num = now.month
-month_name = list_bulan[month_num - 1]
-
-dt_string = "{} {} {}".format(now.day month_name now.year)
-#dt_string = now.strftime("%d {month_name} %Y")
+now = datetime.now()
+dt_string = now.strftime("%d %B %Y")
 st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
 
 def load_data(url):
