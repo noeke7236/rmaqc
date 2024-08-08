@@ -27,7 +27,8 @@ now = datetime.datetime.now()
 month_num = now.month
 month_name = list_bulan[month_num - 1]
 
-dt_string = now.strftime("%d {month_name} %Y")
+dt_string = "{} {} {}".format(now.day month_name now.year)
+#dt_string = now.strftime("%d {month_name} %Y")
 st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
 
 def load_data(url):
