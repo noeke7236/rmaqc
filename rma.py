@@ -47,24 +47,22 @@ def calculate_statistics(data):
     total_qty = data['Qty'].sum()
     return row_count, total_qty
 
-"""
-def calculate_percentage_level(data):
-    data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
-    result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
-    #result_counts = data['Final Status Name'].value_counts()
-        
-    if 'Bad' not in result_counts:
-        result_counts['Bad'] = 0
-    if 'Good' not in result_counts:
-        result_counts['Good'] = 0
 
-    result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
-    total_good = result_counts['Good'].sum()
-    total_bad = result_counts['Bad'].sum()
-    pass_percentage = (total_good / (total_good + total_bad)) * 100
-    fail_percentage = (total_bad / (total_good + total_bad)) * 100
-    return result_counts, result_percentage, pass_percentage, fail_percentage
-"""
+#def calculate_percentage_level(data):
+    #data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
+    #result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
+            
+    #if 'Bad' not in result_counts:
+    #    result_counts['Bad'] = 0
+    #if 'Good' not in result_counts:
+    #    result_counts['Good'] = 0
+
+    #result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
+    #total_good = result_counts['Good'].sum()
+    #total_bad = result_counts['Bad'].sum()
+    #pass_percentage = (total_good / (total_good + total_bad)) * 100
+    #fail_percentage = (total_bad / (total_good + total_bad)) * 100
+    #return result_counts, result_percentage, pass_percentage, fail_percentage
 
 def calculate_percentage(data, column_name):
   # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
@@ -233,7 +231,6 @@ url3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPxyl1P5AOFTBbTNR2f1TH3
 rma3 = load_data(url3)
 #rma_modified3 = rma3.copy()
 
-#edit 01/08/2024
 # List standar nama kolom
 mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]', 'Tgl Keluar [PB07]', 'Final Status', 'Project']
 
@@ -287,8 +284,6 @@ def rma_2023():
     total_items, total_quantity = calculate_statistics(rma_modified)
     good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified, 'Final Status')
 
-    #rma2023_counts, rma2023_percentage, rma2023_pass_percentage, rma2023_fail_percentage = calculate_percentage(rma_modified)
-    
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items)
     col2.metric("Total Quantity", total_quantity)
@@ -317,28 +312,28 @@ def rma_2023():
       ]
 
     table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage'], tablefmt='html')
+    st.text("")
+    st.subheader('Persentase dalam proses QC')
     st.markdown(table_html, unsafe_allow_html=True)
 
     """
-    tabel_persentase = pd.DataFrame({
-        'Bad': rma2023_counts['Bad'].astype(int),
-        'Good': rma2023_counts['Good'].astype(int),
-        'Bad(%)': rma2023_percentage['Bad'],
-        'Good(%)': rma2023_percentage['Good']
-    })
+    #tabel_persentase = pd.DataFrame({
+    #    'Bad': rma2023_counts['Bad'].astype(int),
+    #    'Good': rma2023_counts['Good'].astype(int),
+    #    'Bad(%)': rma2023_percentage['Bad'],
+    #    'Good(%)': rma2023_percentage['Good']
+    #})
 
     # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    tabel_persentase.rename_axis(None, inplace=True)
-    tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
-    tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
+    #tabel_persentase.rename_axis(None, inplace=True)
+    #tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
+    #tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
     
     # Mengganti nama header 'RMA Level' menjadi 'Level'
-    tabel_persentase.columns.name = 'Level'
+    #tabel_persentase.columns.name = 'Level'
     
-    st.text("")
-    st.subheader('Persentase dalam proses QC')
-    st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
-    """
+    #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
+    
     # Membuat Pie Chart untuk baris 'L1'
     #fig_pie, ax_pie = plt.subplots()
     #labels_pie = ['Bad', 'Good']
