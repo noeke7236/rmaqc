@@ -291,8 +291,8 @@ def rma_2023():
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items)
     col2.metric("Total Quantity", total_quantity)
-    col3.metric("Pass :heavy_check_mark:", f"{rma2023_pass_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{rma2023_fail_percentage:.1f}%")
+    col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
+    col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
 
     st.markdown("""---""")
     
