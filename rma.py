@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 import time
+from tabulate import tabulate
 #import datetime
 
 sns.set_theme(style="darkgrid")
