@@ -401,13 +401,14 @@ def rma_2024():
     st.sidebar.markdown("# 2024 :bar_chart:")
 
     total_items2, total_quantity2 = calculate_statistics(rma_modified2)
-    rma2024_counts, rma2024_percentage, rma2024_pass_percentage, rma2024_fail_percentage = calculate_percentage(rma_modified2)
+    good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified2, 'Final Status')
+    #rma2024_counts, rma2024_percentage, rma2024_pass_percentage, rma2024_fail_percentage = calculate_percentage(rma_modified2)
     
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items2)
     col2.metric("Total Quantity", total_quantity2)
-    col3.metric("Pass :heavy_check_mark:", f"{rma2024_pass_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{rma2024_fail_percentage:.1f}%")
+    col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
+    col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
 
     st.markdown("""---""")
     
