@@ -316,7 +316,6 @@ def rma_2023():
     st.subheader('Persentase dalam proses QC')
     st.markdown(table_html, unsafe_allow_html=True)
 
-    """
     #tabel_persentase = pd.DataFrame({
     #    'Bad': rma2023_counts['Bad'].astype(int),
     #    'Good': rma2023_counts['Good'].astype(int),
