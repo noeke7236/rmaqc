@@ -46,7 +46,8 @@ def calculate_statistics(data):
     total_qty = data['Qty'].sum()
     return row_count, total_qty
 
-def calculate_percentage(data):
+"""
+def calculate_percentage_level(data):
     data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
     result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
     #result_counts = data['Final Status Name'].value_counts()
@@ -62,6 +63,23 @@ def calculate_percentage(data):
     pass_percentage = (total_good / (total_good + total_bad)) * 100
     fail_percentage = (total_bad / (total_good + total_bad)) * 100
     return result_counts, result_percentage, pass_percentage, fail_percentage
+"""
+
+def calculate_percentage(data, column_name):
+  # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
+  data[f'{column_name} Name'] = data[column_name].replace({'OK': 'Good', 'NOK': 'Bad'})
+
+  # Hitung jumlah untuk setiap status
+  status_counts = data[f'{column_name} Name'].value_counts()
+
+  # Hitung persentase untuk setiap status
+  total_counts = status_counts.sum()
+  good_counts = status_counts.get('Good', 0)
+  fail_counts = status_counts.get('Bad', 0)
+  good_percentage = (good_counts / total_counts * 100).round(1)
+  fail_percentage = (fail_counts / total_counts * 100).round(1)
+
+  return good_counts, fail_counts, good_percentage, fail_percentage
 
 def total_barang_masuk(data):
     row_count, total_qty = calculate_statistics(data)
@@ -245,7 +263,7 @@ def rma_2022():
     rma_modified3 = normalize_columns(rma_modified3, mylist) #edit 02/08/2024
     
     total_items3, total_quantity3 = calculate_statistics(rma_modified3)
-    rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
+    rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3,  'Final Status')
     #df_table = calculate_percentage(rma_modified3)
     
     col1, col2, col3, col4 = st.columns(4)
@@ -266,7 +284,9 @@ def rma_2023():
     rma_modified = normalize_columns(rma_modified, mylist)
     
     total_items, total_quantity = calculate_statistics(rma_modified)
-    rma2023_counts, rma2023_percentage, rma2023_pass_percentage, rma2023_fail_percentage = calculate_percentage(rma_modified)
+    good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified, 'Final Status')
+
+    #rma2023_counts, rma2023_percentage, rma2023_pass_percentage, rma2023_fail_percentage = calculate_percentage(rma_modified)
     
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Items", total_items)
@@ -290,6 +310,15 @@ def rma_2023():
     
     # PERSENTASE DALAM PROSES QC
     #edit 01/08/2024
+    table_data = [
+        ['Good', good_counts, good_percentage],
+        ['Fail', fail_counts, fail_percentage]
+      ]
+
+    table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage'], tablefmt='html')
+    st.markdown(table_html, unsafe_allow_html=True)
+
+    """
     tabel_persentase = pd.DataFrame({
         'Bad': rma2023_counts['Bad'].astype(int),
         'Good': rma2023_counts['Good'].astype(int),
@@ -304,11 +333,11 @@ def rma_2023():
     
     # Mengganti nama header 'RMA Level' menjadi 'Level'
     tabel_persentase.columns.name = 'Level'
-
+    
     st.text("")
     st.subheader('Persentase dalam proses QC')
     st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
-    
+    """
     # Membuat Pie Chart untuk baris 'L1'
     #fig_pie, ax_pie = plt.subplots()
     #labels_pie = ['Bad', 'Good']
