@@ -255,8 +255,8 @@ def rma_qc():
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
 def rma_2022():
-    st.markdown("# Infografis Tahun 2022")
-    st.sidebar.markdown("# 2022 :bar_chart:")
+    st.markdown("# Infografis Tahun 2022 :tiger:")
+    st.sidebar.markdown("# 2022 :tiger2:")
 
     #edit 02/08/2024
     rma_modified3 = rma3.copy()
@@ -276,8 +276,8 @@ def rma_2022():
     st.markdown("""---""")
     
 def rma_2023():
-    st.markdown("# Infografis Tahun 2023")
-    st.sidebar.markdown("# 2023 :bar_chart:")
+    st.markdown("# Infografis Tahun 2023 :rabbit:")
+    st.sidebar.markdown("# 2023 :rabbit2:")
 
     rma_modified = rma.copy()
     rma_modified = drop_columns(rma_modified, columns_to_drop) #edit 02/08/2024
@@ -400,7 +400,7 @@ def rma_2023():
 
 def rma_2024():
     st.markdown("# Infografis Tahun 2024 :dragon_face:")
-    st.sidebar.markdown("# 2024 :bar_chart:")
+    st.sidebar.markdown("# 2024 :dragon:")
 
     #total_items2, total_quantity2 = calculate_statistics(rma_modified2)
     total_items, total_quantity = calculate_statistics(rma_modified2)
