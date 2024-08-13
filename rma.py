@@ -4,10 +4,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from datetime import datetime
+#from datetime import datetime
 import time
 from tabulate import tabulate
-#import datetime
+from utils import get_current_time_in_jakarta
 
 sns.set_theme(style="darkgrid")
 
@@ -16,9 +16,11 @@ st.set_page_config(
     page_icon=":watermelon:",
 )
 
-now = datetime.now()
-dt_string = now.strftime("%d %B %Y")
-st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
+#now = datetime.now()
+#dt_string = now.strftime("%d %B %Y")
+#st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='font-size: 24px ; text-align: right'>{time_string}</p>", unsafe_allow_html=True)
+
 
 def load_data(url):
     return pd.read_excel(url)
@@ -260,13 +262,13 @@ def rma_2022():
     rma_modified3 = rma3.copy()
     rma_modified3 = normalize_columns(rma_modified3, mylist) #edit 02/08/2024
     
-    total_items3, total_quantity3 = calculate_statistics(rma_modified3)
+    total_items, total_quantity = calculate_statistics(rma_modified3)
     rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3,  'Final Status')
     #df_table = calculate_percentage(rma_modified3)
     
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", total_items3)
-    col2.metric("Total Quantity", total_quantity3)
+    col1.metric("Total Items", total_items)
+    col2.metric("Total Quantity", total_quantity)
     col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
     col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
     #edit 02/08/2024
@@ -311,7 +313,7 @@ def rma_2023():
         ['Fail', fail_counts, fail_percentage]
       ]
 
-    table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage'], tablefmt='html')
+    table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
     st.text("")
     st.subheader('Persentase dalam proses QC')
     st.markdown(table_html, unsafe_allow_html=True)
@@ -415,6 +417,18 @@ def rma_2024():
     # TOTAL BARANG MASUK
     total_barang_masuk(rma_modified2)
 
+    # PERSENTASE DALAM PROSES QC
+    #edit 01/08/2024
+    table_data = [
+        ['Good', good_counts, good_percentage],
+        ['Fail', fail_counts, fail_percentage]
+      ]
+
+    table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
+    st.text("")
+    st.subheader('Persentase dalam proses QC')
+    st.markdown(table_html, unsafe_allow_html=True)
+    
     # GRAFIK BARANG MASUK
     grafik_barang_masuk(rma_modified2)
 
