@@ -19,7 +19,7 @@ st.set_page_config(
 #now = datetime.now()
 #dt_string = now.strftime("%d %B %Y")
 #st.markdown(f"<p style='text-align: right'>{dt_string}</p>", unsafe_allow_html=True)
-st.markdown(f"<p style='font-size: 24px ; text-align: right'>{time_string}</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
 
 
 def load_data(url):
