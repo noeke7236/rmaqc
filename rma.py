@@ -241,9 +241,9 @@ def rma_qc():
     st.sidebar.markdown("# QC & RMA ")
     st.header('Deskripsi', divider='rainbow')
     
-    #with open('deskripsi.txt', 'r') as file:
-    #    deskripsi = file.read()
-    #stx.scrollableTextbox(deskripsi)
+    with open('deskripsi.txt', 'r') as file:
+        deskripsi = file.read()
+    stx.scrollableTextbox(deskripsi)
     
     st.header('Alur Kerja', divider='rainbow')
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
