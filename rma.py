@@ -4,8 +4,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-#from datetime import datetime
+import streamlit_scrollable_textbox as stx
 import time
+
 from tabulate import tabulate
 from utils import get_current_time_in_jakarta
 from utils import load_data
@@ -14,14 +15,11 @@ from utils import grafik_barang
 sns.set_theme(style="darkgrid")
 
 st.set_page_config(
-    page_title="RMA&QC",
+    page_title="QC&RMA",
     page_icon=":watermelon:",
 )
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
-
-#def load_data(url):
-#    return pd.read_excel(url)
 
 #edit 02/08/2024
 def drop_columns(data, columns_to_drop):
@@ -46,7 +44,6 @@ def calculate_statistics(data):
     row_count = len(data)
     total_qty = data['Qty'].sum()
     return row_count, total_qty
-
 
 #def calculate_percentage_level(data):
     #data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
@@ -240,15 +237,19 @@ columns_to_drop = ['Kategori','Expert','Tgl Tes','Tiket PB07']
 #st.sidebar.image("logo.png",use_column_width=True)
 
 def rma_qc():
-    st.markdown("# RMA QC ")
-    st.sidebar.markdown("# RMA QC ")
+    st.markdown("# QC & RMA ")
+    st.sidebar.markdown("# QC & RMA ")
+    st.header('Deskripsi', divider='rainbow')
+    with open('deskripsi.txt', 'r') as file:
+        deskripsi = file.read()
+    stx.scrollableTextbox(deskripsi)
     st.header('Alur Kerja', divider='rainbow')
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
     st.text("")
     st.text("")
     st.header('Knowledge Base', divider='rainbow')
     url_link = "http://kb.mindotama.co.id/dokuwiki/doku.php?id=start"
-    st.write("RMA QC Knowledge Base [link](%s)" % url_link)
+    st.write("QC & RMA Knowledge Base [link](%s)" % url_link)
     #st.markdown("check out this [link](%s)" % url)
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
@@ -445,7 +446,7 @@ def rma_2024():
     grafik_bar_project(rma_modified2, 'Project 2024')
 
 page_names_to_funcs = {
-    "RMA QC": rma_qc,
+    "QC & RMA": rma_qc,
     "2022": rma_2022,
     "2023": rma_2023,
     "2024": rma_2024
