@@ -15,7 +15,7 @@ mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]'
 
 def rma_2022():
     #st.markdown('<span style="font-size: 24px;">Infografis Tahun 2022</span>', unsafe_allow_html=True)
-    st.markdown("# Infografis Tahun 2022")
+    st.markdown("# Infografis Tahun 2022 :tiger:")
     st.sidebar.markdown("# 2022 :tiger2:")
 
     rma_modified3 = rma3.copy()
