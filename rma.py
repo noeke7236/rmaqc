@@ -11,6 +11,7 @@ from tabulate import tabulate
 from utils import get_current_time_in_jakarta
 from utils import load_data
 from utils import grafik_barang
+from rma_2022 import rma_2022
 
 sns.set_theme(style="darkgrid")
 
@@ -224,8 +225,8 @@ url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_
 rma2 = load_data(url2)
 rma_modified2 = rma2.copy()
 
-url3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPxyl1P5AOFTBbTNR2f1TH3jP69HJigz2nnixuT2Ft3E67jeQFerdFoD5heO9YSY-Zi_H7TjHrTu3x/pub?output=xlsx'
-rma3 = load_data(url3)
+#url3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPxyl1P5AOFTBbTNR2f1TH3jP69HJigz2nnixuT2Ft3E67jeQFerdFoD5heO9YSY-Zi_H7TjHrTu3x/pub?output=xlsx'
+#rma3 = load_data(url3)
 #rma_modified3 = rma3.copy()
 
 # List standar nama kolom
@@ -255,26 +256,26 @@ def rma_qc():
     #st.markdown("check out this [link](%s)" % url)
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
-def rma_2022():
-    st.markdown("# Infografis Tahun 2022 :tiger:")
-    st.sidebar.markdown("# 2022 :tiger2:")
+#def rma_2022():
+#    st.markdown("# Infografis Tahun 2022 :tiger:")
+#    st.sidebar.markdown("# 2022 :tiger2:")
 
     #edit 02/08/2024
-    rma_modified3 = rma3.copy()
-    rma_modified3 = normalize_columns(rma_modified3, mylist) #edit 02/08/2024
+#    rma_modified3 = rma3.copy()
+#    rma_modified3 = normalize_columns(rma_modified3, mylist) #edit 02/08/2024
     
-    total_items, total_quantity = calculate_statistics(rma_modified3)
-    rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3,  'Final Status')
+#    total_items, total_quantity = calculate_statistics(rma_modified3)
+#    rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3,  'Final Status')
     #df_table = calculate_percentage(rma_modified3)
     
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", total_items)
-    col2.metric("Total Quantity", total_quantity)
-    col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
+#    col1, col2, col3, col4 = st.columns(4)
+#    col1.metric("Total Items", total_items)
+#    col2.metric("Total Quantity", total_quantity)
+#    col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
+#    col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
     #edit 02/08/2024
     
-    st.markdown("""---""")
+#    st.markdown("""---""")
     
 def rma_2023():
     st.markdown("# Infografis Tahun 2023 :rabbit:")
