@@ -86,7 +86,10 @@ def grafik_barang(data, kolom_tanggal, kolom_jumlah, judul, warna):
     palette = ["#BEFF47" if y == max_value else warna for y in result_dataframe['jumlah_y']]
 
     fig_bar, ax_bar = plt.subplots(figsize=(12, 6))
-    bar_plot = sns.barplot(data=result_dataframe, x="bulan", y="jumlah_y", palette=palette)
+    #04102024
+    #bar_plot = sns.barplot(data=result_dataframe, x="bulan", y="jumlah_y", palette=palette)
+    bar_plot = sns.barplot(data=result_dataframe, x="bulan", y="jumlah_y", hue="bulan", palette=palette, ax=ax_bar, legend=False)
+    #04102024
     ax_bar.set_xlabel('Bulan')
     ax_bar.set_ylabel('Jumlah barang')
     ax_bar.set_ylim(0, max_value + 50)
