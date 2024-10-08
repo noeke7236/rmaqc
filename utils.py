@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import plotly.graph_objects as go
 
 # Month_names dictionary
 month_names = {
@@ -71,6 +72,41 @@ def calculate_percentage(data):
 
     return percentage_table, pass_percentage, fail_percentage
 
+def tabel_alat_barang(data):
+    total_items, total_quantity = calculate_statistics(data)
+    header = ['Total', 'Jumlah']
+    data = [['Items', 'Quantity'], [total_items, total_quantity]]
+
+    fig = go.Figure(data=[go.Table(
+        columnwidth = [100,100],
+        header=dict(values=header,
+        fill_color='lightskyblue',
+        align='center',
+        font_size=24
+        ),
+        cells=dict(values=data,
+        fill_color='lightcyan',
+        align='center',
+        height=30,
+        font_size=20
+        ),
+    )
+    ])
+
+    fig.update_layout(
+        width=300,
+        height=100,
+        margin=dict(
+            l=0,
+            r=0,
+            b=0,
+            t=0
+        )
+    )
+
+    st.subheader('Total Alat / Barang')
+    st.plotly_chart(fig)
+
 def grafik_barang(data, kolom_tanggal, kolom_jumlah, judul, warna):
     data['Bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.strftime('%B')
     data['bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.month
@@ -103,3 +139,10 @@ def grafik_barang(data, kolom_tanggal, kolom_jumlah, judul, warna):
     st.text("")
     st.subheader(judul)
     st.pyplot(fig_bar)
+
+def total_barang_masuk(data):
+    row_count, total_qty = calculate_statistics(data)
+    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
+    st.subheader('Total Alat/Barang')
+    st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+
