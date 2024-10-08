@@ -5,11 +5,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit_scrollable_textbox as stx
+import plotly.graph_objects as go
 import time
 
 from tabulate import tabulate
 from utils import get_current_time_in_jakarta
 from utils import load_data
+from utils import tabel_alat_barang
 from utils import grafik_barang
 from rma_2022 import rma_2022
 
@@ -83,75 +85,6 @@ def total_barang_masuk(data):
     tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
     st.subheader('Total Alat/Barang')
     st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-
-#def grafik_barang_masuk(data):
-#    data['Bulan_Masuk'] = pd.to_datetime(data['Tgl Masuk [PB06]'], dayfirst=True).dt.strftime('%B')
-#    data['bulan'] = pd.to_datetime(data['Tgl Masuk [PB06]'], dayfirst=True).dt.month
-#    data['jumlah'] = 1
-#    result = data.groupby(['bulan']).agg(jumlah=('jumlah', 'count')).reset_index()
-
-#    no_bulan = [{'bulan': i, 'jumlah': 0} for i in range(1, 13)]
-#    data_bulan = pd.DataFrame(no_bulan)
-#    result_dataframe = pd.merge(data_bulan, result, on='bulan', how='left')
-#    result_dataframe['jumlah_y'] = result_dataframe['jumlah_y'].fillna(0).astype(int)
-
-#    max_value = result_dataframe['jumlah_y'].max()
-
-#    # Atur warna bar menjadi #FF6347 jika nilai y adalah max_value
-#    palette = ["#FF6347" if y == max_value else "#009EFA" for y in result_dataframe['jumlah_y']]
-    
-#    fig_bar, ax_bar = plt.subplots(figsize=(12, 6))
-#    bar_plot = sns.barplot(data=result_dataframe, x="bulan", y="jumlah_y", palette=palette)
-#    ax_bar.set_xlabel('Bulan')
-#    ax_bar.set_ylabel('Jumlah barang')
-#    ax_bar.set_ylim(0, max_value + 50)
-    
-#    for p in ax_bar.patches:
-#        height = p.get_height()
-#        ax_bar.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
-#                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
-
- #   bulan_labels = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
- #   ax_bar.set_xticks(range(len(bulan_labels)))
- #   ax_bar.set_xticklabels(bulan_labels, rotation=20)
- #   st.text("")
- #   st.subheader('Grafik barang masuk')
- #   st.pyplot(fig_bar)
-
-#def grafik_barang_keluar(data):
-#    data['Bulan_Keluar'] = pd.to_datetime(data['Tgl Keluar [PB07]'], dayfirst=True).dt.strftime('%B')
-#    data['bulan_out'] = pd.to_datetime(data['Tgl Keluar [PB07]'], dayfirst=True).dt.month
-#    data['jumlah_out'] = 1
-#    result_out = data.groupby(['bulan_out']).agg(jumlah_out=('jumlah_out', 'count')).reset_index()
-
-#    no_bulan_out = [{'bulan_out': i, 'jumlah_out': 0} for i in range(1, 13)]
-#    data_bulan_out = pd.DataFrame(no_bulan_out)
-#    result_dataframe_out = pd.merge(data_bulan_out, result_out, on='bulan_out', how='left')
-#    result_dataframe_out['jumlah_out_y'] = result_dataframe_out['jumlah_out_y'].fillna(0).astype(int)
-
-#    # Tentukan max_value
-#    max_value = result_dataframe_out['jumlah_out_y'].max()
-
-#    # Tetapkan warna berdasarkan max_value
-#    palette = ["#009EFA"if y == max_value else "#FF6347" for y in result_dataframe_out['jumlah_out_y']]
-
-#    fig_bar1, ax_bar1 = plt.subplots(figsize=(12, 6))
-#    bar_plot = sns.barplot(data=result_dataframe_out, x="bulan_out", y="jumlah_out_y", palette=palette)
-#    ax_bar1.set_xlabel('Bulan')
-#    ax_bar1.set_ylabel('Jumlah barang')
-#    ax_bar1.set_ylim(0, max_value + 50)  # Setting ylim based on max_value
-
-#    for p in ax_bar1.patches:
-#        height = p.get_height()
-#        ax_bar1.annotate(f'{height:.0f}', (p.get_x() + p.get_width() / 2., height),
-#                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
-
-#    bulan_labels1 = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember']
-#    ax_bar1.set_xticks(range(len(bulan_labels1)))
-#    ax_bar1.set_xticklabels(bulan_labels1, rotation=20)
-#    st.text("")
-#    st.subheader('Grafik barang keluar')
-#    st.pyplot(fig_bar1)
 
 def grafik_bar_horizontal_count(data):
     count_barang = data['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
@@ -298,7 +231,8 @@ def rma_2023():
     
     # TOTAL BARANG MASUK
     # Calculate statistics
-    total_barang_masuk(rma_modified)
+    #total_barang_masuk(rma_modified)
+    tabel_alat_barang(rma_modified)
     
     # GRAFIK BARANG MASUK
     grafik_barang(rma_modified, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
@@ -417,7 +351,8 @@ def rma_2024():
     st.markdown("""---""")
     
     # TOTAL BARANG MASUK
-    total_barang_masuk(rma_modified2)
+    #total_barang_masuk(rma_modified2)
+    tabel_alat_barang(rma_modified2)
 
     # PERSENTASE DALAM PROSES QC
     #edit 01/08/2024
