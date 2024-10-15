@@ -174,7 +174,7 @@ def rma_qc():
     #st.markdown("check out this [link](%s)" % url)
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
- def rma_2023():
+def rma_2023():
     st.markdown("# Infografis Tahun 2023 :rabbit:")
     st.sidebar.markdown("# 2023 :rabbit2:")
 
