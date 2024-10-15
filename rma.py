@@ -11,6 +11,7 @@ import time
 from tabulate import tabulate
 from utils import get_current_time_in_jakarta
 from utils import load_data
+from utils import calculate_statistics
 from utils import tabel_alat_barang
 from utils import grafik_barang
 from rma_2022 import rma_2022
@@ -43,26 +44,10 @@ def normalize_columns(data, target_columns):
     data.columns = new_column_names
     return data
 
-def calculate_statistics(data):
-    row_count = len(data)
-    total_qty = data['Qty'].sum()
-    return row_count, total_qty
-
-#def calculate_percentage_level(data):
-    #data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
-    #result_counts = data.groupby(['RMA Level', 'Final Status Name'])['Final Status Name'].value_counts().unstack().fillna(0)
-            
-    #if 'Bad' not in result_counts:
-    #    result_counts['Bad'] = 0
-    #if 'Good' not in result_counts:
-    #    result_counts['Good'] = 0
-
-    #result_percentage = (result_counts.div(result_counts.sum(axis=1), axis=0) * 100).round(1)
-    #total_good = result_counts['Good'].sum()
-    #total_bad = result_counts['Bad'].sum()
-    #pass_percentage = (total_good / (total_good + total_bad)) * 100
-    #fail_percentage = (total_bad / (total_good + total_bad)) * 100
-    #return result_counts, result_percentage, pass_percentage, fail_percentage
+#def calculate_statistics(data):
+#    row_count = len(data)
+#    total_qty = data['Qty'].sum()
+#    return row_count, total_qty
 
 def calculate_percentage(data, column_name):
   # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
@@ -189,28 +174,7 @@ def rma_qc():
     #st.markdown("check out this [link](%s)" % url)
     st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
-#def rma_2022():
-#    st.markdown("# Infografis Tahun 2022 :tiger:")
-#    st.sidebar.markdown("# 2022 :tiger2:")
-
-    #edit 02/08/2024
-#    rma_modified3 = rma3.copy()
-#    rma_modified3 = normalize_columns(rma_modified3, mylist) #edit 02/08/2024
-    
-#    total_items, total_quantity = calculate_statistics(rma_modified3)
-#    rma2022_counts, rma2022_percentage, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3,  'Final Status')
-    #df_table = calculate_percentage(rma_modified3)
-    
-#    col1, col2, col3, col4 = st.columns(4)
-#    col1.metric("Total Items", total_items)
-#    col2.metric("Total Quantity", total_quantity)
-#    col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
-#    col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
-    #edit 02/08/2024
-    
-#    st.markdown("""---""")
-    
-def rma_2023():
+ def rma_2023():
     st.markdown("# Infografis Tahun 2023 :rabbit:")
     st.sidebar.markdown("# 2023 :rabbit2:")
 
