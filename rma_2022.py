@@ -22,7 +22,7 @@ def rma_2022():
     rma_modified3 = rma3.copy()
     rma_modified3 = normalize_columns(rma_modified3, mylist)
 
-    total_items2, total_quantity2 = calculate_statistics(rma_modified3)
+    total_items, total_quantity = calculate_statistics(rma_modified3)
 
     #percentage_table, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
     #rma2022_counts, rma2022_percentage, #rma2022_pass_percentage,rma2022_fail_percentage = #calculate_percentage(rma_modified3)
