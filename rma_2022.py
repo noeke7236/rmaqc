@@ -24,14 +24,18 @@ def rma_2022():
 
     total_items2, total_quantity2 = calculate_statistics(rma_modified3)
 
-    percentage_table, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
+    #percentage_table, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
     #rma2022_counts, rma2022_percentage, #rma2022_pass_percentage,rma2022_fail_percentage = #calculate_percentage(rma_modified3)
 
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", total_items2)
-    col2.metric("Total Quantity", total_quantity2)
-    col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
+    #col1, col2, col3, col4 = st.columns(4)
+    #col1.metric("Total Items", total_items2)
+    #col2.metric("Total Quantity", total_quantity2)
+    #col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
+    #col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
 
-    #st.markdown("""---""")
+    # Calculate the percentages
+    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified3, 'Final Status')
+
+    display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
+
     st.divider()
