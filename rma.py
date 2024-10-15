@@ -331,7 +331,7 @@ def rma_2024():
     #total_items2, total_quantity2 = calculate_statistics(rma_modified2)
     total_items, total_quantity = calculate_statistics(rma_modified2)
     
-    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
+    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified2, 'Final Status')
     
     #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified2, 'Final Status')
         
