@@ -49,28 +49,56 @@ def calculate_statistics(data):
     total_qty = data['Qty'].sum()
     return row_count, total_qty
 
-def calculate_percentage(data):
+def calculate_percentage(data, column_name):
+    # Hitung jumlah nilai unik
+    unique_counts = data[column_name].nunique()
+    #print(f"Jumlah nilai unik: {unique_counts}")
+
+    # Hitung jumlah untuk setiap status
+    status_counts = data[column_name].value_counts()
+    total_counts = status_counts.sum()
+
+    if unique_counts == 2:
+        good_counts = status_counts.get('OK', 0)
+        fail_counts = status_counts.get('NOK', 0)
+        good_percentage = (good_counts / total_counts * 100).round(1)
+        fail_percentage = (fail_counts / total_counts * 100).round(1)
+        return good_percentage, fail_percentage, None  # Tidak ada untested
+
+    elif unique_counts == 3:
+        good_counts = status_counts.get('OK', 0)
+        fail_counts = status_counts.get('NOK', 0)
+        untested_counts = status_counts.get('Untested', 0)
+        good_percentage = (good_counts / total_counts * 100).round(1)
+        fail_percentage = (fail_counts / total_counts * 100).round(1)
+        untested_percentage = (untested_counts / total_counts * 100).round(1)
+        return good_percentage, fail_percentage, untested_percentage
+
+    else:
+        raise ValueError("Jumlah nilai unik tidak didukung.")
+
+#def calculate_percentage(data):
     # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
-    data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
+#    data['Final Status Name'] = data['Final Status'].replace({'OK': 'Good', 'NOK': 'Bad'})
 
     # Menghitung nilai count untuk setiap kategori
-    my_data_status = data['Final Status Name'].value_counts()
+#    my_data_status = data['Final Status Name'].value_counts()
 
     # Membuat tabel dengan persentase
-    table_data = {
-      'Status': my_data_status.values,
-      'Total': my_data_status.values,
-      'Persentase': (my_data_status / my_data_status.sum() * 100).round(1)
-    }
-    percentage_table = pd.DataFrame(table_data)
+#    table_data = {
+#      'Status': my_data_status.values,
+#      'Total': my_data_status.values,
+#      'Persentase': (my_data_status / my_data_status.sum() * 100).round(1)
+#    }
+#    percentage_table = pd.DataFrame(table_data)
 
     # Hitung persentase keseluruhan
-    total_good = my_data_status.get('Good', 0)
-    total_bad = my_data_status.get('Bad', 0)
-    pass_percentage = (total_good / (total_good + total_bad)) * 100 if (total_good + total_bad) > 0 else 0
-    fail_percentage = (total_bad / (total_good + total_bad)) * 100 if (total_good + total_bad) > 0 else 0
+ #   total_good = my_data_status.get('Good', 0)
+ #   total_bad = my_data_status.get('Bad', 0)
+ #   pass_percentage = (total_good / (total_good + total_bad)) * 100 if (total_good + total_bad) > 0 else 0
+ #   fail_percentage = (total_bad / (total_good + total_bad)) * 100 if (total_good + total_bad) > 0 else 0
 
-    return percentage_table, pass_percentage, fail_percentage
+ #   return percentage_table, pass_percentage, fail_percentage
 
 def display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage=None):
     unique_counts = 2 if untested_percentage is None else 3
