@@ -12,6 +12,7 @@ from tabulate import tabulate
 from utils import get_current_time_in_jakarta
 from utils import load_data
 from utils import calculate_statistics
+from utils import display_metrics
 from utils import tabel_alat_barang
 from utils import grafik_barang
 from rma_2022 import rma_2022
@@ -44,32 +45,55 @@ def normalize_columns(data, target_columns):
     data.columns = new_column_names
     return data
 
-#def calculate_statistics(data):
-#    row_count = len(data)
-#    total_qty = data['Qty'].sum()
-#    return row_count, total_qty
-
 def calculate_percentage(data, column_name):
+    # Hitung jumlah nilai unik
+    unique_counts = data[column_name].nunique()
+    #print(f"Jumlah nilai unik: {unique_counts}")
+
+    # Hitung jumlah untuk setiap status
+    status_counts = data[column_name].value_counts()
+    total_counts = status_counts.sum()
+
+    if unique_counts == 2:
+        good_counts = status_counts.get('OK', 0)
+        fail_counts = status_counts.get('NOK', 0)
+        good_percentage = (good_counts / total_counts * 100).round(1)
+        fail_percentage = (fail_counts / total_counts * 100).round(1)
+        return good_percentage, fail_percentage, None  # Tidak ada untested
+
+    elif unique_counts == 3:
+        good_counts = status_counts.get('OK', 0)
+        fail_counts = status_counts.get('NOK', 0)
+        untested_counts = status_counts.get('Untested', 0)
+        good_percentage = (good_counts / total_counts * 100).round(1)
+        fail_percentage = (fail_counts / total_counts * 100).round(1)
+        untested_percentage = (untested_counts / total_counts * 100).round(1)
+        return good_percentage, fail_percentage, untested_percentage
+
+    else:
+        raise ValueError("Jumlah nilai unik tidak didukung.")
+
+#def calculate_percentage(data, column_name):
   # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
-  data[f'{column_name} Name'] = data[column_name].replace({'OK': 'Good', 'NOK': 'Bad'})
+#  data[f'{column_name} Name'] = data[column_name].replace({'OK': 'Good', 'NOK': 'Bad'})
 
   # Hitung jumlah untuk setiap status
-  status_counts = data[f'{column_name} Name'].value_counts()
+#  status_counts = data[f'{column_name} Name'].value_counts()
 
   # Hitung persentase untuk setiap status
-  total_counts = status_counts.sum()
-  good_counts = status_counts.get('Good', 0)
-  fail_counts = status_counts.get('Bad', 0)
-  good_percentage = (good_counts / total_counts * 100).round(1)
-  fail_percentage = (fail_counts / total_counts * 100).round(1)
+#  total_counts = status_counts.sum()
+#  good_counts = status_counts.get('Good', 0)
+#  fail_counts = status_counts.get('Bad', 0)
+#  good_percentage = (good_counts / total_counts * 100).round(1)
+#  fail_percentage = (fail_counts / total_counts * 100).round(1)
 
-  return good_counts, fail_counts, good_percentage, fail_percentage
+#  return good_counts, fail_counts, good_percentage, fail_percentage
 
-def total_barang_masuk(data):
-    row_count, total_qty = calculate_statistics(data)
-    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
-    st.subheader('Total Alat/Barang')
-    st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+#def total_barang_masuk(data):
+#    row_count, total_qty = calculate_statistics(data)
+#    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
+#    st.subheader('Total Alat/Barang')
+#    st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
 def grafik_bar_horizontal_count(data):
     count_barang = data['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
@@ -143,10 +167,6 @@ url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_
 rma2 = load_data(url2)
 rma_modified2 = rma2.copy()
 
-#url3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPxyl1P5AOFTBbTNR2f1TH3jP69HJigz2nnixuT2Ft3E67jeQFerdFoD5heO9YSY-Zi_H7TjHrTu3x/pub?output=xlsx'
-#rma3 = load_data(url3)
-#rma_modified3 = rma3.copy()
-
 # List standar nama kolom
 mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]', 'Tgl Keluar [PB07]', 'Final Status', 'Project']
 
@@ -183,15 +203,21 @@ def rma_2023():
     rma_modified = normalize_columns(rma_modified, mylist)
     
     total_items, total_quantity = calculate_statistics(rma_modified)
-    good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified, 'Final Status')
+    # Calculate the percentages
+    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
+    
+    #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified, 'Final Status')
 
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", total_items)
-    col2.metric("Total Quantity", total_quantity)
-    col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
+    #col1, col2, col3, col4 = st.columns(4)
+    #col1.metric("Total Items", total_items)
+    #col2.metric("Total Quantity", total_quantity)
+    #col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
+    #col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
 
-    st.markdown("""---""")
+    display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
+
+    st.divider()
+    #st.markdown("""---""")
     
     # TOTAL BARANG MASUK
     # Calculate statistics
@@ -208,15 +234,15 @@ def rma_2023():
     
     # PERSENTASE DALAM PROSES QC
     #edit 01/08/2024
-    table_data = [
-        ['Good', good_counts, good_percentage],
-        ['Fail', fail_counts, fail_percentage]
-      ]
+    #table_data = [
+    #    ['Good', good_counts, good_percentage],
+    #    ['Fail', fail_counts, fail_percentage]
+    #  ]
 
-    table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
-    st.text("")
-    st.subheader('Persentase dalam proses QC')
-    st.markdown(table_html, unsafe_allow_html=True)
+    #table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
+    #st.text("")
+    #st.subheader('Persentase dalam proses QC')
+    #st.markdown(table_html, unsafe_allow_html=True)
 
     #tabel_persentase = pd.DataFrame({
     #    'Bad': rma2023_counts['Bad'].astype(int),
@@ -304,15 +330,21 @@ def rma_2024():
 
     #total_items2, total_quantity2 = calculate_statistics(rma_modified2)
     total_items, total_quantity = calculate_statistics(rma_modified2)
-    good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified2, 'Final Status')
+    
+    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
+    
+    #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified2, 'Final Status')
         
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Total Items", total_items)
-    col2.metric("Total Quantity", total_quantity)
-    col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
-    col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
+    #col1, col2, col3, col4 = st.columns(4)
+    #col1.metric("Total Items", total_items)
+    #col2.metric("Total Quantity", total_quantity)
+    #col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
+    #col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
 
-    st.markdown("""---""")
+    display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
+
+    st.divider()
+    #st.markdown("""---""")
     
     # TOTAL BARANG MASUK
     #total_barang_masuk(rma_modified2)
@@ -320,15 +352,15 @@ def rma_2024():
 
     # PERSENTASE DALAM PROSES QC
     #edit 01/08/2024
-    table_data = [
-        ['Good', good_counts, good_percentage],
-        ['Fail', fail_counts, fail_percentage]
-      ]
+    #table_data = [
+    #    ['Good', good_counts, good_percentage],
+    #    ['Fail', fail_counts, fail_percentage]
+    #  ]
 
-    table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
-    st.text("")
-    st.subheader('Persentase dalam proses QC')
-    st.markdown(table_html, unsafe_allow_html=True)
+    #table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
+    #st.text("")
+    #st.subheader('Persentase dalam proses QC')
+    #st.markdown(table_html, unsafe_allow_html=True)
     
     # GRAFIK BARANG MASUK
     #grafik_barang_masuk(rma_modified2)
