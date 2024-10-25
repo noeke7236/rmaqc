@@ -133,7 +133,8 @@ def grafik_bar_horizontal_sum(data):
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
     st.pyplot(fig_sum)
 
-def grafik_bar_project(data, title):
+#def grafik_bar_project(data, title):
+def grafik_bar_project(data):
     data_project = data['Project'].value_counts()
     project_names = data_project.index
     project_counts = data_project.values
@@ -150,7 +151,7 @@ def grafik_bar_project(data, title):
     for i, value in enumerate(project_counts):
         ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
 
-    ax_bar2.set_ylabel('Project')
+    #ax_bar2.set_ylabel('Project')
     ax_bar2.set_xlabel('Jumlah Items')
     ax_bar2.set_title(title)
 
@@ -206,12 +207,6 @@ def rma_2023():
     good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
     
     #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified, 'Final Status')
-
-    #col1, col2, col3, col4 = st.columns(4)
-    #col1.metric("Total Items", total_items)
-    #col2.metric("Total Quantity", total_quantity)
-    #col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
-    #col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
 
     display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
 
@@ -321,7 +316,8 @@ def rma_2023():
     grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
-    grafik_bar_project(rma_modified, 'Project 2023')
+    #grafik_bar_project(rma_modified, 'Project 2023')
+    grafik_bar_project(rma_modified)
 
 def rma_2024():
     st.markdown("# Infografis Tahun 2024 :dragon_face:")
@@ -334,12 +330,6 @@ def rma_2024():
     
     #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified2, 'Final Status')
         
-    #col1, col2, col3, col4 = st.columns(4)
-    #col1.metric("Total Items", total_items)
-    #col2.metric("Total Quantity", total_quantity)
-    #col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
-    #col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
-
     display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
 
     st.divider()
@@ -376,7 +366,8 @@ def rma_2024():
     grafik_bar_horizontal_sum(rma_modified2)
 
     # GRAFIK BAR PROJECT
-    grafik_bar_project(rma_modified2, 'Project 2024')
+    #grafik_bar_project(rma_modified2, 'Project 2024')
+    grafik_bar_project(rma_modified2)
 
 page_names_to_funcs = {
     "QC & RMA": rma_qc,
