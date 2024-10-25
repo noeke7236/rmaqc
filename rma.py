@@ -151,9 +151,9 @@ def grafik_bar_project(data):
     for i, value in enumerate(project_counts):
         ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
 
-    #ax_bar2.set_ylabel('Project')
+    ax_bar2.set_ylabel('Project')
     ax_bar2.set_xlabel('Jumlah Items')
-    ax_bar2.set_title(title)
+    #ax_bar2.set_title(title)
 
     st.text("")
     st.subheader('Jumlah Alat/Barang berdasarkan project')
