@@ -135,26 +135,25 @@ def grafik_bar_horizontal_sum(data):
 
 def grafik_bar_project(data, title):
     data_project = data['Project'].value_counts()
-
-    # Mengambil data dari Series data_project
     project_names = data_project.index
     project_counts = data_project.values
 
-    # Membuat objek figure dan axes
     fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
 
-    # Membuat bar plot dengan seaborn dan menggunakan axes
-    sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
+    norm = plt.Normalize(project_counts.min(), project_counts.max())
+    cmap = plt.get_cmap("viridis")
+    palette_list = [cmap(norm(count)) for count in project_counts]
 
-    # Menambahkan bar label ke setiap batang
+    sns.barplot(x=project_counts, y=project_names, hue=project_names, palette=palette_list, ax=ax_bar2, legend=False)
+    #sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
+
     for i, value in enumerate(project_counts):
         ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
 
     ax_bar2.set_ylabel('Project')
-    ax_bar2.set_xlabel('Jumlah')
+    ax_bar2.set_xlabel('Jumlah Items')
     ax_bar2.set_title(title)
 
-    # Menampilkan plot di Streamlit
     st.text("")
     st.subheader('Jumlah Alat/Barang berdasarkan project')
     st.pyplot(fig_bar2)
