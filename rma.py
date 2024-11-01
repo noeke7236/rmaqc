@@ -135,7 +135,6 @@ def grafik_bar_horizontal_sum(data):
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
     st.pyplot(fig_sum)
 
-#def grafik_bar_project(data, title):
 def grafik_bar_project(data):
     data_project = data['Project'].value_counts()
     project_names = data_project.index
@@ -168,12 +167,6 @@ rma = load_data(url)
 url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
 rma2 = load_data(url2)
 rma_modified2 = rma2.copy()
-
-# List standar nama kolom
-#mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]', 'Tgl Keluar [PB07]', 'Final Status', 'Project']
-
-# Kolom yang harus dihapus untuk data tahun 2023
-#columns_to_drop = ['Kategori','Expert','Tgl Tes','Tiket PB07']
 
 #st.sidebar.image("logo.png",use_column_width=True)
 
