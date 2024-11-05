@@ -4,6 +4,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+import pyecharts.options as opts
+from streamlit_echarts import st_pyecharts
+
 import streamlit_scrollable_textbox as stx
 import plotly.graph_objects as go
 import time
@@ -16,7 +20,9 @@ from utils import normalize_columns
 from utils import calculate_statistics
 from utils import display_metrics
 from utils import tabel_alat_barang
+from utils import statistik_barang
 from utils import grafik_barang
+
 from config import mylist
 from config import columns_to_drop
 from rma_2022 import rma_2022
@@ -29,25 +35,6 @@ st.set_page_config(
 )
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
-
-#edit 02/08/2024
-#def drop_columns(data, columns_to_drop):
-#    data.drop(columns_to_drop, axis=1, inplace=True)
-#    return data
-
-#def normalize_columns(data, target_columns):
-    # Ambil nama kolom yang ada di DataFrame
-    #nama_kolom = data.columns.tolist()
-
-    # Buat column_mapping secara otomatis berdasarkan perbedaan antara nama_kolom dan target_columns
-    #column_mapping = {nama_kolom[i]: target_columns[i] for i in range(min(len(nama_kolom), len(target_columns))) if nama_kolom[i] != target_columns[i]}
-
-    # List untuk menyimpan nama kolom yang baru
-    #new_column_names = [column_mapping[col] if col in column_mapping else col for col in nama_kolom]
-
-    # Ganti nama kolom di DataFrame
-    #data.columns = new_column_names
-    #return data
 
 def calculate_percentage(data, column_name):
     # Hitung jumlah nilai unik
@@ -76,12 +63,6 @@ def calculate_percentage(data, column_name):
 
     else:
         raise ValueError("Jumlah nilai unik tidak didukung.")
-
-#def total_barang_masuk(data):
-#    row_count, total_qty = calculate_statistics(data)
-#    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
-#    st.subheader('Total Alat/Barang')
-#    st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
 def grafik_bar_horizontal_count(data):
     count_barang = data['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
@@ -196,6 +177,15 @@ def rma_2023():
     # Calculate statistics
     #total_barang_masuk(rma_modified)
     tabel_alat_barang(rma_modified)
+
+    # GRAFTIK BARANG MASUK DAN KELUAR
+    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    # Membuat grafik barang masuk dan keluar
+    bar = grafik_barang(data_masuk, data_keluar)
+    # Menampilkan grafik di Streamlit
+    st.subheader("Grafik Barang Masuk dan Keluar")
+    st_pyecharts(bar, height="500px")
     
     # GRAFIK BARANG MASUK
     #grafik_barang(rma_modified, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
@@ -288,7 +278,17 @@ def rma_2024():
     tabel_alat_barang(rma_modified2)
 
     # PERSENTASE DALAM PROSES QC
-        
+
+    # GRAFIK BARANG MASUK DAN KELUAR
+    # Menghitung statistik barang masuk dan keluar
+    data_masuk = statistik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    data_keluar = statistik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    # Membuat grafik barang masuk dan keluar
+    bar = grafik_barang(data_masuk, data_keluar)
+    # Menampilkan grafik di Streamlit
+    st.subheader("Grafik Barang Masuk dan Keluar")
+    st_pyecharts(bar, height="500px")
+    
     # GRAFIK BARANG MASUK
     #grafik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
     
