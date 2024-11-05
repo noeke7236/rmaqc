@@ -8,6 +8,7 @@ from utils import normalize_columns
 from utils import calculate_statistics
 from utils import calculate_percentage
 from utils import display_metrics
+from utils import tabel_alat_barang
 
 url3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPxyl1P5AOFTBbTNR2f1TH3jP69HJigz2nnixuT2Ft3E67jeQFerdFoD5heO9YSY-Zi_H7TjHrTu3x/pub?output=xlsx'
 rma3 = load_data(url3)
@@ -23,19 +24,11 @@ def rma_2022():
     rma_modified3 = normalize_columns(rma_modified3, mylist)
 
     total_items, total_quantity = calculate_statistics(rma_modified3)
-
-    #percentage_table, rma2022_pass_percentage, rma2022_fail_percentage = calculate_percentage(rma_modified3)
-    #rma2022_counts, rma2022_percentage, #rma2022_pass_percentage,rma2022_fail_percentage = #calculate_percentage(rma_modified3)
-
-    #col1, col2, col3, col4 = st.columns(4)
-    #col1.metric("Total Items", total_items2)
-    #col2.metric("Total Quantity", total_quantity2)
-    #col3.metric("Pass :heavy_check_mark:", f"{rma2022_pass_percentage:.1f}%")
-    #col4.metric("Fail :x:", f"{rma2022_fail_percentage:.1f}%")
-
-    # Calculate the percentages
     good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified3, 'Final Status')
-
+    
     display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
-
+    
     st.divider()
+
+    # TOTAL BARANG MASUK
+    tabel_alat_barang(rma_modified3)
