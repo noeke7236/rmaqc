@@ -30,17 +30,14 @@ def get_current_time_in_jakarta():
 def load_data(url):
     return pd.read_excel(url)
 
+def drop_columns(data, columns_to_drop):
+    data.drop(columns_to_drop, axis=1, inplace=True)
+    return data
+
 def normalize_columns(data, target_columns):
-    # Ambil nama kolom yang ada di DataFrame
     nama_kolom = data.columns.tolist()
-
-    # Buat column_mapping secara otomatis berdasarkan perbedaan antara nama_kolom dan target_columns
     column_mapping = {nama_kolom[i]: target_columns[i] for i in range(min(len(nama_kolom), len(target_columns))) if nama_kolom[i] != target_columns[i]}
-
-    # List untuk menyimpan nama kolom yang baru
     new_column_names = [column_mapping[col] if col in column_mapping else col for col in nama_kolom]
-
-    # Ganti nama kolom di DataFrame
     data.columns = new_column_names
     return data
 
