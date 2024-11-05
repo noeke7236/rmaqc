@@ -11,6 +11,8 @@ import time
 from tabulate import tabulate
 from utils import get_current_time_in_jakarta
 from utils import load_data
+from utils import drop_columns
+from utils import normalize_columns
 from utils import calculate_statistics
 from utils import display_metrics
 from utils import tabel_alat_barang
@@ -29,23 +31,23 @@ st.set_page_config(
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
 
 #edit 02/08/2024
-def drop_columns(data, columns_to_drop):
-    data.drop(columns_to_drop, axis=1, inplace=True)
-    return data
+#def drop_columns(data, columns_to_drop):
+#    data.drop(columns_to_drop, axis=1, inplace=True)
+#    return data
 
-def normalize_columns(data, target_columns):
+#def normalize_columns(data, target_columns):
     # Ambil nama kolom yang ada di DataFrame
-    nama_kolom = data.columns.tolist()
+    #nama_kolom = data.columns.tolist()
 
     # Buat column_mapping secara otomatis berdasarkan perbedaan antara nama_kolom dan target_columns
-    column_mapping = {nama_kolom[i]: target_columns[i] for i in range(min(len(nama_kolom), len(target_columns))) if nama_kolom[i] != target_columns[i]}
+    #column_mapping = {nama_kolom[i]: target_columns[i] for i in range(min(len(nama_kolom), len(target_columns))) if nama_kolom[i] != target_columns[i]}
 
     # List untuk menyimpan nama kolom yang baru
-    new_column_names = [column_mapping[col] if col in column_mapping else col for col in nama_kolom]
+    #new_column_names = [column_mapping[col] if col in column_mapping else col for col in nama_kolom]
 
     # Ganti nama kolom di DataFrame
-    data.columns = new_column_names
-    return data
+    #data.columns = new_column_names
+    #return data
 
 def calculate_percentage(data, column_name):
     # Hitung jumlah nilai unik
@@ -185,8 +187,6 @@ def rma_2023():
     # Calculate the percentages
     good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
     
-    #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified, 'Final Status')
-
     display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
 
     st.divider()
@@ -198,12 +198,10 @@ def rma_2023():
     tabel_alat_barang(rma_modified)
     
     # GRAFIK BARANG MASUK
-    grafik_barang(rma_modified, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
-    #grafik_barang_masuk(rma_modified)
-    
+    #grafik_barang(rma_modified, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
+        
     # GRAFIK BARANG KELUAR
-    grafik_barang(rma_modified, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
-    #grafik_barang_keluar(rma_modified)
+    #grafik_barang(rma_modified, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
     
     # PERSENTASE DALAM PROSES QC
     
@@ -280,8 +278,6 @@ def rma_2024():
     
     good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified2, 'Final Status')
     
-    #good_counts, fail_counts, good_percentage, fail_percentage = calculate_percentage(rma_modified2, 'Final Status')
-        
     display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
 
     st.divider()
@@ -292,24 +288,12 @@ def rma_2024():
     tabel_alat_barang(rma_modified2)
 
     # PERSENTASE DALAM PROSES QC
-    #edit 01/08/2024
-    #table_data = [
-    #    ['Good', good_counts, good_percentage],
-    #    ['Fail', fail_counts, fail_percentage]
-    #  ]
-
-    #table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
-    #st.text("")
-    #st.subheader('Persentase dalam proses QC')
-    #st.markdown(table_html, unsafe_allow_html=True)
-    
+        
     # GRAFIK BARANG MASUK
-    #grafik_barang_masuk(rma_modified2)
-    grafik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
+    #grafik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
     
     # GRAFIK BARANG KELUAR
-    #grafik_barang_keluar(rma_modified2)
-    grafik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
+    #grafik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
 
     #GRAFIK BAR HORIZONTAL COUNT
     grafik_bar_horizontal_count(rma_modified2)
