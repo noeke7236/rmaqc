@@ -75,22 +75,6 @@ def calculate_percentage(data, column_name):
     else:
         raise ValueError("Jumlah nilai unik tidak didukung.")
 
-#def calculate_percentage(data, column_name):
-  # Mengganti nilai 'OK' menjadi 'Good' dan 'NOK' menjadi 'Bad'
-#  data[f'{column_name} Name'] = data[column_name].replace({'OK': 'Good', 'NOK': 'Bad'})
-
-  # Hitung jumlah untuk setiap status
-#  status_counts = data[f'{column_name} Name'].value_counts()
-
-  # Hitung persentase untuk setiap status
-#  total_counts = status_counts.sum()
-#  good_counts = status_counts.get('Good', 0)
-#  fail_counts = status_counts.get('Bad', 0)
-#  good_percentage = (good_counts / total_counts * 100).round(1)
-#  fail_percentage = (fail_counts / total_counts * 100).round(1)
-
-#  return good_counts, fail_counts, good_percentage, fail_percentage
-
 #def total_barang_masuk(data):
 #    row_count, total_qty = calculate_statistics(data)
 #    tabel_barang = pd.DataFrame({'Kategori': ['Total Barang', 'Total Kuantitas'], 'Nilai': [row_count, total_qty]})
@@ -222,33 +206,6 @@ def rma_2023():
     #grafik_barang_keluar(rma_modified)
     
     # PERSENTASE DALAM PROSES QC
-    #edit 01/08/2024
-    #table_data = [
-    #    ['Good', good_counts, good_percentage],
-    #    ['Fail', fail_counts, fail_percentage]
-    #  ]
-
-    #table_html = tabulate(table_data, headers=['Status', 'Total', 'Percentage(%)'], tablefmt='html')
-    #st.text("")
-    #st.subheader('Persentase dalam proses QC')
-    #st.markdown(table_html, unsafe_allow_html=True)
-
-    #tabel_persentase = pd.DataFrame({
-    #    'Bad': rma2023_counts['Bad'].astype(int),
-    #    'Good': rma2023_counts['Good'].astype(int),
-    #    'Bad(%)': rma2023_percentage['Bad'],
-    #    'Good(%)': rma2023_percentage['Good']
-    #})
-
-    # Mengatur format angka desimal di kolom 'Percentage' menjadi 2 angka di belakang koma
-    #tabel_persentase.rename_axis(None, inplace=True)
-    #tabel_persentase['Bad(%)'] = tabel_persentase['Bad(%)'].apply(lambda x: f"{x:.1f}")
-    #tabel_persentase['Good(%)'] = tabel_persentase['Good(%)'].apply(lambda x: f"{x:.1f}")
-    
-    # Mengganti nama header 'RMA Level' menjadi 'Level'
-    #tabel_persentase.columns.name = 'Level'
-    
-    #st.markdown(tabel_persentase.style.to_html(), unsafe_allow_html=True)
     
     # Membuat Pie Chart untuk baris 'L1'
     #fig_pie, ax_pie = plt.subplots()
