@@ -8,7 +8,7 @@ import seaborn as sns
 import pyecharts.options as opts
 from streamlit_echarts import st_pyecharts
 
-import streamlit_scrollable_textbox as stx
+#import streamlit_scrollable_textbox as stx
 import plotly.graph_objects as go
 import time
 
@@ -25,6 +25,7 @@ from utils import grafik_barang
 
 from config import mylist
 from config import columns_to_drop
+from rma_qc import rma_qc
 from rma_2022 import rma_2022
 
 sns.set_theme(style="darkgrid")
@@ -137,24 +138,24 @@ rma_modified2 = rma2.copy()
 
 #st.sidebar.image("logo.png",use_column_width=True)
 
-def rma_qc():
-    st.markdown("# QC & RMA ")
-    st.sidebar.markdown("# QC & RMA ")
-    st.header('Deskripsi', divider='rainbow')
+#def rma_qc():
+#    st.markdown("# QC & RMA ")
+#    st.sidebar.markdown("# QC & RMA ")
+#    st.header('Deskripsi', divider='rainbow')
     
-    with open('deskripsi.txt', 'r') as file:
-        deskripsi = file.read()
-    stx.scrollableTextbox(deskripsi)
+#    with open('deskripsi.txt', 'r') as file:
+#        deskripsi = file.read()
+#    stx.scrollableTextbox(deskripsi)
     
-    st.header('Alur Kerja', divider='rainbow')
-    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
-    st.text("")
-    st.text("")
-    st.header('Knowledge Base', divider='rainbow')
-    url_link = "http://kb.mindotama.co.id/dokuwiki/doku.php?id=start"
-    st.write("QC & RMA Knowledge Base [link](%s)" % url_link)
-    #st.markdown("check out this [link](%s)" % url)
-    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
+#    st.header('Alur Kerja', divider='rainbow')
+#    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
+#    st.text("")
+#    st.text("")
+#    st.header('Knowledge Base', divider='rainbow')
+#    url_link = "http://kb.mindotama.co.id/dokuwiki/doku.php?id=start"
+#    st.write("QC & RMA Knowledge Base [link](%s)" % url_link)
+#    #st.markdown("check out this [link](%s)" % url)
+#    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
 def rma_2023():
     st.markdown("# Infografis Tahun 2023 :rabbit:")
