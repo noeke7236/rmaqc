@@ -22,6 +22,7 @@ from utils import display_metrics
 from utils import tabel_alat_barang
 from utils import statistik_barang
 from utils import grafik_barang
+from utils import grafik_bar_project
 
 from config import mylist
 from config import columns_to_drop
@@ -103,30 +104,29 @@ def grafik_bar_horizontal_sum(data):
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
     st.pyplot(fig_sum)
 
-def grafik_bar_project(data):
-    data_project = data['Project'].value_counts()
-    project_names = data_project.index
-    project_counts = data_project.values
+#def grafik_bar_project(data):
+    #data_project = data['Project'].value_counts()
+    #project_names = data_project.index
+    #project_counts = data_project.values
 
-    fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
+    #fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
 
-    norm = plt.Normalize(project_counts.min(), project_counts.max())
-    cmap = plt.get_cmap("viridis")
-    palette_list = [cmap(norm(count)) for count in project_counts]
+    #norm = plt.Normalize(project_counts.min(), project_counts.max())
+    #cmap = plt.get_cmap("viridis")
+    #palette_list = [cmap(norm(count)) for count in project_counts]
 
-    sns.barplot(x=project_counts, y=project_names, hue=project_names, palette=palette_list, ax=ax_bar2, legend=False)
-    #sns.barplot(x=project_counts, y=project_names, palette='viridis', ax=ax_bar2)
+    #sns.barplot(x=project_counts, y=project_names, hue=project_names, palette=palette_list, ax=ax_bar2, legend=False)
+    
+    #for i, value in enumerate(project_counts):
+    #    ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
 
-    for i, value in enumerate(project_counts):
-        ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
-
-    ax_bar2.set_ylabel('Project')
-    ax_bar2.set_xlabel('Jumlah Items')
+    #ax_bar2.set_ylabel('Project')
+    #ax_bar2.set_xlabel('Jumlah Items')
     #ax_bar2.set_title(title)
 
-    st.text("")
-    st.subheader('Jumlah Alat/Barang berdasarkan project')
-    st.pyplot(fig_bar2)
+    #st.text("")
+    #st.subheader('Jumlah Alat/Barang berdasarkan project')
+    #st.pyplot(fig_bar2)
 
 # Load data
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
@@ -137,25 +137,6 @@ rma2 = load_data(url2)
 rma_modified2 = rma2.copy()
 
 #st.sidebar.image("logo.png",use_column_width=True)
-
-#def rma_qc():
-#    st.markdown("# QC & RMA ")
-#    st.sidebar.markdown("# QC & RMA ")
-#    st.header('Deskripsi', divider='rainbow')
-    
-#    with open('deskripsi.txt', 'r') as file:
-#        deskripsi = file.read()
-#    stx.scrollableTextbox(deskripsi)
-    
-#    st.header('Alur Kerja', divider='rainbow')
-#    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/rma_flowchart.png')
-#    st.text("")
-#    st.text("")
-#    st.header('Knowledge Base', divider='rainbow')
-#    url_link = "http://kb.mindotama.co.id/dokuwiki/doku.php?id=start"
-#    st.write("QC & RMA Knowledge Base [link](%s)" % url_link)
-#    #st.markdown("check out this [link](%s)" % url)
-#    st.image('https://raw.githubusercontent.com/noeke7236/rmaqc/main/images/webkbmindotama.png')
 
 def rma_2023():
     st.markdown("# Infografis Tahun 2023 :rabbit:")
@@ -257,8 +238,8 @@ def rma_2023():
     grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
-    #grafik_bar_project(rma_modified, 'Project 2023')
-    grafik_bar_project(rma_modified)
+    grafik_bar_project(rma_modified, 'Project Tahun 2023')
+    #grafik_bar_project(rma_modified)
 
 def rma_2024():
     st.markdown("# Infografis Tahun 2024 :dragon_face:")
@@ -303,8 +284,8 @@ def rma_2024():
     grafik_bar_horizontal_sum(rma_modified2)
 
     # GRAFIK BAR PROJECT
-    #grafik_bar_project(rma_modified2, 'Project 2024')
-    grafik_bar_project(rma_modified2)
+    grafik_bar_project(rma_modified2, 'Project Tahun 2024')
+    #grafik_bar_project(rma_modified2)
 
 page_names_to_funcs = {
     "QC & RMA": rma_qc,
