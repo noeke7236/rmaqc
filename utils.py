@@ -195,3 +195,35 @@ def total_barang_masuk(data):
     st.subheader('Total Alat/Barang')
     st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
+def grafik_bar_project(data, title):
+    data_project = data['Project'].value_counts()
+
+    # Mengambil data dari Series data_project dan membalikkan urutannya
+    project_names = data_project.index[::-1]  # Membalik urutan nama project
+    project_counts = data_project.values[::-1]  # Membalik urutan jumlah project
+    
+    # Membuat objek figure dan axes
+    fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
+    
+    norm = plt.Normalize(project_counts.min(), project_counts.max())
+    cmap = plt.get_cmap("viridis")
+       
+    # Membuat warna untuk setiap batang
+    colors = [cmap(norm(count)) for count in project_counts]
+
+    # Membuat bar plot menggunakan Matplotlib
+    bars = ax_bar2.barh(project_names, project_counts, color=colors)
+
+    # Menambahkan label ke setiap batang
+    for bar in bars:
+        width = bar.get_width()
+        ax_bar2.text(width, bar.get_y() + bar.get_height()/2, f'{width}', ha='left', va='center', color='black')
+
+    ax_bar2.set_ylabel('Project')
+    ax_bar2.set_xlabel('Jumlah')
+    ax_bar2.set_title(title)
+
+    # Menampilkan plot di Streamlit
+    st.text("")
+    st.subheader('Jumlah Alat/Barang berdasarkan project')
+    st.pyplot(fig_bar2)
