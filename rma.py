@@ -104,30 +104,6 @@ def grafik_bar_horizontal_sum(data):
     st.subheader('Top 10 Alat/Barang berdasarkan jumlah kuantitas')
     st.pyplot(fig_sum)
 
-#def grafik_bar_project(data):
-    #data_project = data['Project'].value_counts()
-    #project_names = data_project.index
-    #project_counts = data_project.values
-
-    #fig_bar2, ax_bar2 = plt.subplots(figsize=(12, 6))
-
-    #norm = plt.Normalize(project_counts.min(), project_counts.max())
-    #cmap = plt.get_cmap("viridis")
-    #palette_list = [cmap(norm(count)) for count in project_counts]
-
-    #sns.barplot(x=project_counts, y=project_names, hue=project_names, palette=palette_list, ax=ax_bar2, legend=False)
-    
-    #for i, value in enumerate(project_counts):
-    #    ax_bar2.text(value, i, f'{value}', ha='left', va='center', color='black')
-
-    #ax_bar2.set_ylabel('Project')
-    #ax_bar2.set_xlabel('Jumlah Items')
-    #ax_bar2.set_title(title)
-
-    #st.text("")
-    #st.subheader('Jumlah Alat/Barang berdasarkan project')
-    #st.pyplot(fig_bar2)
-
 # Load data
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
 rma = load_data(url)
