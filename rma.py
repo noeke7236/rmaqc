@@ -20,6 +20,7 @@ from utils import normalize_columns
 from utils import calculate_statistics
 from utils import display_metrics
 from utils import tabel_alat_barang
+from utils import tampilkan_pie_chart
 from utils import statistik_barang
 from utils import grafik_barang
 from utils import grafik_bar_project
