@@ -29,6 +29,7 @@ from config import mylist
 from config import columns_to_drop
 from rma_qc import rma_qc
 from rma_2022 import rma_2022
+from rma_2024 import rma_2024
 
 sns.set_theme(style="darkgrid")
 
@@ -109,9 +110,9 @@ def grafik_bar_horizontal_sum(data):
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
 rma = load_data(url)
 
-url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
-rma2 = load_data(url2)
-rma_modified2 = rma2.copy()
+#url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
+#rma2 = load_data(url2)
+#rma_modified2 = rma2.copy()
 
 #st.sidebar.image("logo.png",use_column_width=True)
 
@@ -221,35 +222,33 @@ def rma_2023():
     grafik_bar_project(rma_modified, 'Project Tahun 2023')
     #grafik_bar_project(rma_modified)
 
-def rma_2024():
-    st.markdown("# Infografis Tahun 2024 :dragon_face:")
-    st.sidebar.markdown("# 2024 :dragon:")
+#def rma_2024():
+    #st.markdown("# Infografis Tahun 2024 :dragon_face:")
+    #st.sidebar.markdown("# 2024 :dragon:")
 
-    #total_items2, total_quantity2 = calculate_statistics(rma_modified2)
-    total_items, total_quantity = calculate_statistics(rma_modified2)
+    #total_items, total_quantity = calculate_statistics(rma_modified2)
     
-    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified2, 'Final Status')
+    #good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified2, 'Final Status')
     
-    display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
+    #display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
 
-    st.divider()
-    #st.markdown("""---""")
-    
+    #st.divider()
+        
     # TOTAL BARANG MASUK
     #total_barang_masuk(rma_modified2)
-    tabel_alat_barang(rma_modified2)
+    #tabel_alat_barang(rma_modified2)
 
     # PERSENTASE DALAM PROSES QC
 
     # GRAFIK BARANG MASUK DAN KELUAR
     # Menghitung statistik barang masuk dan keluar
-    data_masuk = statistik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
-    data_keluar = statistik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    #data_masuk = statistik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    #data_keluar = statistik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
     # Membuat grafik barang masuk dan keluar
-    bar = grafik_barang(data_masuk, data_keluar)
+    #bar = grafik_barang(data_masuk, data_keluar)
     # Menampilkan grafik di Streamlit
-    st.subheader("Grafik Barang Masuk dan Keluar")
-    st_pyecharts(bar, height="500px")
+    #st.subheader("Grafik Barang Masuk dan Keluar")
+    #st_pyecharts(bar, height="500px")
     
     # GRAFIK BARANG MASUK
     #grafik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
@@ -258,13 +257,13 @@ def rma_2024():
     #grafik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
 
     #GRAFIK BAR HORIZONTAL COUNT
-    grafik_bar_horizontal_count(rma_modified2)
+    #grafik_bar_horizontal_count(rma_modified2)
 
     #GRAFIK BAR HORIZONTAL SUM
-    grafik_bar_horizontal_sum(rma_modified2)
+    #grafik_bar_horizontal_sum(rma_modified2)
 
     # GRAFIK BAR PROJECT
-    grafik_bar_project(rma_modified2, 'Project Tahun 2024')
+    #grafik_bar_project(rma_modified2, 'Project Tahun 2024')
     #grafik_bar_project(rma_modified2)
 
 page_names_to_funcs = {
