@@ -7,6 +7,7 @@ import streamlit as st
 import plotly.graph_objects as go
 
 from pyecharts import options as opts
+from pyecharts.charts import Pie
 from pyecharts.charts import Bar
 from streamlit_echarts import st_pyecharts
 
@@ -130,6 +131,23 @@ def tabel_alat_barang(data):
 
     st.subheader('Total Alat / Barang')
     st.plotly_chart(fig)
+
+def tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage):
+    labels = ["Pass", "Fail"]
+    values = [good_percentage, fail_percentage]
+      
+    if untested_percentage is not None:
+        labels.append("Untested")
+        values.append(untested_percentage)
+        #colors.append('#f8cc1b')
+    
+    c = (
+        Pie()
+        .add("", [list(z) for z in zip(labels, values)])
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    st.subheader("Grafik Persentase Status Alat / Barang")
+    st_pyecharts(c, width="640px", height="480px")
 
 def statistik_barang(data, kolom_tanggal, judul, warna):
     data['Bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.strftime('%B')
