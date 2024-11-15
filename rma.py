@@ -134,8 +134,11 @@ def rma_2023():
     # TOTAL BARANG MASUK
     # Calculate statistics
     #total_barang_masuk(rma_modified)
-    tabel_alat_barang(rma_modified)
+    #tabel_alat_barang(rma_modified)
 
+    # PERSENTASE DALAM PROSES QC
+    tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
+    
     # GRAFTIK BARANG MASUK DAN KELUAR
     data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
     data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
