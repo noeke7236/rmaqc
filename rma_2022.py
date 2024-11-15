@@ -11,7 +11,10 @@ from utils import normalize_columns
 from utils import calculate_statistics
 from utils import calculate_percentage
 from utils import display_metrics
-from utils import tabel_alat_barang
+#from utils import tabel_alat_barang
+from utils import tampilkan_pie_chart
+from utils import statistik_barang
+from utils import grafik_barang
 
 #url3 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPxyl1P5AOFTBbTNR2f1TH3jP69HJigz2nnixuT2Ft3E67jeQFerdFoD5heO9YSY-Zi_H7TjHrTu3x/pub?output=xlsx'
 #rma3 = load_data(url3)
@@ -26,13 +29,6 @@ def rma_2022():
     st.markdown("# Infografis Tahun "+ tahun_2022['tahun'] +" "+ tahun_2022['icon'])
     st.sidebar.markdown("# "+ tahun_2022['tahun'] +" "+ tahun_2022['icon_sidebar'])
     
-    #st.markdown('<span style="font-size: 24px;">Infografis Tahun 2022</span>', unsafe_allow_html=True)
-    #st.markdown("# Infografis Tahun 2022 :tiger:")
-    #st.sidebar.markdown("# 2022 :tiger2:")
-
-    #rma_modified3 = rma3.copy()
-    #rma_modified3 = normalize_columns(rma_modified3, mylist)
-
     total_items, total_quantity = calculate_statistics(rma_modified)
     good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
     
@@ -41,4 +37,14 @@ def rma_2022():
     st.divider()
 
     # TOTAL BARANG MASUK
-    tabel_alat_barang(rma_modified)
+    #tabel_alat_barang(rma_modified)
+
+    # PIE CHART PERSENTASE QC
+    tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
+
+    # GRAFIK BARANG MASUK & BARANG KELUAR
+    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    bar = grafik_barang(data_masuk, data_keluar)
+    st.subheader("Grafik Barang Masuk dan Keluar")
+    st_pyecharts(bar, height="500px")
