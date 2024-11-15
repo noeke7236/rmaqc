@@ -3,6 +3,8 @@
 import streamlit as st
 import pandas as pd
 
+from streamlit_echarts import st_pyecharts
+
 from config import tahun_2022
 from config import mylist
 
