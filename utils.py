@@ -213,10 +213,42 @@ def total_barang_masuk(data):
     st.subheader('Total Alat/Barang')
     st.markdown(tabel_barang.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
+def grafik_bar_horizontal_count(data):
+    count_barang = data['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
+
+    # Membuat horizontal bar chart
+    fig_count, ax_count = plt.subplots()
+    bars = count_barang.plot(kind='barh', color='skyblue', ax=ax_count)
+    ax_count.set_xlabel('Jumlah')
+    ax_count.set_ylabel('Alat/Barang')
+    ax_count.grid(axis='x')
+
+    for bar, value in zip(bars.patches, count_barang):
+        plt.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2 - 0.15, str(value), ha='center', va='center', color='black')
+
+    st.text("")
+    st.subheader('Top 10 Alat/Barang berdasarkan Items')
+    st.pyplot(fig_count)
+
+def grafik_bar_horizontal_sum(data):
+    sum_barang = data.groupby(('Nama Barang'))['Qty'].sum().nlargest(10).sort_values(ascending=True)
+
+    fig_sum, ax_sum = plt.subplots()
+    bars = sum_barang.plot(kind='barh', color='tomato', ax=ax_sum)
+    ax_sum.set_xlabel('Jumlah')
+    ax_sum.set_ylabel('Alat/Barang')
+    ax_sum.grid(axis='x')
+
+    for bar, value in zip(bars.patches, sum_barang):
+        ax_sum.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2, str(value), ha='center', va='center', color='black')
+
+    st.text("")
+    st.subheader('Top 10 Alat/Barang berdasarkan Quantity')
+    st.pyplot(fig_sum)
+
 def grafik_bar_project(data, title):
     data_project = data['Project'].value_counts()
 
-    # Mengambil data dari Series data_project dan membalikkan urutannya
     project_names = data_project.index[::-1]  # Membalik urutan nama project
     project_counts = data_project.values[::-1]  # Membalik urutan jumlah project
     
