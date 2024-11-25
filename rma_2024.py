@@ -75,23 +75,23 @@ def rma_2024():
     #grafik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
 
     # Menghitung statistik barang masuk dan keluar
-    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
-    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    ##data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    ##data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
 
     # Membuat grafik barang masuk dan keluar
-    bar = grafik_barang(data_masuk, data_keluar)
+    ##bar = grafik_barang(data_masuk, data_keluar)
 
     # Menampilkan grafik di Streamlit
-    st.subheader("Grafik Barang Masuk dan Keluar")
-    st_pyecharts(bar, height="500px")
+    ##st.subheader("Grafik Barang Masuk dan Keluar")
+    ##st_pyecharts(bar, height="500px")
 
     #GRAFIK BAR HORIZONTAL COUNT
     #grafik_bar_horizontal_count(rma_modified2)
-    grafik_bar_horizontal_count(rma_modified)
+    ##grafik_bar_horizontal_count(rma_modified)
     
     #GRAFIK BAR HORIZONTAL SUM
     #grafik_bar_horizontal_sum(rma_modified2)
-    grafik_bar_horizontal_sum(rma_modified)
+    ##grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
     #grafik_bar_project(rma_modified, 'Project 2024)
