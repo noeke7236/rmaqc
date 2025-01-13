@@ -86,16 +86,16 @@ def display_metrics(total_items, total_quantity, good_percentage, fail_percentag
         col1, col2, col3, col4 = st.columns(4)
         col1.metric("Total Items", total_items)
         col2.metric("Total Quantity", total_quantity)
-        col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
-        col4.metric("Fail :x:", f"{fail_percentage:.1f}%")
+        col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.2f}%")
+        col4.metric("Fail :x:", f"{fail_percentage:.2f}%")
 
     elif unique_counts == 3:
         col1, col2, col3, col4, col5 = st.columns(5)
         col1.metric("Total Items", total_items)
         col2.metric("Total Quantity", total_quantity)
-        col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.1f}%")
-        col4.metric("Untested :no_entry_sign:", f"{untested_percentage:.1f}%")
-        col5.metric("Fail :x:", f"{fail_percentage:.1f}%")
+        col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.2f}%")
+        col4.metric("Untested :no_entry_sign:", f"{untested_percentage:.2f}%")
+        col5.metric("Fail :x:", f"{fail_percentage:.2f}%")
 
 def tabel_alat_barang(data):
     total_items, total_quantity = calculate_statistics(data)
