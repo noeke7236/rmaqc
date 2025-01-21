@@ -149,7 +149,10 @@ def tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage):
     st.subheader("Grafik Persentase Status Alat / Barang")
     st_pyecharts(c, width="640px", height="480px")
 
-def statistik_barang(data, kolom_tanggal, judul, warna):
+def statistik_barang(data, kolom_tanggal, judul, warna, tahun):
+    data[kolom_tanggal] = pd.to_datetime(data[kolom_tanggal], dayfirst=True)
+    data = data[data[kolom_tanggal].dt.year == tahun]
+    
     data['Bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.strftime('%B')
     data['bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.month
     data['jumlah'] = 1
