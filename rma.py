@@ -120,6 +120,8 @@ def rma_2023():
     st.markdown("# Infografis Tahun 2023 :rabbit:")
     st.sidebar.markdown("# 2023 :rabbit2:")
 
+    tahun = int(2023)
+    
     rma_modified = rma.copy()
     rma_modified = drop_columns(rma_modified, columns_to_drop) #edit 02/08/2024
     rma_modified = normalize_columns(rma_modified, mylist)
@@ -141,9 +143,14 @@ def rma_2023():
     # PERSENTASE DALAM PROSES QC
     tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
     
+    # GRAFTIK BARANG MASUK DAN KELUAR [old]
+    #data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    #data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+
     # GRAFTIK BARANG MASUK DAN KELUAR
-    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
-    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA", tahun)
+    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347", tahun)
+    
     # Membuat grafik barang masuk dan keluar
     bar = grafik_barang(data_masuk, data_keluar)
     # Menampilkan grafik di Streamlit
