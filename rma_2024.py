@@ -20,6 +20,8 @@ from utils import grafik_bar_project
 def rma_2024():
     rma = load_data(tahun_2024['url'])
     rma_modified = rma.copy()
+
+    tahun = int(tahun_2024['tahun'])
     
     st.markdown("# Infografis Tahun "+ tahun_2024['tahun'] +" "+ tahun_2024['icon'])
     st.sidebar.markdown("# "+ tahun_2024['tahun'] + " " + tahun_2024['icon_sidebar'])
@@ -74,10 +76,14 @@ def rma_2024():
     #grafik_barang_keluar(rma_modified2)
     #grafik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
 
-    # Menghitung statistik barang masuk dan keluar
-    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
-    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    # Menghitung statistik barang masuk dan keluar [old]
+    #data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    #data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
 
+    # Menghitung statistik barang masuk dan keluar
+    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA", tahun)
+    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347", tahun)
+    
     # Membuat grafik barang masuk dan keluar
     bar = grafik_barang(data_masuk, data_keluar)
 
