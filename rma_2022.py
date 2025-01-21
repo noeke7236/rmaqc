@@ -28,6 +28,8 @@ def rma_2022():
     rma_modified = rma.copy()
     rma_modified = normalize_columns(rma_modified, mylist)
 
+    tahun = int(tahun_2022['tahun'])
+    
     st.markdown("# Infografis Tahun "+ tahun_2022['tahun'] +" "+ tahun_2022['icon'])
     st.sidebar.markdown("# "+ tahun_2022['tahun'] +" "+ tahun_2022['icon_sidebar'])
     
@@ -45,8 +47,13 @@ def rma_2022():
     tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
 
     # GRAFIK BARANG MASUK & BARANG KELUAR
-    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
-    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+    #data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
+    #data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
+
+    # GRAFIK BARANG MASUK & BARANG KELUAR
+    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA", tahun)
+    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347", tahun)
+    
     bar = grafik_barang(data_masuk, data_keluar)
     st.subheader("Grafik Barang Masuk dan Keluar")
     st_pyecharts(bar, height="500px")
