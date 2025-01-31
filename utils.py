@@ -154,11 +154,17 @@ def tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage):
 
 def statistik_barang(data, kolom_tanggal, judul, warna, tahun):
     data[kolom_tanggal] = pd.to_datetime(data[kolom_tanggal], dayfirst=True)
-    data = data[data[kolom_tanggal].dt.year == tahun]
+    #data = data[data[kolom_tanggal].dt.year == tahun]
+    data = data[data[kolom_tanggal].dt.year == tahun].copy()
     
-    data['Bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.strftime('%B')
-    data['bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.month
-    data['jumlah'] = 1
+    #data['Bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.strftime('%B')
+    #data['bulan'] = pd.to_datetime(data[kolom_tanggal], dayfirst=True).dt.month
+    #data['jumlah'] = 1
+
+    data.loc[:, 'Bulan'] = data[kolom_tanggal].dt.strftime('%B')
+    data.loc[:, 'bulan'] = data[kolom_tanggal].dt.month
+    data.loc[:, 'jumlah'] = 1
+    
     result = data.groupby(['bulan']).agg(jumlah=('jumlah', 'count')).reset_index()
 
     no_bulan = [{'bulan': i, 'jumlah': 0} for i in range(1, 13)]
