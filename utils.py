@@ -35,6 +35,9 @@ def get_current_time_in_jakarta():
 def load_data(url):
     return pd.read_excel(url)
 
+def load_data_csv(url):
+    return pd.read_csv(url)
+
 def drop_columns(data, columns_to_drop):
     data.drop(columns_to_drop, axis=1, inplace=True)
     return data
@@ -63,17 +66,17 @@ def calculate_percentage(data, column_name):
     if unique_counts == 2:
         good_counts = status_counts.get('OK', 0)
         fail_counts = status_counts.get('NOK', 0)
-        good_percentage = (good_counts / total_counts * 100).round(1)
-        fail_percentage = (fail_counts / total_counts * 100).round(1)
+        good_percentage = (good_counts / total_counts * 100).round(2)
+        fail_percentage = (fail_counts / total_counts * 100).round(2)
         return good_percentage, fail_percentage, None  # Tidak ada untested
 
     elif unique_counts == 3:
         good_counts = status_counts.get('OK', 0)
         fail_counts = status_counts.get('NOK', 0)
         untested_counts = status_counts.get('Untested', 0)
-        good_percentage = (good_counts / total_counts * 100).round(1)
-        fail_percentage = (fail_counts / total_counts * 100).round(1)
-        untested_percentage = (untested_counts / total_counts * 100).round(1)
+        good_percentage = (good_counts / total_counts * 100).round(2)
+        fail_percentage = (fail_counts / total_counts * 100).round(2)
+        untested_percentage = (untested_counts / total_counts * 100).round(2)
         return good_percentage, fail_percentage, untested_percentage
 
     else:
