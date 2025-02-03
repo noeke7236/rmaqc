@@ -233,8 +233,8 @@ page_names_to_funcs = {
     "QC & RMA": rma_qc,
     "2022": rma_2022,
     "2023": rma_2023,
-    "2024": rma_2024,
-    "2025": rma_2025
+    "2024": rma_2024
+    #"2025": rma_2025
 }
 
 selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
