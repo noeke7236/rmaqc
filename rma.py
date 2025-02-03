@@ -229,56 +229,12 @@ def rma_2023():
     grafik_bar_project(rma_modified, 'Project Tahun 2023')
     #grafik_bar_project(rma_modified)
 
-#def rma_2024():
-    #st.markdown("# Infografis Tahun 2024 :dragon_face:")
-    #st.sidebar.markdown("# 2024 :dragon:")
-
-    #total_items, total_quantity = calculate_statistics(rma_modified2)
-    
-    #good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified2, 'Final Status')
-    
-    #display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
-
-    #st.divider()
-        
-    # TOTAL BARANG MASUK
-    #total_barang_masuk(rma_modified2)
-    #tabel_alat_barang(rma_modified2)
-
-    # PERSENTASE DALAM PROSES QC
-
-    # GRAFIK BARANG MASUK DAN KELUAR
-    # Menghitung statistik barang masuk dan keluar
-    #data_masuk = statistik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
-    #data_keluar = statistik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
-    # Membuat grafik barang masuk dan keluar
-    #bar = grafik_barang(data_masuk, data_keluar)
-    # Menampilkan grafik di Streamlit
-    #st.subheader("Grafik Barang Masuk dan Keluar")
-    #st_pyecharts(bar, height="500px")
-    
-    # GRAFIK BARANG MASUK
-    #grafik_barang(rma_modified2, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
-    
-    # GRAFIK BARANG KELUAR
-    #grafik_barang(rma_modified2, 'Tgl Keluar [PB07]', 'jumlah_out', 'Grafik barang keluar', "#FF6347")
-
-    #GRAFIK BAR HORIZONTAL COUNT
-    #grafik_bar_horizontal_count(rma_modified2)
-
-    #GRAFIK BAR HORIZONTAL SUM
-    #grafik_bar_horizontal_sum(rma_modified2)
-
-    # GRAFIK BAR PROJECT
-    #grafik_bar_project(rma_modified2, 'Project Tahun 2024')
-    #grafik_bar_project(rma_modified2)
-
 page_names_to_funcs = {
     "QC & RMA": rma_qc,
     "2022": rma_2022,
     "2023": rma_2023,
-    "2024": rma_2024
-    #"Page 3": page3,
+    "2024": rma_2024,
+    "2025": rma_2025
 }
 
 selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
