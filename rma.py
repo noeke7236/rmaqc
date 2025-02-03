@@ -30,6 +30,7 @@ from config import columns_to_drop
 from rma_qc import rma_qc
 from rma_2022 import rma_2022
 from rma_2024 import rma_2024
+from rma_2025 import rma_2025
 
 sns.set_theme(style="darkgrid")
 
