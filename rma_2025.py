@@ -10,7 +10,7 @@ from utils import load_data_csv
 from utils import calculate_statistics
 from utils import calculate_percentage, calculate_percentage2 
 from utils import display_metrics
-from utils import create_level_table_data
+
 from utils import tampilkan_pie_chart
 from utils import tampilkan_pie_chart1
 from utils import statistik_barang
@@ -18,7 +18,6 @@ from utils import grafik_barang
 from utils import grafik_bar_horizontal_count
 from utils import grafik_bar_horizontal_sum
 from utils import grafik_bar_project
-#from utils import grafik_funnel_project
 
 def rma_2025():
     rma = load_data_csv(tahun_2025['url'])
