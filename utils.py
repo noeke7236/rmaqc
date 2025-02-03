@@ -82,6 +82,21 @@ def calculate_percentage(data, column_name):
     else:
         raise ValueError("Jumlah nilai unik tidak didukung.")
 
+def calculate_percentage2(data, column_name):
+    level_counts = data[column_name].value_counts()
+    total_level_counts = level_counts.sum()
+
+    L0_counts = level_counts.get('L0', 0)
+    L1_counts = level_counts.get('L1', 0)
+    L2_counts = level_counts.get('L2', 0)
+    L3_counts = level_counts.get('L3', 0)
+    L0_percentage = (L0_counts / total_level_counts * 100).round(2)
+    L1_percentage = (L1_counts / total_level_counts * 100).round(2)
+    L2_percentage = (L2_counts / total_level_counts * 100).round(2)
+    L3_percentage = (L3_counts / total_level_counts * 100).round(2)
+
+    return L0_counts, L1_counts, L2_counts, L3_counts, L0_percentage, L1_percentage, L2_percentage, L3_percentage
+
 def display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage=None):
     unique_counts = 2 if untested_percentage is None else 3
 
@@ -150,6 +165,21 @@ def tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage):
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
     st.subheader("Grafik Persentase Status Alat / Barang")
+    st_pyecharts(c, width="640px", height="480px")
+
+def tampilkan_pie_chart1(L0_percentage, L1_percentage, L2_percentage, L3_percentage):
+    # Menyiapkan data untuk pie chart
+    labels = ["L0", "L1", "L2", "L3"]
+    values = [L0_percentage, L1_percentage, L2_percentage, L3_percentage]
+        
+    # Create a pie chart using pyecharts
+    c = (
+        Pie()
+        .add("", [list(z) for z in zip(labels, values)])
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+
+    st.subheader("Grafik Persentase Level")
     st_pyecharts(c, width="640px", height="480px")
 
 def statistik_barang(data, kolom_tanggal, judul, warna, tahun):
