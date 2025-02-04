@@ -8,9 +8,9 @@ from config import tahun_2024
 
 from utils import load_data
 from utils import calculate_statistics
-from utils import calculate_percentage
+from utils import calculate_percentage, calculate_percentage2
 from utils import display_metrics
-from utils import tampilkan_pie_chart
+from utils import tampilkan_pie_chart, tampilkan_pie_chart1
 from utils import statistik_barang
 from utils import grafik_barang
 from utils import grafik_bar_horizontal_count
@@ -30,6 +30,8 @@ def rma_2024():
     good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
     #good_counts, fail_counts, untested_counts, good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified2, 'Final Status')
 
+    L0_counts, L1_counts, L2_counts, L3_counts, L0_percentage, L1_percentage, L2_percentage, L3_percentage = calculate_percentage2(rma_modified, 'RMA Level')
+    
     display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
         
     st.divider()
@@ -64,6 +66,7 @@ def rma_2024():
     #st_pyecharts(c, width="640px", height="480px")
     tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
 
+    tampilkan_pie_chart1(L0_percentage, L1_percentage, L2_percentage, L3_percentage)
     # TOTAL BARANG MASUK
     #total_barang_masuk(rma_modified2)
     #tabel_alat_barang(rma_modified2)
