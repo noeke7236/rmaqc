@@ -162,6 +162,7 @@ def tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage):
     c = (
         Pie()
         .add("", [list(z) for z in zip(labels, values)])
+        .set_global_opts(legend_opts=opts.LegendOpts(type_="scroll", pos_left="80%", orient="vertical"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
     st.subheader("Grafik Persentase Status Alat / Barang")
@@ -176,6 +177,7 @@ def tampilkan_pie_chart1(L0_percentage, L1_percentage, L2_percentage, L3_percent
     c = (
         Pie()
         .add("", [list(z) for z in zip(labels, values)])
+        .set_global_opts(legend_opts=opts.LegendOpts(type_="scroll", pos_left="80%", orient="vertical"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
 
