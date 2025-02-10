@@ -32,6 +32,14 @@ def get_current_time_in_jakarta():
     time_string = jakarta_time.strftime(f'{jakarta_time.day} {month_names[jakarta_time.strftime("%m").lstrip("0")]} {jakarta_time.year}')
     return time_string
 
+def load_data_new(tipe, url):
+    if tipe == 'excel':
+        return pd.read_excel(url)
+    elif tipe == 'csv':
+        return pd.read_csv(url)
+    else:
+        raise ValueError("Tipe tidak dikenali. Harap gunakan 'excel' atau 'csv'.")
+
 def load_data(url):
     return pd.read_excel(url)
 
