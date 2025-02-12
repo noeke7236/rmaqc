@@ -9,7 +9,7 @@ from config import columns_to_drop
 
 from config import tahun_2023
 
-from utils import load_data
+from utils import load_data_new
 from utils import calculate_statistics
 from utils import calculate_percentage, calculate_percentage2
 from utils import display_metrics
@@ -28,7 +28,7 @@ def rma_2023():
     
     st.markdown("# Infografis Tahun "+ str(tahun_2023['tahun']) +" "+ tahun_2023['icon'])
     st.sidebar.markdown("# "+ str(tahun_2023['tahun']) + " " + tahun_2023['icon_sidebar'])
-    rma = load_data(tahun_2023['tipe'], tahun_2023['url'])
+    rma = load_data_new(tahun_2023['tipe'], tahun_2023['url'])
     
     rma_modified = rma.copy()
     rma_modified = drop_columns(rma_modified, columns_to_drop)
