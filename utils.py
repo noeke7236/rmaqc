@@ -298,7 +298,8 @@ def grafik_bar_horizontal_sum(data):
     st.subheader('Top 10 Alat/Barang berdasarkan Quantity')
     st.pyplot(fig_sum)
 
-def grafik_bar_project(data, title):
+#def grafik_bar_project(data, title):
+def grafik_bar_project(data):
     data_project = data['Project'].value_counts()
 
     project_names = data_project.index[::-1]  # Membalik urutan nama project
@@ -323,7 +324,7 @@ def grafik_bar_project(data, title):
 
     ax_bar2.set_ylabel('Project')
     ax_bar2.set_xlabel('Jumlah')
-    ax_bar2.set_title(title)
+    #ax_bar2.set_title(title)
 
     # Menampilkan plot di Streamlit
     st.text("")
