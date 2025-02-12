@@ -29,6 +29,7 @@ from config import mylist
 from config import columns_to_drop
 from rma_qc import rma_qc
 from rma_2022 import rma_2022
+from rma_2023 import rma_2023
 from rma_2024 import rma_2024
 from rma_2025 import rma_2025
 
@@ -41,33 +42,33 @@ st.set_page_config(
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
 
-def calculate_percentage(data, column_name):
+#def calculate_percentage(data, column_name):
     # Hitung jumlah nilai unik
-    unique_counts = data[column_name].nunique()
+    #unique_counts = data[column_name].nunique()
     #print(f"Jumlah nilai unik: {unique_counts}")
 
     # Hitung jumlah untuk setiap status
-    status_counts = data[column_name].value_counts()
-    total_counts = status_counts.sum()
+    #status_counts = data[column_name].value_counts()
+    #total_counts = status_counts.sum()
 
-    if unique_counts == 2:
-        good_counts = status_counts.get('OK', 0)
-        fail_counts = status_counts.get('NOK', 0)
-        good_percentage = (good_counts / total_counts * 100).round(1)
-        fail_percentage = (fail_counts / total_counts * 100).round(1)
-        return good_percentage, fail_percentage, None  # Tidak ada untested
+    #if unique_counts == 2:
+        #good_counts = status_counts.get('OK', 0)
+        #fail_counts = status_counts.get('NOK', 0)
+        #good_percentage = (good_counts / total_counts * 100).round(1)
+        #fail_percentage = (fail_counts / total_counts * 100).round(1)
+        #return good_percentage, fail_percentage, None  # Tidak ada untested
 
-    elif unique_counts == 3:
-        good_counts = status_counts.get('OK', 0)
-        fail_counts = status_counts.get('NOK', 0)
-        untested_counts = status_counts.get('Untested', 0)
-        good_percentage = (good_counts / total_counts * 100).round(1)
-        fail_percentage = (fail_counts / total_counts * 100).round(1)
-        untested_percentage = (untested_counts / total_counts * 100).round(1)
-        return good_percentage, fail_percentage, untested_percentage
+    #elif unique_counts == 3:
+        #good_counts = status_counts.get('OK', 0)
+        #fail_counts = status_counts.get('NOK', 0)
+        #untested_counts = status_counts.get('Untested', 0)
+        #good_percentage = (good_counts / total_counts * 100).round(1)
+        #fail_percentage = (fail_counts / total_counts * 100).round(1)
+        #untested_percentage = (untested_counts / total_counts * 100).round(1)
+        #return good_percentage, fail_percentage, untested_percentage
 
-    else:
-        raise ValueError("Jumlah nilai unik tidak didukung.")
+    #else:
+        #raise ValueError("Jumlah nilai unik tidak didukung.")
 
 def grafik_bar_horizontal_count(data):
     count_barang = data['Nama Barang'].value_counts().nlargest(10).sort_values(ascending=True)
@@ -117,46 +118,45 @@ rma = load_data(url)
 
 #st.sidebar.image("logo.png",use_column_width=True)
 
-def rma_2023():
-    st.markdown("# Infografis Tahun 2023 :rabbit:")
-    st.sidebar.markdown("# 2023 :rabbit2:")
+#def rma_2023():
+    #st.markdown("# Infografis Tahun 2023 :rabbit:")
+    #st.sidebar.markdown("# 2023 :rabbit2:")
 
-    tahun = int(2023)
+    #tahun = int(2023)
     
-    rma_modified = rma.copy()
-    rma_modified = drop_columns(rma_modified, columns_to_drop) #edit 02/08/2024
-    rma_modified = normalize_columns(rma_modified, mylist)
+    #rma_modified = rma.copy()
+    #rma_modified = drop_columns(rma_modified, columns_to_drop) #edit 02/08/2024
+    #rma_modified = normalize_columns(rma_modified, mylist)
     
-    total_items, total_quantity = calculate_statistics(rma_modified)
-    # Calculate the percentages
-    good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
+    #total_items, total_quantity = calculate_statistics(rma_modified)
     
-    display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
+    #good_percentage, fail_percentage, untested_percentage = calculate_percentage(rma_modified, 'Final Status')
+    
+    #display_metrics(total_items, total_quantity, good_percentage, fail_percentage, untested_percentage)
 
-    st.divider()
-    #st.markdown("""---""")
-    
+    #st.divider()
+        
     # TOTAL BARANG MASUK
     # Calculate statistics
     #total_barang_masuk(rma_modified)
     #tabel_alat_barang(rma_modified)
 
     # PERSENTASE DALAM PROSES QC
-    tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
+    #tampilkan_pie_chart(good_percentage, fail_percentage, untested_percentage)
     
     # GRAFTIK BARANG MASUK DAN KELUAR [old]
     #data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA")
     #data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347")
 
     # GRAFTIK BARANG MASUK DAN KELUAR
-    data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA", tahun)
-    data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347", tahun)
+    #data_masuk = statistik_barang(rma_modified, 'Tgl Masuk [PB06]', 'Barang Masuk', "#009EFA", tahun)
+    #data_keluar = statistik_barang(rma_modified, 'Tgl Keluar [PB07]', 'Barang Keluar', "#FF6347", tahun)
     
     # Membuat grafik barang masuk dan keluar
-    bar = grafik_barang(data_masuk, data_keluar)
+    #bar = grafik_barang(data_masuk, data_keluar)
     # Menampilkan grafik di Streamlit
-    st.subheader("Grafik Barang Masuk dan Keluar")
-    st_pyecharts(bar, height="500px")
+    #st.subheader("Grafik Barang Masuk dan Keluar")
+    #st_pyecharts(bar, height="500px")
     
     # GRAFIK BARANG MASUK
     #grafik_barang(rma_modified, 'Tgl Masuk [PB06]', 'jumlah_in', 'Grafik barang masuk', "#009EFA")
@@ -221,13 +221,13 @@ def rma_2023():
     #st.markdown(filtered_data_L3.style.hide(axis="index").to_html(), unsafe_allow_html=True)
         
     #GRAFIK BAR HORIZONTAL COUNT
-    grafik_bar_horizontal_count(rma_modified)
+    #grafik_bar_horizontal_count(rma_modified)
     
     #GRAFIK BAR HORIZONTAL SUM
-    grafik_bar_horizontal_sum(rma_modified)
+    #grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
-    grafik_bar_project(rma_modified, 'Project Tahun 2023')
+    #grafik_bar_project(rma_modified, 'Project Tahun 2023')
     #grafik_bar_project(rma_modified)
 
 page_names_to_funcs = {
