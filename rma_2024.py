@@ -103,5 +103,5 @@ def rma_2024():
     grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
-    #grafik_bar_project(rma_modified, 'Project 2024)
-    grafik_bar_project(rma_modified, 'Project '+ tahun_2024['tahun'])
+    grafik_bar_project(rma_modified)
+    #grafik_bar_project(rma_modified, 'Project '+ tahun_2024['tahun'])
