@@ -6,7 +6,7 @@ from streamlit_echarts import st_pyecharts
 
 from config import tahun_2024
 
-from utils import load_data
+from utils import load_data_new
 from utils import calculate_statistics
 from utils import calculate_percentage, calculate_percentage2
 from utils import display_metrics
@@ -18,7 +18,8 @@ from utils import grafik_bar_horizontal_sum
 from utils import grafik_bar_project
 
 def rma_2024():
-    rma = load_data(tahun_2024['url'])
+    #rma = load_data(tahun_2024['url'])
+    rma = load_data_new(tahun_2024['tipe'], tahun_2024['url'])
     rma_modified = rma.copy()
 
     tahun = int(tahun_2024['tahun'])
