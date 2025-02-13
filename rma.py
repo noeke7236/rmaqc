@@ -5,8 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-import pyecharts.options as opts
-from streamlit_echarts import st_pyecharts
+#import pyecharts.options as opts
+#from streamlit_echarts import st_pyecharts
 
 #import streamlit_scrollable_textbox as stx
 import plotly.graph_objects as go
@@ -109,12 +109,8 @@ def grafik_bar_horizontal_sum(data):
     st.pyplot(fig_sum)
 
 # Load data
-url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
-rma = load_data(url)
-
-#url2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx'
-#rma2 = load_data(url2)
-#rma_modified2 = rma2.copy()
+#url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2gUwmQqoZnuheu3yON7gG9yep2apr1Hwcs9xvb4Ce1yxkIBNAHZmDoarWHOUymQ/pub?output=xlsx'
+#rma = load_data(url)
 
 #st.sidebar.image("logo.png",use_column_width=True)
 
