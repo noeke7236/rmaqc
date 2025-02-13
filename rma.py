@@ -3,18 +3,14 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 
-#import pyecharts.options as opts
-#from streamlit_echarts import st_pyecharts
-
-#import streamlit_scrollable_textbox as stx
 import plotly.graph_objects as go
 import time
 
 from tabulate import tabulate
 from utils import get_current_time_in_jakarta
-#from utils import load_data
+
 from utils import drop_columns
 from utils import normalize_columns
 from utils import calculate_statistics
