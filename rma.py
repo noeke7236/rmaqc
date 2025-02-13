@@ -14,7 +14,7 @@ import time
 
 from tabulate import tabulate
 from utils import get_current_time_in_jakarta
-from utils import load_data
+#from utils import load_data
 from utils import drop_columns
 from utils import normalize_columns
 from utils import calculate_statistics
