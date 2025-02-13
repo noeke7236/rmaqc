@@ -1,11 +1,25 @@
 import streamlit as st
 import streamlit_scrollable_textbox as stx
+from annotated_text import annotated_text, annotation
 
 def rma_qc():
     st.markdown("# QC & RMA ")
     st.sidebar.markdown("# QC & RMA ")
-    st.header('Deskripsi', divider='rainbow')
 
+    annotated_text(
+        ("\"", "", "#fff"),  # Tanda petik pembuka
+        ("Creative", "", "#ffa500"),
+        " minds drive innovation, ",
+        ("Proactive", "", "#faa"),
+        " actions shape the future, ",
+        ("Trustworthy", "", "#afa"),
+        " values build strong relationships, and ",
+        ("Unity", "", "#8ef"),
+        " brings lasting success.",
+        ("\"", "", "#fff")   # Tanda petik penutup
+    )
+    
+    st.header('Deskripsi', divider='rainbow')
     with open('deskripsi.txt', 'r') as file:
         deskripsi = file.read()
     stx.scrollableTextbox(deskripsi)
