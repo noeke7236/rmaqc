@@ -17,7 +17,7 @@ from utils import statistik_barang
 from utils import grafik_barang
 from utils import grafik_bar_horizontal_count
 from utils import grafik_bar_horizontal_sum
-from utils import grafik_bar_project
+from utils import grafik_bar_project_new
 
 def rma_2025():
     #rma = load_data_csv(tahun_2025['url'])
@@ -60,7 +60,6 @@ def rma_2025():
     grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
-    grafik_bar_project(rma_modified)
-    #grafik_bar_project(rma_modified, 'Project '+ tahun_2025['tahun'])
+    grafik_bar_project_new(rma_modified)
     
     
