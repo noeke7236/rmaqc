@@ -6,6 +6,7 @@ import seaborn as sns
 import streamlit as st
 import plotly.graph_objects as go
 
+from streamlit_g2 import g2
 from pyecharts import options as opts
 from pyecharts.charts import Pie
 from pyecharts.charts import Bar
@@ -331,3 +332,29 @@ def grafik_bar_project(data):
     st.text("")
     st.subheader('Jumlah Alat/Barang berdasarkan project')
     st.pyplot(fig_bar2)
+
+def grafik_bar_project_new(data):
+    data_project = data['Project'].value_counts().reset_index()
+    data_project.columns = ['Project', 'Jumlah']  
+
+    options = {
+        "autoFit": True,
+        "type": "interval",
+        "coordinate": {
+            "transform": [
+                {"type": "transpose"}
+            ]
+        },
+        "data": data_project.to_dict(orient='records'),
+        "encode": {
+            "x": "Project",
+            "y": "Jumlah",
+            "color": "Project",
+        },
+        "scale": {
+            "x": {"padding": 0.5}
+        }
+    }
+
+    # Menampilkan grafik
+    g2(options=options)
