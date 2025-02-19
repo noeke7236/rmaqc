@@ -8,7 +8,7 @@ from streamlit_echarts import st_pyecharts
 from config import tahun_2022
 from config import mylist
 
-from utils import load_data_new
+from utils import load_data
 from utils import normalize_columns
 from utils import calculate_statistics
 from utils import calculate_percentage
@@ -21,8 +21,8 @@ from utils import grafik_barang
 #mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]', 'Tgl Keluar [PB07]', 'Final Status', 'Project']
 
 def rma_2022():
-    #rma = load_data(tahun_2022['url'])
-    rma = load_data_new(tahun_2022['tipe'], tahun_2022['url'])
+    #rma = load_data_new(tahun_2022['tipe'], tahun_2022['url'])
+    rma = load_data(tahun_2022['tipe'], tahun_2022['url'])
     rma_modified = rma.copy()
     rma_modified = normalize_columns(rma_modified, mylist)
 
