@@ -34,7 +34,7 @@ def get_current_time_in_jakarta():
     return time_string
 
 @st.cache_data
-def load_data_new(tipe, url):
+def load_data(tipe, url):
     if tipe == 'excel':
         return pd.read_excel(url)
     elif tipe == 'csv':
