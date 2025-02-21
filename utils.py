@@ -42,12 +42,6 @@ def load_data(tipe, url):
     else:
         raise ValueError("Tipe tidak dikenali. Harap gunakan 'excel' atau 'csv'.")
 
-#def load_data(url):
-#    return pd.read_excel(url)
-
-#def load_data_csv(url):
-#    return pd.read_csv(url)
-
 def drop_columns(data, columns_to_drop):
     data.drop(columns_to_drop, axis=1, inplace=True)
     return data
@@ -357,4 +351,5 @@ def grafik_bar_project_new(data):
     }
 
     # Menampilkan grafik
+    st.subheader('Jumlah Alat/Barang berdasarkan project')
     g2(options=options)
