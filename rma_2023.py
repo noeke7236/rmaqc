@@ -22,13 +22,13 @@ from utils import grafik_barang
 from utils import grafik_bar_horizontal_count
 from utils import grafik_bar_horizontal_sum
 from utils import grafik_bar_project
+from utils import grafik_bar_project_new
 
 def rma_2023():
     tahun = int(tahun_2023['tahun'])
     
     st.markdown("# Infografis Tahun "+ str(tahun_2023['tahun']) +" "+ tahun_2023['icon'])
     st.sidebar.markdown("# "+ str(tahun_2023['tahun']) + " " + tahun_2023['icon_sidebar'])
-    #rma = load_data_new(tahun_2023['tipe'], tahun_2023['url'])
     rma = load_data(tahun_2023['tipe'], tahun_2023['url'])
     
     rma_modified = rma.copy()
@@ -66,4 +66,7 @@ def rma_2023():
     grafik_bar_horizontal_sum(rma_modified)
     
     # GRAFIK BAR PROJECT
-    grafik_bar_project(rma_modified)
+    #grafik_bar_project(rma_modified)
+
+    # GRAFIK BAR PROJECT
+    grafik_bar_project_new(rma_modified)
