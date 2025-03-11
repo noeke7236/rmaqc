@@ -20,7 +20,6 @@ from utils import grafik_bar_horizontal_sum
 from utils import grafik_bar_project_new
 
 def rma_2025():
-    #rma = load_data_new(tahun_2025['tipe'], tahun_2025['url'])
     rma = load_data(tahun_2025['tipe'], tahun_2025['url'])
     rma_modified = rma.copy()
     
@@ -61,5 +60,3 @@ def rma_2025():
     
     # GRAFIK BAR PROJECT
     grafik_bar_project_new(rma_modified)
-    
-    
