@@ -3,8 +3,6 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-
 import plotly.graph_objects as go
 import time
 
@@ -35,8 +33,6 @@ st.set_page_config(
 )
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
-
-#sns.set_theme(style="darkgrid")
 
 #def calculate_percentage(data, column_name):
     # Hitung jumlah nilai unik
