@@ -29,14 +29,14 @@ from rma_2023 import rma_2023
 from rma_2024 import rma_2024
 from rma_2025 import rma_2025
 
-sns.set_theme(style="darkgrid")
-
 st.set_page_config(
     page_title="QC & RMA",
     page_icon=":watermelon:"
 )
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
+
+sns.set_theme(style="darkgrid")
 
 #def calculate_percentage(data, column_name):
     # Hitung jumlah nilai unik
