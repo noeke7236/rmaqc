@@ -36,7 +36,7 @@ st.set_page_config(
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
 
-sns.set_theme(style="darkgrid")
+#sns.set_theme(style="darkgrid")
 
 #def calculate_percentage(data, column_name):
     # Hitung jumlah nilai unik
