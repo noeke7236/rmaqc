@@ -33,7 +33,7 @@ sns.set_theme(style="darkgrid")
 
 st.set_page_config(
     page_title="QC & RMA",
-    page_icon=":watermelon:",
+    page_icon=":watermelon:"
 )
 
 st.markdown(f"<p style='font-size: 24px ; text-align: right'>{get_current_time_in_jakarta()}</p>", unsafe_allow_html=True)
