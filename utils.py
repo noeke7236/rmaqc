@@ -11,6 +11,7 @@ from pyecharts import options as opts
 from pyecharts.charts import Pie
 from pyecharts.charts import Bar
 from streamlit_echarts import st_pyecharts
+from streamlit_extras.metric_cards import style_metric_cards
 
 # Month_names dictionary
 month_names = {
@@ -118,6 +119,8 @@ def display_metrics(total_items, total_quantity, good_percentage, fail_percentag
         col3.metric("Pass :heavy_check_mark:", f"{good_percentage:.2f}%")
         col4.metric("Untested :no_entry_sign:", f"{untested_percentage:.2f}%")
         col5.metric("Fail :x:", f"{fail_percentage:.2f}%")
+
+    style_metric_cards()
 
 def tabel_alat_barang(data):
     total_items, total_quantity = calculate_statistics(data)
