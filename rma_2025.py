@@ -54,7 +54,11 @@ def rma_2025():
 
     #GRAFIK BAR HORIZONTAL COUNT
     grafik_bar_horizontal_count(rma_modified)
-    
+
+    # Pending (Status Masih RMA)
+    data_pending = rma_modified[rma_modified['Tgl Keluar [PB07]'].isna()]
+    st.write("List alat atau barang yang masih ada di QC & RMA")
+    st.dataframe(data_pending, hide_index=True)
     #GRAFIK BAR HORIZONTAL SUM
     grafik_bar_horizontal_sum(rma_modified)
     
