@@ -6,7 +6,8 @@ tahun_2022 = {'tahun' : '2022', 'tipe' : 'excel', 'url' : 'https://docs.google.c
 tahun_2023 = {'tahun' : '2023', 'tipe' : 'excel', 'url' : '/2023/2023all.xlsx', 'icon' : ':rabbit:', 'icon_sidebar' : ':rabbit2:'}
 #tahun_2024 = {'tahun' : '2024', 'tipe' : 'excel', 'url' : 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT85fb9TAXVvoVOWoBQ2kRJ_ETGs6DWyZ1u-ttnr8ejrvBvxC9yQvsVWRaKSRQkeSDC1SbPQJESmYqu/pub?output=xlsx', 'icon' : ':dragon_face:', 'icon_sidebar' : ':dragon:'}
 tahun_2024 = {'tahun' : '2024', 'tipe' : 'excel', 'url' : '/2024/2024all.xlsx', 'icon' : ':dragon_face:', 'icon_sidebar' : ':dragon:'}
-tahun_2025 = {'tahun' : '2025', 'tipe' : 'csv', 'url' : 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrI-S-HxETvnbQKJmbldzFj8G6cOTddrvGgtDtftsiJRd7vz2RApDPFXdx_TkU0xZz04Zp1Yvh146f/pub?output=csv', 'icon' : ' ', 'icon_sidebar' : ':snake:'}
+#tahun_2025 = {'tahun' : '2025', 'tipe' : 'csv', 'url' : 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrI-S-HxETvnbQKJmbldzFj8G6cOTddrvGgtDtftsiJRd7vz2RApDPFXdx_TkU0xZz04Zp1Yvh146f/pub?output=csv', 'icon' : ' ', 'icon_sidebar' : ':snake:'}
+tahun_2025 = {'tahun' : '2025', 'tipe' : 'csv', 'url' : 'https://docs.google.com/spreadsheets/d/14fYrCAZ16r7tmy8IFsxzNmzOJ-_Y80QH/export?format=csv', 'icon' : ' ', 'icon_sidebar' : ':snake:'}
 
 # List standar nama kolom
 mylist = ['Nama Barang', 'Serial Number', 'Qty', 'RMA Level', 'Tgl Masuk [PB06]', 'Tgl Keluar [PB07]', 'Final Status', 'Project']
