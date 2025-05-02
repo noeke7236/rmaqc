@@ -63,5 +63,7 @@ def rma_2025():
 
     # Pending (Status Masih RMA)
     data_pending = rma_modified[rma_modified['Tgl Keluar [PB07]'].isna()]
+    data_pending['Tgl Masuk [PB06]'] = pd.to_datetime(data_pending['Tgl Masuk [PB06]']).dt.strftime('%d/%m/%Y')
+    data_pending = data_pending.drop(columns=['RMA Level', 'Tgl Keluar [PB07]', 'Final Status'])
     st.write("List alat atau barang yang masih ada di QC & RMA")
     st.dataframe(data_pending, hide_index=True)
